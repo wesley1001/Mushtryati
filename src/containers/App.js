@@ -4,15 +4,7 @@ import React, { Component, StyleSheet} from 'react-native'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux/native'
 import {assets} from '../utils/assets'
-import {
-  actions as routerActions,
-  Route,
-  NavBar,
-  Router,
-  Schema,
-  TabBar,
-  TabRoute,
-} from 'react-native-router-redux'
+
 
 import Detail from '../components/Detail'
 import Master from '../components/Master'
