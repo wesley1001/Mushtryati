@@ -3,16 +3,11 @@
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import {connect} from 'react-redux/native'
 
-export default Master = (backgroundColor = '#F5FCFF') => class extends Component {
+export default class Master extends Component {
   render() {
-    const { actions, assets } = this.props;
-
     return (
-      <View style={[styles.container, { backgroundColor }]}>
-        <TouchableHighlight onPress={actions.routes.detail()}>
-          <Image style={styles.image} source={assets.logo}/>
-        </TouchableHighlight>
-        <Text style={styles.text} onPress={actions.routes.detail()}>Push detail view</Text>
+      <View style={[styles.container]}>
+        <Text style={styles.text}>Push detail view</Text>
       </View>
     );
   }

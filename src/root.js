@@ -3,7 +3,6 @@ import { Provider } from 'react-redux/native'
 import configureStore from './store/configure-store'
 
 
-
 import App from './containers/App'
 
 const store = configureStore()

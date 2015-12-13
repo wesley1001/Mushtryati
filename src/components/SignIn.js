@@ -4,7 +4,7 @@ import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInpu
 import {login} from '../actions/auth.js'
 import { connect } from 'react-redux/native'
 import {getUser,saveUser} from './../utils/storage'
-
+var Actions = require('react-native-router-flux').Actions;
 
 class SignIn extends Component {
 
@@ -33,7 +33,7 @@ class SignIn extends Component {
     dispatch(login(this.state.email, this.state.password, (cb)=> {
       if (cb.success) {
         saveUser(cb.user)
-        return dispatch(actions.routes.tabBar.tab1())
+        Actions.tabbar();
       }
     }))
   }
@@ -63,7 +63,7 @@ class SignIn extends Component {
             autoCorrect={false}
             />
 
-          <TouchableHighlight onPress={actions.routes.tabBar.tab1()} style={styles.ltr}>
+          <TouchableHighlight onPress={Actions.tabbar} style={styles.ltr}>
             <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
           </TouchableHighlight>
 
@@ -81,7 +81,7 @@ class SignIn extends Component {
             <Text style={styles.buttonText}>الدخول</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={actions.routes.register()}>
+          <TouchableHighlight onPress={Actions.register}>
             <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>لا يوجد الحساب ؟ سحل الان </Text>
           </TouchableHighlight>
 

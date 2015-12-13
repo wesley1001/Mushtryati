@@ -4,6 +4,8 @@ import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInpu
 import {register} from '../actions/auth.js';
 import { connect } from 'react-redux/native';
 import Error from '../components/Error';
+var Actions = require('react-native-router-flux').Actions;
+
 class Register extends Component {
 
   constructor(props) {
@@ -28,13 +30,13 @@ class Register extends Component {
 
     dispatch(register(params, (cb)=> {
       if (cb.success) {
-        return dispatch(actions.routes.signIn());
+        Actions.login();
       }
     }));
   }
 
   render() {
-    const { actions, assets, auth } = this.props;
+    const { auth } = this.props;
 
     if (auth.loggingIn) {
       return (
@@ -77,7 +79,7 @@ class Register extends Component {
             <Text style={styles.buttonText}>سجل</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={actions.routes.signIn()}>
+          <TouchableHighlight onPress={Actions.login}>
             <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>يوجد الحساب ؟ اضغط للدخول</Text>
           </TouchableHighlight>
 
