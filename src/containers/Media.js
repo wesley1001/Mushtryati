@@ -2,9 +2,10 @@
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import {connect} from 'react-redux/native'
 import {fetchMedias,selectedMedia} from './../actions/media'
-import {login} from './../actions/auth.js'
 import MediaList from './../components/MediaList'
 import MediaItem from './../components/MediaItem'
+var Actions = require('react-native-router-flux').Actions;
+
 class Media extends Component {
 
   constructor(props) {
@@ -13,10 +14,10 @@ class Media extends Component {
   }
 
   componentWillMount() {
-    const {dispatch,actions} = this.props;
+    const {dispatch} = this.props;
     dispatch(fetchMedias());
-
-    //let media =   {
+    //
+    //let media = {
     //  "id": 1,
     //  "user_id": 40,
     //  "caption": "reiciendis",
@@ -143,7 +144,7 @@ class Media extends Component {
     //      "media_id": 1,
     //      "comment": "Nemo.",
     //      "created_at": "2015-12-12 12:01:36",
-    //      "updated_at": "2015-12-12 12:01:36",
+    //      "u;pdated_at": "2015-12-12 12:01:36",
     //      "user": {
     //        "id": 38,
     //        "name": "Soledad Klocko",
@@ -187,17 +188,15 @@ class Media extends Component {
     //    }
     //  ]
     //}
-    //return dispatch(actions.routes.mediaItem(media));
+    //Actions.mediaItem();
   }
 
   loadMedia(media) {
-    const {dispatch,actions} = this.props;
-    dispatch(selectedMedia(media));
-    return dispatch(actions.routes.mediaItem(media));
+    Actions.mediaItem({data: media});
   }
 
   render() {
-    const { actions, assets, medias, auth } = this.props
+    const {  medias } = this.props
 
     return (
       <MediaList medias={medias} loadMedia={this.loadMedia}/>

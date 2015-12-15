@@ -9,7 +9,7 @@ import {assets} from '../utils/assets'
 export default class MediaItem extends Component {
 
   render() {
-    const {id,caption,url,comments,user} = this.props.routerData;
+    const {id,caption,url,comments,user} = this.props.data;
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -40,7 +40,8 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 5,
-  },
+    paddingTop:64
+},
   img: {
     height: 200,
     borderRadius: 5,
@@ -48,13 +49,11 @@ var styles = StyleSheet.create({
   },
   commentImg: {
     width: 24,
-    height: 22,
-    color: "#5BC3BE",
+    height: 22
   },
   favoriteImg: {
     width: 24,
-    height: 22,
-    color: "#5BC3BE",
+    height: 22
   },
   thumbnail: {
     width: 30,

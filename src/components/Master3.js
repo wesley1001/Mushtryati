@@ -3,7 +3,7 @@
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import {connect} from 'react-redux/native'
 
-export default class Master extends Component {
+export default class Master3 extends Component {
   render() {
     return (
       <View style={[styles.container]}>

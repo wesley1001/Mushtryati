@@ -28,25 +28,17 @@ export default class CommentList extends Component {
     let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
 
     return (
-      <View style={styles.container}>
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
           contentInset={{bottom:49}}
           />
-      </View>
     )
   }
 }
 
 var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    margin: 5,
-  },
   list: {},
   row: {
     justifyContent: 'flex-end',

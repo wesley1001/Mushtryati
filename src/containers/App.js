@@ -4,40 +4,34 @@ import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-nat
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux/native'
 import {assets} from '../utils/assets'
+var { Icon } = require('react-native-icons');
 
 var {Router, Route, Schema, Animations, TabBar} = require('react-native-router-flux');
 
 import Detail from '../components/Detail'
 import Media from '../containers/Media'
 import Master from '../components/Master'
+import Master2 from '../components/Master2'
+import Master3 from '../components/Master3'
+import Master4 from '../components/Master4'
 import SignIn from '../components/SignIn'
 import Register from '../components/Register'
 import MediaItem from '../components/MediaItem'
-//
-//export const defaultSchema = {
-//  navBar: NavBar,
-//  navLeftColor: '#FFFFFF',
-//  navTint: '#5BC3BE',
-//  navTitleColor: '#FFFFFF',
-//  navTitleStyle: {
-//    fontFamily: 'Avenir Next',
-//    fontSize: 18,
-//  },
-//  statusStyle: 'light-content',
-//  tabBar: TabBar,
-//}
-//
 
 class TabIcon extends Component {
   render() {
     return (
       <View>
-        <Image style={{width:30,height:30}} source={this.props.tabIcon}/>
-        <Text style={{color: this.props.selected ? 'red' :'black'}}>{this.props.title}</Text>
+        <Icon
+          name={this.props.tabIcon}
+          size={25}
+          color={ this.props.selected ? '#FFFFFF' :'#FFFFFF'}
+          style={{width:25,height:25,alignSelf:'center'}}
+          />
+        <Text style={{color: this.props.selected ? '#FFFFFF' :'#FFFFFF'}}>{this.props.title}</Text>
       </View>
     );
   }
-
 }
 
 
@@ -58,40 +52,48 @@ class Application extends Component {
         <Schema name="withoutAnimation"/>
         <Schema name="tab" type="switch" icon={TabIcon}/>
 
-        <Route name="login" component={SignIn} assets={assets} initial={true} wrapRouter={true} title="Login"
-               hideNavBar={false}/>
-        <Route name="register" component={Register} title="Register" schema="default" hideNavBar={false} />
-        <Route name="home" component={Media} title="Replace" type="replace"/>
+        <Route name="login" component={SignIn} assets={assets} initial={true} wrapRouter={true} title="تسجيل الدخول"
+               hideNavBar={false}
+               navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+               titleStyle={{ color:'white', fontSize:17}}
+               barButtonTextStyle={{ fontSize:17, color:'white' }}
+               schema="default"
+          />
 
-        <Route name="register2" component={Register} title="Register2" schema="withoutAnimation"/>
+        <Route name="register" component={Register} title="تسجيل الدخول" schema="default" hideNavBar={false}/>
+
         <Route name="tabbar">
-          <Router footer={TabBar} showNavigationBar={true}>
-            <Route name="tab1" schema="tab" tabIcon={assets.home} title="Tab #1">
+          <Router footer={TabBar} showNavigationBar={true}
+                  navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                  style={{backgroundColor:'#5BC3BE'}}
+                  titleStyle={{ color:'white', fontSize:17}}
+            >
+            <Route name="tab1" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}/>
+            <Route name="tab2" schema="tab" title="مفضلات" tabIcon='fontawesome|heart'>
               <Router>
-                <Route name="tab1_1" component={Master} title="Tab #1_1"/>
-                <Route name="tab1_2" component={Master} title="Tab #1_2"/>
+                <Route name="media" component={Media} title="Tab #1_1"/>
+                <Route name="mediaItem" component={MediaItem} title="Tab #1_2"/>
               </Router>
             </Route>
-            <Route name="tab2" schema="tab" title="Tab #2" tabIcon={assets.suitcase} hideTabBar={true}
-                   component={Media}/>
-            <Route name="tab3" schema="tab" title="Tab #3" tabIcon={assets.favorites} component={Master}/>
-            <Route name="tab4" schema="tab" title="Tab #4" tabIcon={assets.settings} component={Master}/>
+            <Route name="tab3" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase' component={Master}/>
+            <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home' component={Master}/>
           </Router>
         </Route>
+
       </Router>
 
       //<Router {...this.props} assets={assets} initial={this.state.initialRoute}>
       //
-      //  <Schema name="default" {...defaultSchema} />
+      // <Schema name="default" {...defaultSchema} />
       //
-      //  <Route name="signIn" component={SignIn} type="reset" hideNavBar={true}/>
-      //  <Route name="register" component={Register} type="reset" title="تسجيل الدخول"/>
-      //  <Route name="detail" component={Detail}/>
-      //  <Route name="media" component={Media} title="مشترياتي"/>
-      //  <Route name="mediaItem" component={MediaItem}/>
+      // <Route name="signIn" component={SignIn} type="reset" hideNavBar={true}/>
+      // <Route name="register" component={Register} type="reset" title="تسجيل الدخول"/>
+      // <Route name="detail" component={Detail}/>
+      // <Route name="media" component={Media} title="مشترياتي"/>
+      // <Route name="mediaItem" component={MediaItem}/>
       //
-      //  <TabRoute name="tabBar" barTint='#FFFFFF' tint="#32DEAF">
-      //    <Route name="tab4" component={Master('#111')}
+      // <TabRoute name="tabBar" barTint='#FFFFFF' tint="#32DEAF">
+      // <Route name="tab4" component={Master('#111')}
       //           title="الاعدادات"
       //           tabItem={{icon: assets.settings, title: 'الاعدادات'}}
       //      />
