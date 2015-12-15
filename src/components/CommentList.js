@@ -31,7 +31,7 @@ export default class CommentList extends Component {
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow.bind(this)}
-          automaticallyAdjustContentInsets={false}
+          automaticallyAdjustContentInsets={true}
           contentInset={{bottom:49}}
           />
     )

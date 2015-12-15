@@ -7,8 +7,8 @@ import {
 
 const initialState = {
   data: [],
-  loading:false,
-  selected: {}
+  loading: false,
+  selected: null
 }
 
 export default function medias(state = initialState, action = {}) {
@@ -16,12 +16,13 @@ export default function medias(state = initialState, action = {}) {
     case SELECTED_MEDIA:
       return {
         ...state,
-        selected:action.selected
+        selected: action.selected
       }
     case MEDIA_REQUEST:
       return {
         ... state,
-        loading: true
+        loading: true,
+        selected: null
       }
     case MEDIA_SUCCESS:
       return {

@@ -1,5 +1,5 @@
 import {API_ROOT} from './../utils/config'
-import {MEDIA_REQUEST,MEDIA_SUCCESS,MEDIA_FAILURE,SELECTED_MEDIA } from '../constants/ActionTypes'
+import {MEDIA_REQUEST,MEDIA_SUCCESS,MEDIA_FAILURE,SELECTED_MEDIA,FAVORITE_MEDIA,COMMENT_MEDIA } from '../constants/ActionTypes'
 
 function mediasRequest() {
   return {
@@ -39,5 +39,23 @@ export function selectedMedia(media) {
   return {
     type: SELECTED_MEDIA,
     selected: media
+  }
+}
+
+export function favoriteMedia(media) {
+  return dispatch => {
+    return fetch(API_ROOT + '/medias/favorite', {
+      method: 'POST',
+      body: JSON.stringify({
+        media: media
+      })
+    });
+  }
+}
+
+export function commentMedia(media, comment) {
+  return {
+    type: COMMENT_MEDIA,
+    media: media
   }
 }
