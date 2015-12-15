@@ -70,7 +70,7 @@ class Application extends Component {
                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                   style={{backgroundColor:'#5BC3BE'}}
                   titleStyle={{ color:'white', fontSize:17}}
-                  initial="tab4"
+                  barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
             <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -84,7 +84,7 @@ class Application extends Component {
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                 titleStyle={{ color:'white', fontSize:17}}
-
+                barButtonTextStyle={{ fontSize:17, color:'white' }}
                 >
                 <Route name="mediaListTab" component={Media} title="مشترياتي"/>
                 <Route name="mediaItemTab" component={MediaItem} title=""/>
