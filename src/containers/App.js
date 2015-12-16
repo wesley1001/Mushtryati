@@ -35,13 +35,14 @@ class Application extends Component {
 
         <Route name="register" component={Register} title="تسجيل الدخول" schema="default" hideNavBar={false}/>
 
-        <Route name="tabbar">
+        <Route name="tabBar">
           <Router footer={TabBar} showNavigationBar={false}
                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                   style={{backgroundColor:'#5BC3BE'}}
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
+
             <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -68,9 +69,9 @@ class Application extends Component {
                    titleStyle={{ color:'white', fontSize:17}}
 
               />
+
           </Router>
         </Route>
-
       </Router>
 
     )

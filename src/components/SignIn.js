@@ -63,7 +63,7 @@ class SignIn extends Component {
             autoCorrect={false}
             />
 
-          <TouchableHighlight onPress={Actions.tabbar} style={styles.ltr}>
+          <TouchableHighlight onPress={Actions.tabBar} style={styles.ltr}>
             <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
           </TouchableHighlight>
 
