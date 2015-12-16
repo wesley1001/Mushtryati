@@ -22,7 +22,8 @@ function mediasFailure(error) {
 }
 
 export function fetchMedias() {
-  return dispatch => {
+  return (dispatch) => {
+
     dispatch(mediasRequest())
     return fetch(API_ROOT + '/medias')
       .then(response => response.json())
@@ -42,20 +43,47 @@ export function selectedMedia(media) {
   }
 }
 
-export function favoriteMedia(media) {
-  return dispatch => {
-    return fetch(API_ROOT + '/medias/favorite', {
-      method: 'POST',
-      body: JSON.stringify({
-        media: media
+export function selectMedia(media) {
+  return (dispatch) => {
+    dispatch(mediasRequest())
+    return fetch(API_ROOT + '/medias/' + media.id)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(selectedMedia(json))
       })
-    });
+      .catch((error)=> {})
   }
 }
 
-export function commentMedia(media, comment) {
-  return {
-    type: COMMENT_MEDIA,
-    media: media
+export function favoriteMedia(media) {
+  return (dispatch, getState) => {
+    const { state } = getState();
+    console.log('state', getState());
+    let userID = 1 // state.auth.user.id;
+    return fetch(API_ROOT + '/medias/favorite', {
+      method: 'POST',
+      body: JSON.stringify({
+        media: media,
+        user: userID
+      })
+    })
+      .then(response => response.json())
+      .then(json => {console.log('success', json)})
+      .catch((error)=> {console.log('error', error)})
+  }
+}
+
+export function commentMedia(params) {
+  return (dispatch, getState) => {
+    const { state } = getState();
+    params.user = 1 // state.auth.user.id;
+    console.log(params);
+    return fetch(API_ROOT + '/medias/comment', {
+      method: 'POST',
+      body: JSON.stringify(params)
+    })
+      .then(response => response.json())
+      .then(json => {console.log('success', json)})
+      .catch((error)=> {console.log('error', error)})
   }
 }

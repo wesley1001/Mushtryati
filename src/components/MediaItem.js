@@ -20,7 +20,9 @@ export default class MediaItem extends Component {
   render() {
     const {id,caption,url,comments,user} = this.props.data;
     return (
-      <ScrollView>
+      <ScrollView
+
+        >
         <View style={styles.container}>
           <View style={{flexDirection: "row",  paddingBottom:10}}>
             <Text style={styles.createdAt}>2h</Text>
@@ -36,22 +38,22 @@ export default class MediaItem extends Component {
           </View>
 
           <View style={{flex:1,flexDirection:'row',justifyContent:"center",paddingTop:10}}>
-            <Text style={{padding:5}}>100</Text>
+            <Text style={{padding:5,alignSelf:'center'}}>100</Text>
 
-            <TouchableHighlight onPress={() => this.props.onCommentSubmit(id,this.state.comment)} underlayColor="transparent">
+            <TouchableHighlight onPress={() => this.props.onCommentIconClick(this.props.data)} underlayColor="transparent">
               <Icon
-                name='fontawesome|comment'
-                size={20}
+                name='ion|chatbubble'
+                size={24}
                 color={'gray'}
                 style={styles.commentImg}
                 />
             </TouchableHighlight>
 
-            <Text style={{padding:5}}>20</Text>
+            <Text style={{padding:5,alignSelf:'center'}}>20</Text>
             <TouchableHighlight onPress={() => this.props.onFavoritePress(id)} underlayColor="transparent">
               <Icon
-                name='fontawesome|heart'
-                size={20}
+                name='ion|android-favorite-outline'
+                size={24}
                 color={ this.props.selected ? 'gray' :'red'}
                 style={styles.favoriteImg}
                 />
@@ -59,7 +61,7 @@ export default class MediaItem extends Component {
 
           </View>
         </View>
-        <CommentList comments={comments} line={assets.line}/>
+        <CommentList comments={comments} line={assets.line} contentInset={0} />
       </ScrollView>
     )
   }
@@ -77,18 +79,15 @@ var styles = StyleSheet.create({
     paddingTop: 10
   },
   commentImg: {
-    width: 20,
-    height: 20,
-    padding: 5,
+    width: 24,
+    height: 22,
     marginRight: 50,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   favoriteImg: {
-    width: 20,
-    height: 20,
-    padding: 5,
+    width: 24,
+    height: 22,
     alignSelf: "center"
-
   },
   thumbnail: {
     width: 30,

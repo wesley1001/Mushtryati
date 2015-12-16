@@ -1,7 +1,7 @@
 'use strict'
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import {connect} from 'react-redux/native'
-import {fetchMedias,selectedMedia,favoriteMedia,commentMedia} from './../actions/media'
+import {fetchMedias,selectMedia,favoriteMedia,commentMedia} from './../actions/media'
 import MediaList from './../components/MediaList'
 import MediaItem from './../components/MediaItem'
 var Actions = require('react-native-router-flux').Actions;
@@ -12,19 +12,9 @@ class Media extends Component {
     super(props);
     this.loadMedia = this.loadMedia.bind(this);
     this.handleFavoritePress = this.handleFavoritePress.bind(this);
+    this.handleCommentIconClick = this.handleCommentIconClick.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
-
-  handleFavoritePress = (media) => {
-    const {dispatch} = this.props;
-    dispatch(favoriteMedia(media));
-  }
-
-  handleCommentSubmit = (media, comment) => {
-    const {dispatch} = this.props;
-    dispatch(commentMedia(media, comment));
-  }
-
 
   componentWillMount() {
     const {dispatch} = this.props;
@@ -204,19 +194,41 @@ class Media extends Component {
     //Actions.mediaItemTab(media);
   }
 
-  loadMedia(media) {
+
+  handleFavoritePress = (media) => {
     const {dispatch} = this.props;
-    dispatch(selectedMedia(media));
+    dispatch(favoriteMedia(media));
+  }
+
+  handleCommentSubmit = (media, comment) => {
+    const {dispatch} = this.props;
+    const params = {
+      media: media.id,
+      comment: comment,
+    }
+    dispatch(commentMedia(params));
+  }
+
+  handleCommentIconClick = (media) => {
+    Actions.mediaCommentTab({
+      data: media,
+      onCommentSubmit: this.handleCommentSubmit})
+  }
+
+  loadMedia(media) {
+    const {dispatch,medias} = this.props;
+    dispatch(selectMedia(media));
     Actions.mediaItemTab({
       data: media,
       onFavoritePress: this.handleFavoritePress,
-      onCommentSubmit: this.handleCommentSubmit
+      onCommentIconClick: this.handleCommentIconClick
     });
   }
 
   render() {
     const {  medias } = this.props
     return (
+
       <MediaList medias={medias} loadMedia={this.loadMedia}/>
     )
   }

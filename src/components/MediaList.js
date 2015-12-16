@@ -4,6 +4,12 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 export default class MediaList extends Component {
 
+  componentWillMount() {
+    //let listViewScrollView = this.refs.listView.getScrollResponder();
+    //listViewScrollView.scrollWithoutAnimationTo(80);
+    //listViewScrollView.scrollWithoutAnimationTo(-80);
+  }
+
   renderRow(media) {
     return (
       <View style={styles.row}>
@@ -19,6 +25,7 @@ export default class MediaList extends Component {
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     let dataSource = medias ? ds.cloneWithRows(medias) : ds.cloneWithRows([]);
 
+
     return (
       <ListView
         contentContainerStyle={styles.list}
@@ -27,6 +34,7 @@ export default class MediaList extends Component {
         contentInset={{bottom:49}}
         style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
+        ref='listView'
         />
     )
 
@@ -35,9 +43,10 @@ export default class MediaList extends Component {
 
 var styles = StyleSheet.create({
   list: {
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    paddingVertical:20
   },
   row: {
     justifyContent: 'center',

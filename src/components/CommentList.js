@@ -28,12 +28,12 @@ export default class CommentList extends Component {
     let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
 
     return (
-        <ListView
-          dataSource={dataSource}
-          renderRow={this.renderRow.bind(this)}
-          automaticallyAdjustContentInsets={true}
-          contentInset={{bottom:49}}
-          />
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow.bind(this)}
+        automaticallyAdjustContentInsets={false}
+        contentInset={{bottom:this.props.contentInset ? this.props.contentInset : 49 }}
+        />
     )
   }
 }
