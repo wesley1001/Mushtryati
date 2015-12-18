@@ -1,33 +1,31 @@
 import {
-  MEDIA_REQUEST,
-  MEDIA_SUCCESS,
-  MEDIA_FAILURE,
+  MEDIAS_REQUEST,
+  MEDIAS_SUCCESS,
+  MEDIAS_FAILURE,
 } from '../constants/ActionTypes'
 
 const initialState = {
-  entity: {},
+  collection: [],
   processingRequest: false,
-  hasFavorited: false,
-  error: null,
+  error: null
 }
 
-export default function media(state = initialState, action = {}) {
+export default function medias(state = initialState, action = {}) {
   switch (action.type) {
-    case MEDIA_REQUEST:
+    case MEDIAS_REQUEST:
       return {
         ... state,
         processingRequest: true,
         error: null
       }
-    case MEDIA_SUCCESS:
+    case MEDIAS_SUCCESS:
       return {
         ... state,
         processingRequest: false,
-        entity: action.entity,
-        hasFavorited: action.hasFavorited,
+        collection: action.collection,
         error: null
       }
-    case MEDIA_FAILURE:
+    case MEDIAS_FAILURE:
       return {
         ...state,
         processingRequest: false,

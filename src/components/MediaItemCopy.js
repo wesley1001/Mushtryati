@@ -6,8 +6,16 @@ import { Icon } from 'react-native-icons';
 
 export default class MediaItem extends Component {
 
-  renderContent(media) {
-    const {caption,url,user} = media;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      comment: 'asdasdasdasd'
+    }
+  }
+
+  render() {
+    const {id,caption,url,user} = this.props.media;
     return (
       <View style={styles.container}>
         <View style={{flexDirection: "row",  paddingBottom:10}}>
@@ -22,35 +30,34 @@ export default class MediaItem extends Component {
         <View>
           <Text style={{ padding:10, textAlign:"center" }}>{caption}</Text>
         </View>
+
+        <View style={{flex:1,flexDirection:'row',justifyContent:"center",paddingTop:10}}>
+          <Text style={{padding:5,alignSelf:'center'}}>100</Text>
+
+          <TouchableHighlight onPress={() => this.props.onCommentIconClick(this.props.data)}
+                              underlayColor="transparent">
+            <Icon
+              name='ion|chatbubble'
+              size={24}
+              color={'gray'}
+              style={styles.commentImg}
+              />
+          </TouchableHighlight>
+
+          <Text style={{padding:5,alignSelf:'center'}}>20</Text>
+          <TouchableHighlight onPress={() => this.props.onFavoritePress(id)} underlayColor="transparent">
+            <Icon
+              name='ion|android-favorite-outline'
+              size={24}
+              color={ this.props.selected ? 'gray' :'red'}
+              style={styles.favoriteImg}
+              />
+          </TouchableHighlight>
+
+        </View>
       </View>
     )
   }
-
-  //renderContent(media) {
-  //
-  //  alert(JSON.stringify(this.props.media));
-  //
-  //  return (
-  //    <View style={styles.container}>
-  //      <Text style={{color:'black'}}>bla asd as bla</Text>
-  //    </View>
-  //  )
-  //}
-
-  render() {
-
-    const {media} = this.props;
-
-    if (media.id && media.id > 0) {
-
-      return this.renderContent(media);
-    } else {
-      return (
-        <View />
-      )
-    }
-  }
-
 }
 
 var styles = StyleSheet.create({

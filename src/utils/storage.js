@@ -2,9 +2,6 @@
 import React,{AsyncStorage} from 'react-native';
 
 export const USER_STORAGE_KEY = 'user';
-export const CATEGORYLIST_STORAGE_KEY = 'category_list';
-export const CATEGORY_STORAGE_KEY = 'category_';
-export const COMPANY_STORAGE_KEY = 'company_';
 
 export const saveUser = (user, cb)=> {
 

@@ -23,7 +23,7 @@ export default class CommentList extends Component {
   }
 
   render() {
-    const {comments} = this.props;
+    const {comments} = this.props.comments;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
 

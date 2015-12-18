@@ -1,89 +1,42 @@
-import {API_ROOT} from './../utils/config'
-import {MEDIA_REQUEST,MEDIA_SUCCESS,MEDIA_FAILURE,SELECTED_MEDIA,FAVORITE_MEDIA,COMMENT_MEDIA } from '../constants/ActionTypes'
+import {API_ROOT} from './../utils/config';
+import {
+  MEDIA_REQUEST,
+  MEDIA_SUCCESS,
+  MEDIA_FAILURE
+} from '../constants/ActionTypes';
 
-function mediasRequest() {
+function mediaRequest() {
   return {
-    type: MEDIA_REQUEST,
+    type: MEDIA_REQUEST
   }
 }
 
-function mediasSuccess(payload) {
+function mediaSuccess(payload) {
   return {
     type: MEDIA_SUCCESS,
-    data: payload.data
+    entity: payload.data,
+    hasFavorited: payload.hasFavorited
   }
 }
 
-function mediasFailure(error) {
+function mediaFailure(error) {
   return {
     type: MEDIA_FAILURE,
-    error,
+    error: error
   }
 }
 
-export function fetchMedias() {
+export function fetchMedia(mediaID) {
+  const url = API_ROOT + '/medias/' + mediaID;
   return (dispatch) => {
-
-    dispatch(mediasRequest())
-    return fetch(API_ROOT + '/medias')
+    dispatch(mediaRequest());
+    return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(mediasSuccess(json))
+        dispatch(mediaSuccess(json))
       })
-      .catch((error)=> {
-        dispatch(mediasFailure(error))
+      .catch((err)=> {
+        dispatch(mediaFailure(err))
       })
-  }
-}
-
-export function selectedMedia(media) {
-  return {
-    type: SELECTED_MEDIA,
-    selected: media
-  }
-}
-
-export function selectMedia(media) {
-  return (dispatch) => {
-    dispatch(mediasRequest())
-    return fetch(API_ROOT + '/medias/' + media.id)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(selectedMedia(json))
-      })
-      .catch((error)=> {})
-  }
-}
-
-export function favoriteMedia(media) {
-  return (dispatch, getState) => {
-    const { state } = getState();
-    console.log('state', getState());
-    let userID = 1 // state.auth.user.id;
-    return fetch(API_ROOT + '/medias/favorite', {
-      method: 'POST',
-      body: JSON.stringify({
-        media: media,
-        user: userID
-      })
-    })
-      .then(response => response.json())
-      .then(json => {console.log('success', json)})
-      .catch((error)=> {console.log('error', error)})
-  }
-}
-
-export function commentMedia(params) {
-  return (dispatch, getState) => {
-    const { state } = getState();
-    params.user = 1 // state.auth.user.id;
-    console.log(params);
-    return fetch(API_ROOT + '/medias/comment', {
-      method: 'POST',
-      body: JSON.stringify(params)
-    })
-      .then(response => response.json())
-      .then(json => {console.log('success', json)})
-      .catch((error)=> {console.log('error', error)})
   }
 }

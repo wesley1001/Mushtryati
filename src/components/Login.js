@@ -1,12 +1,12 @@
 'use strict'
 
-import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native'
-import {login} from '../actions/auth.js'
-import { connect } from 'react-redux/native'
-import {getUser,saveUser} from './../utils/storage'
-var Actions = require('react-native-router-flux').Actions;
+import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native';
+import {login} from '../actions/login';
+import {connect} from 'react-redux/native';
+import {getUser,saveUser} from './../utils/storage';
+const Actions = require('react-native-router-flux').Actions;
 
-class SignIn extends Component {
+class Login extends Component {
 
   constructor(props) {
     super(props)
@@ -19,7 +19,7 @@ class SignIn extends Component {
   }
 
   componentWillMount() {
-    const {dispatch,actions} = this.props
+    const {dispatch} = this.props
 
     //getUser((user)=> {
     //  if (user != null) {
@@ -29,19 +29,27 @@ class SignIn extends Component {
   }
 
   onLoginPressed() {
-    const {dispatch,actions} = this.props
-    dispatch(login(this.state.email, this.state.password, (cb)=> {
+
+    const {dispatch} = this.props;
+
+    let credentials = {
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    dispatch(login(credentials, (cb)=> {
       if (cb.success) {
-        saveUser(cb.user)
-        Actions.tabbar();
+        //saveUser(cb.user);
+        Actions.tabBar();
       }
-    }))
+    }));
+
   }
 
   render() {
-    const { actions, assets, auth } = this.props
+    const { assets, login } = this.props
 
-    if (auth.loggingIn) {
+    if (login.processingRequest) {
       return (
         <View style={{flex: 1,justifyContent: 'center',alignItems: 'center'}}>
           <ActivityIndicatorIOS size="large" animating={true}/>
@@ -149,11 +157,11 @@ var styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  const { auth } = state
+  const { login } = state
   return {
     ...state,
-    auth
+    login
   }
 }
 
-export default connect(mapStateToProps)(SignIn)
+export default connect(mapStateToProps)(Login)

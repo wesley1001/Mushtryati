@@ -1,96 +1,104 @@
-'use strict';
+'use strict'
 
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native';
-import {register} from '../actions/register';
-import { connect } from 'react-redux/native';
-var Actions = require('react-native-router-flux').Actions;
+import {login} from '../actions/login';
+import {connect} from 'react-redux/native';
+import {getUser,saveUser} from './../utils/storage';
+const Actions = require('react-native-router-flux').Actions;
 
-class Register extends Component {
+class Login extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      name: '',
       email: '',
-      password: '',
-      password_confirmation: ''
+      password: ''
     }
 
-    this.onRegisterPressed = this.onRegisterPressed.bind(this);
+    this.onLoginPressed = this.onLoginPressed.bind(this)
   }
 
-  onRegisterPressed() {
+  componentWillMount() {
+    const {dispatch} = this.props
+
+    //getUser((user)=> {
+    //  if (user != null) {
+    //    return dispatch(actions.routes.tabBar.tab1())
+    //  }
+    //})
+  }
+
+  onLoginPressed() {
+
     const {dispatch} = this.props;
-    const inputs = {
-      name: this.state.name,
+
+    let credentials = {
       email: this.state.email,
       password: this.state.password
     }
 
-    dispatch(register(inputs, (cb)=> {
+    dispatch(login(credentials, (cb)=> {
       if (cb.success) {
-        Actions.login();
+        //saveUser(cb.user);
+        Actions.tabBar();
       }
     }));
+
   }
 
   render() {
-    const { register } = this.props;
+    const { assets, login } = this.props
 
-    if (register.processingRequest) {
+    if (login.processingRequest) {
       return (
         <View style={{flex: 1,justifyContent: 'center',alignItems: 'center'}}>
           <ActivityIndicatorIOS size="large" animating={true}/>
         </View>
-      );
+      )
     } else {
       return (
         <View style={styles.container}>
-          <TextInput
-            style={[styles.loginInput]}
-            ref='name'
-            placeholder="الاسم"
-            onChangeText={(name) => this.setState({name})}
-            />
+
+          <Image style={styles.image} source={assets.mark}/>
 
           <TextInput
-            style={[styles.loginInput]}
+            style={[styles.loginInput,styles.mTop20]}
             ref='email'
             placeholder="الايميل"
             onChangeText={(email) => this.setState({email})}
+            placeholderTextColor={'#E2E2E2'}
+            autoFocus={true}
+            autoCorrect={false}
             />
 
+          <TouchableHighlight onPress={Actions.tabBar} style={styles.ltr}>
+            <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
+          </TouchableHighlight>
+
           <TextInput
-            style={styles.loginInput}
+            style={[styles.loginInput]}
             ref="password"
             placeholder="كلمة السر" secureTextEntry={true}
             onChangeText={(password) => this.setState({password})}
+            placeholderTextColor={'#E2E2E2'}
+            autoFocus={false}
+            autoCorrect={false}
             />
 
-          <TextInput
-            style={styles.loginInput}
-            ref="password"
-            placeholder="تأكيد كلمة السر" secureTextEntry={true}
-            onChangeText={(password_confirmation) => this.setState({password_confirmation})}
-            />
-
-          <TouchableHighlight onPress={this.onRegisterPressed} style={styles.buttonGreen}>
-            <Text style={styles.buttonText}>سجل</Text>
+          <TouchableHighlight onPress={this.onLoginPressed} style={styles.buttonGreen}>
+            <Text style={styles.buttonText}>الدخول</Text>
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={Actions.login}>
-            <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>يوجد الحساب ؟ اضغط للدخول</Text>
+          <TouchableHighlight onPress={Actions.register}>
+            <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>لا يوجد الحساب ؟ سحل الان </Text>
           </TouchableHighlight>
 
         </View>
-      );
+      )
     }
 
   }
 
-  /*
-   { auth.validationErrors.length > 0 ? <Error errors={auth.validationErrors}/> : <Text>  </Text> }
-   */
 }
 
 var styles = StyleSheet.create({
@@ -99,7 +107,6 @@ var styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   loginInput: {
     height: 50,
@@ -145,17 +152,16 @@ var styles = StyleSheet.create({
     alignSelf: 'flex-end'
   },
   mTop20: {
-    marginTop: 10
+    marginTop: 50
   }
-});
-//
-//
+})
+
 function mapStateToProps(state) {
-  const { register } = state;
+  const { login } = state
   return {
     ...state,
-    register
+    login
   }
 }
 
-export default connect(mapStateToProps)(Register)
+export default connect(mapStateToProps)(Login)

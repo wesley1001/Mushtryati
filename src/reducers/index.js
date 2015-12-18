@@ -1,12 +1,16 @@
-import {combineReducers} from 'redux'
-import auth from '../reducers/auth'
-import category from '../reducers/category'
-import medias from '../reducers/media'
+import {combineReducers} from 'redux';
+import user from './../reducers/user';
+import login from './../reducers/login';
+import register from './../reducers/register';
+import medias from './../reducers/medias';
+import media from './../reducers/media';
 
 const rootReducer = combineReducers({
-  auth,
-  category,
-  medias
-})
+  user,
+  login,
+  register,
+  medias,
+  media,
+});
 
-export default rootReducer
+export default rootReducer;

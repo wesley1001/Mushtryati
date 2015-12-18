@@ -4,12 +4,6 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 export default class MediaList extends Component {
 
-  componentWillMount() {
-    //let listViewScrollView = this.refs.listView.getScrollResponder();
-    //listViewScrollView.scrollWithoutAnimationTo(80);
-    //listViewScrollView.scrollWithoutAnimationTo(-80);
-  }
-
   renderRow(media) {
     return (
       <View style={styles.row}>
@@ -24,7 +18,6 @@ export default class MediaList extends Component {
     const {medias} = this.props;
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     let dataSource = medias ? ds.cloneWithRows(medias) : ds.cloneWithRows([]);
-
 
     return (
       <ListView
