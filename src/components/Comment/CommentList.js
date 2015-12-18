@@ -4,7 +4,6 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 export default class CommentList extends Component {
 
-
   constructor(props) {
     super(props);
 
@@ -26,13 +25,6 @@ export default class CommentList extends Component {
       </View>
     )
   }
-
-  //renderRow() {
-  //
-  //  return (
-  //    <View><Text>asdsa asd</Text></View>
-  //  );
-  //}
 
   render() {
     const {comments} = this.props;

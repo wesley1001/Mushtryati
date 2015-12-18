@@ -3,10 +3,10 @@
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView } from 'react-native';
 import {connect} from 'react-redux/native';
 import {fetchMedia,favoriteMedia} from './../actions/media';
-import MediaItem from './../components/MediaItem';
-import MediaCommentIcon from './../components/MediaCommentIcon';
-import MediaFavoriteIcon from './../components/MediaFavoriteIcon';
-import CommentList from './../components/CommentList';
+import MediaItem from './../components/Media/MediaItem';
+import MediaCommentIcon from './../components/Media/MediaCommentIcon';
+import MediaFavoriteIcon from './../components/Media/MediaFavoriteIcon';
+import CommentList from './../components/Comment/CommentList';
 import LoadingIndicator from './../components/LoadingIndicator';
 import {assets} from '../utils/assets'
 import { Icon } from 'react-native-icons';
@@ -28,7 +28,6 @@ class Media extends Component {
     //dispatch(fetchMedia(this.props.data.id));
   }
 
-
   handleCommentSubmit = (comment) => {
     const {dispatch} = this.props;
     const params = {
@@ -41,11 +40,10 @@ class Media extends Component {
   handleCommentIconClick = () => {
     const {media} = this.props;
 
-    alert(media);
-    //Actions.mediaCommentTab({
-    //  data: media,
-    //  onCommentSubmit: this.handleCommentSubmit
-    //})
+    Actions.mediaCommentsTab({
+      data: media
+    });
+
   }
 
   handleFavoriteIconPress = () => {

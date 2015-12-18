@@ -2,7 +2,7 @@
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import {connect} from 'react-redux/native';
 import {fetchMedias} from './../actions/medias';
-import MediaList from './../components/MediaList';
+import MediaList from './../components/Media/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 

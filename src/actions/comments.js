@@ -1,16 +1,64 @@
 import {API_ROOT} from './../utils/config'
+import {
+  COMMENTS_REQUEST,
+  COMMENTS_SUCCESS,
+  COMMENTS_FAILURE,
+  COMMENT_SAVED,
+} from '../constants/ActionTypes'
 
-export function commentMedia(params) {
-  return (dispatch, getState) => {
-    const { state } = getState();
-    params.user = 1 // state.auth.user.id;
-    console.log(params);
-    return fetch(API_ROOT + '/medias/comment', {
+function commentsRequest() {
+  return {
+    type: COMMENTS_REQUEST,
+  }
+}
+
+function commentsSuccess(payload) {
+  return {
+    type: COMMENTS_SUCCESS,
+    collection: payload.data
+  }
+}
+
+function commentsFailure(error) {
+  return {
+    type: COMMENTS_FAILURE,
+    error: error,
+  }
+}
+
+function commentSaved(payload) {
+  return {
+    type: COMMENT_SAVED,
+    comment: payload.comment
+  }
+}
+
+export function fetchComments(mediaID) {
+  return (dispatch) => {
+    dispatch(commentsRequest());
+    return fetch(API_ROOT + '/medias/' + mediaID + '/comments')
+      .then(response => response.json())
+      .then(json => {
+        dispatch(commentsSuccess(json));
+      })
+      .catch((err)=> {
+        dispatch(commentsFailure(err));
+      })
+  }
+}
+
+export function addComment(inputs) {
+  return (dispatch) => {
+    return fetch(API_ROOT + '/comments/comment', {
       method: 'POST',
-      body: JSON.stringify(params)
+      body: JSON.stringify(inputs)
     })
       .then(response => response.json())
-      .then(json => {console.log('success', json)})
-      .catch((error)=> {console.log('error', error)})
+      .then(json => {
+        dispatch(commentSaved(json));
+        dispatch(fetchComments(inputs.media));
+      })
+      .catch((err)=> {
+      })
   }
 }
