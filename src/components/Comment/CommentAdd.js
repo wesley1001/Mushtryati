@@ -6,10 +6,15 @@ export default class CommentAdd extends Component {
 
   constructor(props) {
     super(props);
-
+    this.submitComment = this.submitComment.bind(this);
     this.state = {
       comment: ''
     }
+  }
+
+  submitComment() {
+    const {onCommentSubmit} = this.props;
+    return onCommentSubmit(this.state.comment);
   }
 
   render() {
@@ -26,8 +31,7 @@ export default class CommentAdd extends Component {
           onChangeText={(comment) => this.setState({comment})}
           />
 
-        <TouchableHighlight onPress={this.props.onCommentSubmit(this.state.comment)}
-                            style={styles.buttonGreen}>
+        <TouchableHighlight onPress={this.submitComment} style={styles.buttonGreen}>
           <Text style={styles.buttonText}>ارسل</Text>
         </TouchableHighlight>
 

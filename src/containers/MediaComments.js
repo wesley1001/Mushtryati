@@ -26,7 +26,6 @@ class MediaComments extends Component {
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
 
     dispatch(fetchComments(media.entity.id))
-
   }
 
   keyboardWillShow(e) {
@@ -39,6 +38,7 @@ class MediaComments extends Component {
   }
 
   handleCommentSubmit(comment) {
+    alert(comment);
     const {dispatch,user,media} = this.props;
 
     user.id = 1; // for test only
@@ -58,11 +58,9 @@ class MediaComments extends Component {
     const {comments} = this.props;
 
     return (
-      <ScrollView
-        contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]}
-        >
+      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} >
 
-        <CommentList comments={comments} line={assets.line}/>
+        <CommentList comments={comments.collection} line={assets.line} contentInset={0}/>
 
         <CommentAdd onCommentSubmit={this.handleCommentSubmit}/>
 
