@@ -15,7 +15,8 @@ function mediaSuccess(payload) {
   return {
     type: MEDIA_SUCCESS,
     entity: payload.data,
-    hasFavorited: payload.hasFavorited
+    hasFavorited: payload.hasFavorited,
+    comments:payload.comments
   }
 }
 

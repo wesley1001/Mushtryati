@@ -4,8 +4,14 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 export default class CommentList extends Component {
 
-  renderRow(comment) {
 
+  constructor(props) {
+    super(props);
+
+    this.renderRow = this.renderRow.bind(this);
+  }
+
+  renderRow(comment) {
     return (
       <View>
         <TouchableHighlight onPress={() => ''} underlayColor="transparent">
@@ -17,24 +23,34 @@ export default class CommentList extends Component {
             <Image style={styles.thumb} source={{uri:comment.user.thumbnail.name}}/>
           </View>
         </TouchableHighlight>
-        <Image source={this.props.line}/>
       </View>
     )
   }
 
-  render() {
-    const {comments} = this.props.comments;
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-    let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
+  //renderRow() {
+  //
+  //  return (
+  //    <View><Text>asdsa asd</Text></View>
+  //  );
+  //}
 
-    return (
-      <ListView
-        dataSource={dataSource}
-        renderRow={this.renderRow.bind(this)}
-        automaticallyAdjustContentInsets={false}
-        contentInset={{bottom:this.props.contentInset ? this.props.contentInset : 49 }}
-        />
-    )
+  render() {
+    const {comments} = this.props;
+
+    if (comments.length && comments.length > 0) {
+      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
+      let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
+
+      return (
+        <ListView
+          dataSource={dataSource}
+          renderRow={this.renderRow.bind(this)}
+          automaticallyAdjustContentInsets={false}
+          contentInset={{bottom:this.props.contentInset ? this.props.contentInset : 49 }}
+          />
+      )
+    }
+    return <View />;
   }
 }
 

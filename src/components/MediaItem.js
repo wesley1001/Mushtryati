@@ -26,29 +26,14 @@ export default class MediaItem extends Component {
     )
   }
 
-  //renderContent(media) {
-  //
-  //  alert(JSON.stringify(this.props.media));
-  //
-  //  return (
-  //    <View style={styles.container}>
-  //      <Text style={{color:'black'}}>bla asd as bla</Text>
-  //    </View>
-  //  )
-  //}
-
   render() {
 
     const {media} = this.props;
 
     if (media.id && media.id > 0) {
-
       return this.renderContent(media);
-    } else {
-      return (
-        <View />
-      )
     }
+    return <View/>;
   }
 
 }

@@ -5,6 +5,7 @@ import {connect} from 'react-redux/native';
 import {fetchMedia} from './../actions/media';
 import MediaItem from './../components/MediaItem';
 import CommentList from './../components/CommentList';
+import LoadingIndicator from './../components/LoadingIndicator';
 import {assets} from '../utils/assets'
 import { Icon } from 'react-native-icons';
 
@@ -56,15 +57,15 @@ class Media extends Component {
     const {media} = this.props;
 
     if (media.processingRequest) {
-      return (
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-          <Text style={{ color:'black' }}>loading..</Text>
-        </View>
-      );
+      return <LoadingIndicator />;
     }
+
     return (
+      <ScrollView>
         <MediaItem media={media.entity}/>
-    )
+        <CommentList comments={media.comments} line={assets.line} contentInset={0}/>
+      </ScrollView>
+    );
 
   }
 }

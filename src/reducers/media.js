@@ -9,6 +9,7 @@ const initialState = {
   processingRequest: false,
   hasFavorited: false,
   error: null,
+  comments:[]
 }
 
 export default function media(state = initialState, action = {}) {
@@ -25,6 +26,7 @@ export default function media(state = initialState, action = {}) {
         processingRequest: false,
         entity: action.entity,
         hasFavorited: action.hasFavorited,
+        comments:action.comments,
         error: null
       }
     case MEDIA_FAILURE:

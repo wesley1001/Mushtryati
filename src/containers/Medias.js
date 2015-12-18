@@ -3,6 +3,7 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } f
 import {connect} from 'react-redux/native';
 import {fetchMedias} from './../actions/medias';
 import MediaList from './../components/MediaList';
+import LoadingIndicator from './../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
 class Medias extends Component {
@@ -200,17 +201,17 @@ class Medias extends Component {
   }
 
   render() {
+
     const {  medias } = this.props;
+
     if (medias.processingRequest) {
-      return (
-        <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-          <Text style={{ color:'black' }}>loading..</Text>
-        </View>
-      );
+      return <LoadingIndicator />;
     }
+
     return (
       <MediaList medias={medias.collection} loadMedia={this.loadMedia}/>
-    )
+    );
+
   }
 }
 
