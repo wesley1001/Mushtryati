@@ -16,8 +16,8 @@ export default class CommentList extends Component {
         <TouchableHighlight onPress={() => ''} underlayColor="transparent">
           <View style={{flexDirection:"row", justifyContent:"flex-end", padding:5}}>
             <View style={[{flexDirection:"column",paddingRight:10}]}>
-              <Text style={[{color:'#D49393', fontSize:14},styles.rtl]}>اسم مستخدم</Text>
-              <Text style={styles.rtl}>تعليق تعليقتعليقتعل</Text>
+              <Text style={[{color:'#D49393', fontSize:14},styles.rtl]}>{comment.user.name}</Text>
+              <Text style={styles.rtl}>{comment.comment}</Text>
             </View>
             <Image style={styles.thumb} source={{uri:comment.user.thumbnail.name}}/>
           </View>

@@ -1,7 +1,9 @@
 import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
-  COMMENTS_FAILURE
+  COMMENTS_FAILURE,
+  SAVING_COMMENT,
+  COMMENT_SAVED
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -30,6 +32,16 @@ export default function comments(state = initialState, action = {}) {
         ...state,
         processingRequest: false,
         error: action.error
+      }
+    case SAVING_COMMENT:
+      return {
+        ...state,
+        processingRequest: true
+      }
+    case COMMENT_SAVED:
+      return {
+        ...state,
+        processingRequest: false
       }
     default:
       return state

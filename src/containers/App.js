@@ -16,7 +16,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router hideNavBar={true} initialRoutes={['tabBar']}>
+      <Router hideNavBar={true} initialRoutes={['login']}>
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Schema name="withoutAnimation"/>
@@ -45,8 +45,8 @@ export default class App extends Component {
                 titleStyle={{ color:'white', fontSize:17}}
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
                 >
-                <Route name="mediaEntityTab" component={Media} title=""/>
                 <Route name="mediasTab" component={Medias} title="مشترياتي"/>
+                <Route name="mediaEntityTab" component={Media} title=""/>
                 <Route name="mediaCommentsTab" component={MediaComments} title="تعليقات"/>
               </Router>
             </Route>

@@ -4,6 +4,7 @@ import {
   COMMENTS_SUCCESS,
   COMMENTS_FAILURE,
   COMMENT_SAVED,
+  SAVING_COMMENT
 } from '../constants/ActionTypes'
 
 function commentsRequest() {
@@ -23,6 +24,12 @@ function commentsFailure(error) {
   return {
     type: COMMENTS_FAILURE,
     error: error,
+  }
+}
+
+function savingCommment() {
+  return {
+    type: SAVING_COMMENT
   }
 }
 
@@ -49,7 +56,8 @@ export function fetchComments(mediaID) {
 
 export function addComment(inputs) {
   return (dispatch) => {
-    return fetch(API_ROOT + '/comments/comment', {
+    dispatch(savingCommment());
+    return fetch(API_ROOT + '/medias/comment', {
       method: 'POST',
       body: JSON.stringify(inputs)
     })

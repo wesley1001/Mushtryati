@@ -7,14 +7,22 @@ export default class CommentAdd extends Component {
   constructor(props) {
     super(props);
     this.submitComment = this.submitComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.state = {
       comment: ''
     }
   }
 
+  handleChange = (comment) => {
+    return this.setState({
+      comment: comment
+    })
+  }
+
   submitComment() {
     const {onCommentSubmit} = this.props;
     return onCommentSubmit(this.state.comment);
+    this.refs.commentBox.value = '';
   }
 
   render() {
@@ -28,7 +36,7 @@ export default class CommentAdd extends Component {
           autoFocus={true}
           multiline={true}
           ref='commentBox'
-          onChangeText={(comment) => this.setState({comment})}
+          onChangeText={this.handleChange}
           />
 
         <TouchableHighlight onPress={this.submitComment} style={styles.buttonGreen}>

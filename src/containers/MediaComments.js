@@ -9,6 +9,7 @@ import CommentAdd from './../components/Comment/CommentAdd';
 import { assets }  from '../utils/assets';
 import { Icon } from 'react-native-icons';
 import { addComment, fetchComments } from './../actions/comments';
+import LoadingIndicator from './../components/LoadingIndicator';
 
 class MediaComments extends Component {
 
@@ -38,7 +39,6 @@ class MediaComments extends Component {
   }
 
   handleCommentSubmit(comment) {
-    alert(comment);
     const {dispatch,user,media} = this.props;
 
     user.id = 1; // for test only
@@ -56,6 +56,10 @@ class MediaComments extends Component {
   render() {
 
     const {comments} = this.props;
+
+    if (comments.processingRequest) {
+      return <LoadingIndicator />;
+    }
 
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} >
