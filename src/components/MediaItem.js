@@ -40,9 +40,7 @@ export default class MediaItem extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 5,
-    paddingTop: 64,
+
   },
   img: {
     height: 200,

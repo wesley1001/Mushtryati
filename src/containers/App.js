@@ -39,7 +39,17 @@ export default class App extends Component {
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
-
+            <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
+              <Router
+                navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                titleStyle={{ color:'white', fontSize:17}}
+                barButtonTextStyle={{ fontSize:17, color:'white' }}
+                >
+                <Route name="mediaEntityTab" component={Media} title=""/>
+                <Route name="mediasTab" component={Medias} title="مشترياتي"/>
+                <Route name="mediaCommentsTab" component={MediaComments} title="تعليقات"/>
+              </Router>
+            </Route>
 
             <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -49,17 +59,7 @@ export default class App extends Component {
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
-            <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
-              <Router
-                navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                titleStyle={{ color:'white', fontSize:17}}
-                barButtonTextStyle={{ fontSize:17, color:'white' }}
-                >
-                <Route name="mediasTab" component={Medias} title="مشترياتي"/>
-                <Route name="mediaEntityTab" component={Media} title=""/>
-                <Route name="mediaCommentsTab" component={MediaComments} title="تعليقات"/>
-              </Router>
-            </Route>
+
 
             <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
                    component={Master}

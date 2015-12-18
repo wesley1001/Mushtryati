@@ -2,6 +2,7 @@ import {
   MEDIA_REQUEST,
   MEDIA_SUCCESS,
   MEDIA_FAILURE,
+  MEDIA_FAVORITE
 } from '../constants/ActionTypes'
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
   processingRequest: false,
   hasFavorited: false,
   error: null,
-  comments:[]
+  comments: []
 }
 
 export default function media(state = initialState, action = {}) {
@@ -26,9 +27,11 @@ export default function media(state = initialState, action = {}) {
         processingRequest: false,
         entity: action.entity,
         hasFavorited: action.hasFavorited,
-        comments:action.comments,
+        comments: action.comments,
         error: null
       }
+    case MEDIA_FAVORITE :
+      return Object.assign({}, state, action.hasFavorited);
     case MEDIA_FAILURE:
       return {
         ...state,

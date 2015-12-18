@@ -194,9 +194,7 @@ class Medias extends Component {
 
   loadMedia(media) {
     Actions.mediaEntityTab({
-      data: media,
-      onFavoritePress: this.handleFavoritePress,
-      onCommentIconClick: this.handleCommentIconClick
+      data: media
     });
   }
 

@@ -2,37 +2,34 @@
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView } from 'react-native';
 import {connect} from 'react-redux/native';
-import {fetchMedia} from './../actions/media';
+import {fetchMedia,favoriteMedia} from './../actions/media';
 import MediaItem from './../components/MediaItem';
+import MediaCommentIcon from './../components/MediaCommentIcon';
+import MediaFavoriteIcon from './../components/MediaFavoriteIcon';
 import CommentList from './../components/CommentList';
 import LoadingIndicator from './../components/LoadingIndicator';
 import {assets} from '../utils/assets'
 import { Icon } from 'react-native-icons';
+const Actions = require('react-native-router-flux').Actions;
 
 class Media extends Component {
 
   constructor(props) {
     super(props);
-    this.handleFavoritePress = this.handleFavoritePress.bind(this);
+    this.handleFavoriteIconPress = this.handleFavoriteIconPress.bind(this);
     this.handleCommentIconClick = this.handleCommentIconClick.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
 
-    this.state = {
-      comment: 'this is comment'
-    }
   }
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchMedia(this.props.data.id));
+    dispatch(fetchMedia(1));
+    //dispatch(fetchMedia(this.props.data.id));
   }
 
-  handleFavoritePress = (media) => {
-    const {dispatch} = this.props;
-    dispatch(favoriteMedia(media));
-  }
 
-  handleCommentSubmit = (media, comment) => {
+  handleCommentSubmit = (comment) => {
     const {dispatch} = this.props;
     const params = {
       media: media.id,
@@ -41,18 +38,32 @@ class Media extends Component {
     dispatch(commentMedia(params));
   }
 
-  handleCommentIconClick = (media) => {
-    Actions.mediaCommentTab({
-      data: media,
-      onCommentSubmit: this.handleCommentSubmit
-    })
+  handleCommentIconClick = () => {
+    const {media} = this.props;
+
+    alert(media);
+    //Actions.mediaCommentTab({
+    //  data: media,
+    //  onCommentSubmit: this.handleCommentSubmit
+    //})
+  }
+
+  handleFavoriteIconPress = () => {
+    console.log('fav button pressed');
+    const {dispatch,user,media} = this.props;
+
+    user.id = 1; // for testing purpose only.. uncomment while in production
+
+    const params = {
+      user: user.id,
+      media: media.entity.id
+    };
+
+    dispatch(favoriteMedia(params));
   }
 
 
   render() {
-
-    //<MediaItem media={media.entity}/>
-    //<CommentList comments={media.entity.comments} line={assets.line} contentInset={0}/>
 
     const {media} = this.props;
 
@@ -61,14 +72,31 @@ class Media extends Component {
     }
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <MediaItem media={media.entity}/>
+        <View style={styles.buttonWrapper}>
+          <MediaCommentIcon onCommentIconClick={this.handleCommentIconClick}/>
+          <MediaFavoriteIcon hasFavorited={media.hasFavorited} onFavoriteIconPress={this.handleFavoriteIconPress}/>
+        </View>
         <CommentList comments={media.comments} line={assets.line} contentInset={0}/>
       </ScrollView>
     );
 
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 5,
+    paddingTop: 64,
+  },
+  buttonWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+  }
+});
 
 function mapStateToProps(state) {
   const { media } = state
