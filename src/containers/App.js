@@ -1,28 +1,26 @@
 'use strict';
-
 import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-native';
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
-
-import {assets} from './../utils/assets'
-import TabIcon from './../components/TabIcon';
 import Master from './../components/Master';
 import Login from './../containers/Login';
 import Register from './../containers/Register';
 import Medias from './../containers/Medias';
 import Media from './../containers/Media';
 import Comments from './../containers/Comments';
+import TabIcon from './../components/TabIcon';
 
 export default class App extends Component {
 
   render() {
     return (
       <Router hideNavBar={true} initialRoutes={['login']}>
+
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
         <Schema name="withoutAnimation"/>
         <Schema name="tab" type="switch" icon={TabIcon}/>
 
-        <Route name="login" component={Login} assets={assets} wrapRouter={true} title="تسجيل الدخول"
+        <Route name="login" component={Login} wrapRouter={true} title="تسجيل الدخول"
                hideNavBar={false}
                navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                titleStyle={{ color:'white', fontSize:17}}
@@ -39,6 +37,7 @@ export default class App extends Component {
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
+
             <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -55,11 +54,11 @@ export default class App extends Component {
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
+
             <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='fontawesome|heart' component={Master}
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
-
 
             <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
                    component={Master}
@@ -69,6 +68,7 @@ export default class App extends Component {
 
           </Router>
         </Route>
+
       </Router>
 
     )

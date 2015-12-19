@@ -1,37 +1,31 @@
 'use strict'
-import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native';
+import React, { Component } from 'react-native';
+import LoadingIndicator from './../components/LoadingIndicator';
+import LoginScene from './../components/Auth/LoginScene';
 import {login} from '../actions/login';
 import {connect} from 'react-redux/native';
 import {getUser,saveUser} from './../utils/storage';
-import LoadingIndicator from './../components/LoadingIndicator';
-import LoginScene from './../components/Auth/LoginScene';
-import {assets} from './../utils/assets';
 
 const Actions = require('react-native-router-flux').Actions;
 
 class Login extends Component {
 
   componentWillMount() {
-    const {dispatch} = this.props
-
-    //getUser((user)=> {
-    //  if (user != null) {
-    //    return dispatch(actions.routes.tabBar.tab1())
-    //  }
-    //})
+    return getUser((user)=> {
+      if (user != null) {
+        return Actions.tabBar();
+      }
+    });
   }
 
   handleLogin = (credentials) => {
-
     const {dispatch} = this.props;
-
     dispatch(login(credentials, (cb)=> {
       if (cb.success) {
-        //saveUser(cb.user);
+        saveUser(cb.user);
         return Actions.tabBar();
       }
     }));
-
   }
 
   handleRegisterRoute = () => {
@@ -40,12 +34,12 @@ class Login extends Component {
 
   handleForgotPasswordRoute = () => {
     // @todo: implement route
-
     return Actions.tabBar();
   }
 
   render() {
-    const { assets, login } = this.props
+
+    const { login } = this.props
 
     if (login.processingRequest) {
       return <LoadingIndicator />;
@@ -55,7 +49,7 @@ class Login extends Component {
       <LoginScene
         onLoginPressed={this.handleLogin}
         onRegisterRouteClick={this.handleRegisterRoute}
-        onForgotPasswordRouteClick={this.handleForgotPasswordRoute} mark={assets.mark}
+        onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
         />
     );
 

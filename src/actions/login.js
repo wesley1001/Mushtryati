@@ -44,7 +44,7 @@ export function login(credentials, cb = ()=> {
         } else {
           dispatch(loginSuccess());
           dispatch(setUser(json));
-          return cb({success: true});
+          return cb({success: true,user:json});
         }
       })
       .catch((err)=> {

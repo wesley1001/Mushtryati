@@ -1,56 +1,39 @@
 'use strict'
-
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
+import {assets} from './../../utils/assets';
 
 export default class LoginScene extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       email: '',
       password: ''
     }
-
-    this.handleLogin = this.handleLogin.bind(this)
-  }
-
-  componentWillMount() {
-    const {dispatch} = this.props
-
-    //getUser((user)=> {
-    //  if (user != null) {
-    //    return dispatch(actions.routes.tabBar.tab1())
-    //  }
-    //})
   }
 
   handleLogin = () => {
-
     let credentials = {
       email: this.state.email,
       password: this.state.password
     }
-
-    this.props.onLoginPressed(credentials);
+    return this.props.onLoginPressed(credentials);
   }
 
 
   handleForgotPasswordRoute = () => {
-    this.props.onForgotPasswordRouteClick();
+    return this.props.onForgotPasswordRouteClick();
   }
 
   handleRegisterRoute = () => {
     return this.props.onRegisterRouteClick();
   }
 
-
   render() {
-    const { assets, login } = this.props
-
     return (
       <View style={{flex: 1,padding: 10,justifyContent: 'center',alignItems: 'center'}}>
 
-        <Image style={styles.image} source={this.props.mark}/>
+        <Image style={styles.image} source={assets.mark}/>
 
         <TextInput
           style={[styles.loginInput,styles.mTop20]}
