@@ -11,7 +11,7 @@ import { Icon } from 'react-native-icons';
 import { addComment, fetchComments } from './../actions/comments';
 import LoadingIndicator from './../components/LoadingIndicator';
 
-class MediaComments extends Component {
+class Comments extends Component {
 
   constructor(props) {
     super(props);
@@ -62,7 +62,7 @@ class MediaComments extends Component {
     }
 
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} >
+      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]}>
 
         <CommentList comments={comments.collection} line={assets.line} contentInset={0}/>
 

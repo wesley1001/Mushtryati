@@ -10,7 +10,7 @@ import Login from './../containers/Login';
 import Register from './../containers/Register';
 import Medias from './../containers/Medias';
 import Media from './../containers/Media';
-import MediaComments from './../containers/MediaComments';
+import Comments from './../containers/Comments';
 
 export default class App extends Component {
 
@@ -47,7 +47,7 @@ export default class App extends Component {
                 >
                 <Route name="mediasTab" component={Medias} title="مشترياتي"/>
                 <Route name="mediaEntityTab" component={Media} title=""/>
-                <Route name="mediaCommentsTab" component={MediaComments} title="تعليقات"/>
+                <Route name="mediaCommentsTab" component={Comments} title="تعليقات"/>
               </Router>
             </Route>
 
