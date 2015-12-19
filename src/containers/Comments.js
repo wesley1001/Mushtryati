@@ -23,10 +23,10 @@ class Comments extends Component {
 
   componentWillMount() {
     const {dispatch,media} = this.props;
+    dispatch(fetchComments(media.entity.id))
+
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
-
-    dispatch(fetchComments(media.entity.id))
   }
 
   keyboardWillShow(e) {
@@ -41,7 +41,7 @@ class Comments extends Component {
   handleCommentSubmit(comment) {
     const {dispatch,user,media} = this.props;
 
-    user.id = 1; // for test only
+    //user.id = 1; // for test only
 
     const inputs = {
       media: media.entity.id,
@@ -50,7 +50,6 @@ class Comments extends Component {
     }
 
     dispatch(addComment(inputs));
-
   }
 
   render() {

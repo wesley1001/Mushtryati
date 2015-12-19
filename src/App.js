@@ -1,13 +1,13 @@
 'use strict';
 import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-native';
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
-import Master from './../components/Master';
-import Login from './../containers/Login';
-import Register from './../containers/Register';
-import Medias from './../containers/Medias';
-import Media from './../containers/Media';
-import Comments from './../containers/Comments';
-import TabIcon from './../components/TabIcon';
+import Master from './components/Master';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Medias from './containers/Medias';
+import Media from './containers/Media';
+import Comments from './containers/Comments';
+import TabIcon from './components/TabIcon';
 
 export default class App extends Component {
 
