@@ -91,4 +91,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(MediaComments)
+export default connect(mapStateToProps)(Comments)
