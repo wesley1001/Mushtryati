@@ -5,7 +5,7 @@ import {
 } from '../constants/ActionTypes';
 
 const initialState = {
-  processingRequest: false,
+  isFetching: false,
   errors: []
 };
 
@@ -14,19 +14,19 @@ export default function auth(state = initialState, action = {}) {
     case REGISTER_REQUEST:
       return {
         ...state,
-        processingRequest: true,
+        isFetching: true,
         validationErrors: []
       }
     case REGISTER_SUCCESS:
       return {
         ...state,
-        processingRequest: false,
+        isFetching: false,
         validationErrors: []
       }
     case REGISTER_FAILURE:
       return {
         ...state,
-        processingRequest: false,
+        isFetching: false,
         errors: action.validationErrors,
       };
     default:

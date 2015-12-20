@@ -19,7 +19,9 @@ export default class CommentList extends Component {
               <Text style={[{color:'#D49393', fontSize:14},styles.rtl]}>{comment.user.name}</Text>
               <Text style={styles.rtl}>{comment.comment}</Text>
             </View>
-            <Image style={styles.thumb} source={{uri:comment.user.thumbnail.name}}/>
+            {comment.user.thumbnail ? <Image style={styles.thumb} source={{uri:comment.user.thumbnail.name}}/> :
+              <View/>}
+
           </View>
         </TouchableHighlight>
       </View>

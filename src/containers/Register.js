@@ -24,7 +24,7 @@ class Register extends Component {
   render() {
     const { register } = this.props;
 
-    if (register.processingRequest) {
+    if (register.isFetching) {
       return <LoadingIndicator />;
     }
     return (

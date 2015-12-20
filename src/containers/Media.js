@@ -24,8 +24,7 @@ class Media extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchMedia(1));
-    //dispatch(fetchMedia(this.props.data.id));
+    dispatch(fetchMedia(this.props.data.id));
   }
 
   handleCommentSubmit = (comment) => {
@@ -47,7 +46,7 @@ class Media extends Component {
   }
 
   handleFavoriteIconPress = () => {
-    console.log('fav button pressed');
+    //console.log('fav button pressed');
     const {dispatch,user,media} = this.props;
 
     user.id = 1; // for testing purpose only.. uncomment while in production
@@ -65,9 +64,11 @@ class Media extends Component {
 
     const {media} = this.props;
 
-    if (media.processingRequest) {
+    if (media.isFetching) {
       return <LoadingIndicator />;
     }
+
+
 
     return (
       <ScrollView style={styles.container}>

@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   collection: [],
-  processingRequest: false,
+  isFetching: false,
   error: null
 }
 
@@ -15,20 +15,20 @@ export default function medias(state = initialState, action = {}) {
     case MEDIAS_REQUEST:
       return {
         ... state,
-        processingRequest: true,
+        isFetching: true,
         error: null
       }
     case MEDIAS_SUCCESS:
       return {
         ... state,
-        processingRequest: false,
+        isFetching: false,
         collection: action.collection,
         error: null
       }
     case MEDIAS_FAILURE:
       return {
         ...state,
-        processingRequest: false,
+        isFetching: false,
         error: action.error
       }
     default:

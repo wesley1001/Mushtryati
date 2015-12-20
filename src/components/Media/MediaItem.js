@@ -13,10 +13,10 @@ export default class MediaItem extends Component {
         <View style={{flexDirection: "row",  paddingBottom:10}}>
           <Text style={styles.createdAt}>2h</Text>
           <Text style={styles.name}>{user.name}</Text>
-          <Image style={[styles.thumbnail]} source={{uri:user.thumbnail.name}}/>
+          {user.thumbnail ? <Image style={[styles.thumbnail]} source={{uri:user.thumbnail.name}}/> : <View/> }
         </View>
         <View>
-          <Image style={styles.img} source={{uri:url}}/>
+          {url ? <Image style={styles.img} source={{uri:url}}/> : <View/> }
         </View>
 
         <View>
@@ -39,9 +39,7 @@ export default class MediaItem extends Component {
 }
 
 var styles = StyleSheet.create({
-  container: {
-
-  },
+  container: {},
   img: {
     height: 200,
     borderRadius: 5,

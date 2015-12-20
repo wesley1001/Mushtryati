@@ -56,7 +56,7 @@ class Comments extends Component {
 
     const {comments} = this.props;
 
-    if (comments.processingRequest) {
+    if (comments.isFetching) {
       return <LoadingIndicator />;
     }
 

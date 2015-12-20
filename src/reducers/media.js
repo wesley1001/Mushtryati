@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   entity: {},
-  processingRequest: false,
+  isFetching: false,
   hasFavorited: false,
   error: null,
   comments: []
@@ -18,13 +18,13 @@ export default function media(state = initialState, action = {}) {
     case MEDIA_REQUEST:
       return {
         ... state,
-        processingRequest: true,
+        isFetching: true,
         error: null
       }
     case MEDIA_SUCCESS:
       return {
         ... state,
-        processingRequest: false,
+        isFetching: false,
         entity: action.entity,
         hasFavorited: action.hasFavorited,
         comments: action.comments,
@@ -35,7 +35,7 @@ export default function media(state = initialState, action = {}) {
     case MEDIA_FAILURE:
       return {
         ...state,
-        processingRequest: false,
+        isFetching: false,
         error: action.error
       }
     default:

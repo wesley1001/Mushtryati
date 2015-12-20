@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
-  processingRequest: false,
+  isFetching: false,
   error: null
 };
 
@@ -15,21 +15,21 @@ export default function auth(state = initialState, action = {}) {
     case LOGIN_REQUEST:
       return {
         ... state,
-        processingRequest: true,
+        isFetching: true,
         isLoggedIn: false,
         error: null
       };
     case LOGIN_SUCCESS:
       return {
         ... state,
-        processingRequest: false,
+        isFetching: false,
         isLoggedIn: true,
         error: null
       };
     case LOGIN_FAILURE:
       return {
         ...state,
-        processingRequest: false,
+        isFetching: false,
         isLoggedIn: false,
         error: action.error
       };

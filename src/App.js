@@ -7,8 +7,8 @@ import Register from './containers/Register';
 import Medias from './containers/Medias';
 import Media from './containers/Media';
 import Comments from './containers/Comments';
+import Favorites from './containers/Favorites';
 import TabIcon from './components/TabIcon';
-
 export default class App extends Component {
 
   render() {
@@ -55,7 +55,7 @@ export default class App extends Component {
                    titleStyle={{ color:'white', fontSize:17}}
               />
 
-            <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='fontawesome|heart' component={Master}
+            <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='fontawesome|heart' component={Favorites}
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />

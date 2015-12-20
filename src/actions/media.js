@@ -3,8 +3,10 @@ import {
   MEDIA_REQUEST,
   MEDIA_SUCCESS,
   MEDIA_FAILURE,
-  MEDIA_FAVORITE
+  MEDIA_FAVORITE,
 } from '../constants/ActionTypes';
+
+import {fetchFavorites} from './favorites';
 
 function mediaRequest() {
   return {
@@ -28,10 +30,10 @@ function mediaFailure(error) {
   }
 }
 
-function mediaFavorite(hasFavorited) {
+function toggleFavorite(hasFavorited) {
   return {
     type: MEDIA_FAVORITE,
-    hasFavorited:hasFavorited
+    hasFavorited: hasFavorited
   }
 }
 
@@ -50,6 +52,11 @@ export function fetchMedia(mediaID) {
   }
 }
 
+/**
+ * @param params
+ * @returns {Function}
+ * Favorite a media
+ */
 export function favoriteMedia(params) {
   return (dispatch) => {
     return fetch(API_ROOT + '/medias/favorite', {
@@ -58,8 +65,10 @@ export function favoriteMedia(params) {
     })
       .then(response => response.json())
       .then(json => {
-        dispatch(mediaFavorite(json));
+        dispatch(toggleFavorite(json));
+        dispatch(fetchFavorites(params.user));
       })
-      .catch((error)=> {})
+      .catch((err)=> {
+      })
   }
 }
