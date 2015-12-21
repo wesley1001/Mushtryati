@@ -75,15 +75,15 @@ export default function rules(state, action) {
    * ### name validation
    * set the form field error
    */
-    //case('name'):
-    //  let validName = _.isUndefined(validate({name: value},
-    //    nameConstraints));
-    //  if (validName) {
-    //    return state.setIn(['form', 'fields', 'nameHasError'], false);
-    //  } else {
-    //    return state.setIn(['form', 'fields', 'nameHasError'], true);
-    //  }
-    //  break;
+    case('name'):
+      let validName = _.isUndefined(validate({name: value},
+        nameConstraints));
+      if (validName) {
+        return Object.assign({}, state, _.set(state.form.fields, 'nameHasError', false));
+      } else {
+        return Object.assign({}, state, _.set(state.form.fields, 'nameHasError', true));
+      }
+      break;
 
   /**
    * ### email validation
@@ -93,9 +93,9 @@ export default function rules(state, action) {
       let validEmail = _.isUndefined(validate({from: value},
         emailConstraints));
       if (validEmail) {
-        return Object.assign({}, state, _.set(state.fields, 'emailHasError', false));
+        return Object.assign({}, state, _.set(state.form.fields, 'emailHasError', false));
       } else {
-        return Object.assign({}, state, _.set(state.fields, 'emailHasError', true));
+        return Object.assign({}, state, _.set(state.form.fields, 'emailHasError', true));
       }
       break;
 
@@ -107,9 +107,9 @@ export default function rules(state, action) {
       let validPassword = _.isUndefined(validate({password: value},
         passwordConstraints));
       if (validPassword) {
-        return Object.assign({}, state, _.set(state.fields, 'passwordHasError', false));
+        return Object.assign({}, state, _.set(state.form.fields, 'passwordHasError', false));
       } else {
-        return Object.assign({}, state, _.set(state.fields, 'passwordHasError', true));
+        return Object.assign({}, state, _.set(state.form.fields, 'passwordHasError', true));
       }
       break;
 
@@ -117,18 +117,18 @@ export default function rules(state, action) {
    * ### passwordConfirmation validation
    * set the form field error
    */
-    //case('passwordConfirmation'):
-    //  var validPasswordAgain
-    //    = _.isUndefined(validate({
-    //    password: state.form.fields.password,
-    //    confirmPassword: value
-    //  }, passwordConfirmationConstraints));
-    //  if (validPasswordAgain) {
-    //    return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], false);
-    //  } else {
-    //    return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], true);
-    //  }
-    //  break;
+    case('passwordConfirmation'):
+      var validPasswordAgain
+        = _.isUndefined(validate({
+        password: state.form.fields.password,
+        confirmPassword: value
+      }, passwordConfirmationConstraints));
+      if (validPasswordAgain) {
+        return Object.assign({}, state, _.set(state.form.fields, 'passwordConfirmationHasError', false));
+      } else {
+        return Object.assign({}, state, _.set(state.form.fields, 'passwordConfirmationHasError', false));
+      }
+      break;
   }
 
   return state;

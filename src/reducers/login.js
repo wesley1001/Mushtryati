@@ -11,40 +11,20 @@ import rules from './../validators/validationRules';
 import _ from 'lodash';
 
 const initialState = {
+  form: {
+    isValid: false,
+    disabled: false,
+    fields: {
+      email: '',
+      emailHasError: false,
+      password: '',
+      passwordHasError: false
+    }
+  },
   isLoggedIn: false,
   isFetching: false,
   error: null,
-  disabled: false,
-  isValid: false,
-  fields: {
-    email: '',
-    emailHasError: false,
-    password: '',
-    passwordHasError: false
-  }
 }
-
-//const Form = Record({
-//  disabled: false,
-//  error: null,
-//  isValid: false,
-//  isFetching: false,
-//  fields: {
-//    email: '',
-//    emailHasError: false,
-//    password: '',
-//    passwordHasError: false
-//  }
-//});
-
-///**
-// * ## InitialState
-// * The form is set
-// */
-//var initialState = Record({
-//  form: new Form
-//});
-
 
 export default function login(state = initialState, action = {}) {
   switch (action.type) {
@@ -73,11 +53,9 @@ export default function login(state = initialState, action = {}) {
     {
       const {field, value} = action.payload;
 
-      let nextState = Object.assign({}, state, _.set(state.fields, field, value));
+      let nextState = Object.assign({}, state, _.set(state.form.fields, field, value));
 
-      var finalState = validate(
-        rules(nextState, action)
-        , action);
+      var finalState = validate(rules(nextState, action), action);
 
       return finalState;
     }

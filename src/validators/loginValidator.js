@@ -6,20 +6,15 @@ import _ from 'lodash';
 
 export default function validate(state) {
 
-  if (state.fields.email !== ''
-    &&
-    state.fields.password !== ''
-    && !state.fields.emailHasError
-    && !state.fields.passwordHasError) {
-    return {
-      ...state,
-      isValid: true
-    }
+  let isValid = false;
+  if (state.form.fields.email !== '' && state.form.fields.password !== '' && !state.form.fields.emailHasError && !state.form.fields.passwordHasError) {
+    isValid = true;
   } else {
-    return {
-      ...
-        state,
-      isValid: false
-    }
+    isValid = false;
+  }
+
+  return {
+    ...state,
+    isValid: isValid
   }
 }

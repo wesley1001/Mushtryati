@@ -67,7 +67,7 @@ class Login extends Component {
         onLoginPressed={this.handleLogin}
         onRegisterRouteClick={this.handleRegisterRoute}
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
-        form={login}
+        form={login.form}
         onChange={this.onChange.bind(this)}
         />
     );
