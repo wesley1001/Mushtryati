@@ -1,6 +1,10 @@
+
+
 'use strict'
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
 import {assets} from './../../utils/assets';
+import t from 'tcomb-form-native';
+let Form = t.form.Form;
 
 export default class LoginScene extends Component {
 
@@ -30,43 +34,42 @@ export default class LoginScene extends Component {
   }
 
   render() {
+
+    let options = {
+      auto: 'placeholders',
+      fields: {}
+    };
+
+    let email = {
+      label: 'Email',
+      keyboardType: 'email-address',
+      error: 'Please enter valid email'
+    };
+
+    let password = {
+      label: 'Password',
+      maxLength: 12,
+      secureTextEntry: true,
+      editable: !this.props.form.isFetching,
+      error: 'Must have 6-12 characters with at least 1 number and 1 special character'
+    };
+
+    const loginForm = t.struct({
+      username: t.String,
+      password: t.String
+    });
+
     return (
-      <View style={{flex: 1,padding: 10,justifyContent: 'center',alignItems: 'center'}}>
+
+      <View style={{flex: 1}}>
 
         <Image style={styles.image} source={assets.mark}/>
-
-        <TextInput
-          style={[styles.loginInput,styles.mTop20]}
-          ref='email'
-          placeholder="الايميل"
-          onChangeText={(email) => this.setState({email})}
-          placeholderTextColor={'#E2E2E2'}
-          autoFocus={true}
-          autoCorrect={false}
+        <Form ref="form"
+              type={loginForm}
+              options={options}
+              value={this.props.value}
+              onChange={this.props.onChange}
           />
-
-        <TouchableHighlight onPress={this.handleForgotPasswordRoute} style={styles.ltr} underlayColor='transparent'>
-          <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
-        </TouchableHighlight>
-
-        <TextInput
-          style={[styles.loginInput]}
-          ref="password"
-          placeholder="كلمة السر" secureTextEntry={true}
-          onChangeText={(password) => this.setState({password})}
-          placeholderTextColor={'#E2E2E2'}
-          autoFocus={false}
-          autoCorrect={false}
-          />
-
-        <TouchableHighlight onPress={this.handleLogin} style={styles.buttonGreen} underlayColor='transparent'>
-          <Text style={styles.buttonText}>الدخول</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={this.handleRegisterRoute} underlayColor='transparent'>
-          <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>لا يوجد الحساب ؟ سحل الان </Text>
-        </TouchableHighlight>
-
       </View>
     )
   }

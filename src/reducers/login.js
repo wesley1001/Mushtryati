@@ -7,7 +7,15 @@ import {
 const initialState = {
   isLoggedIn: false,
   isFetching: false,
-  error: null
+  error: null,
+  disabled: false,
+  isValid: false,
+  formFields: {
+    email: '',
+    emailHasError: false,
+    password: '',
+    passwordHasError: false,
+  }
 };
 
 export default function auth(state = initialState, action = {}) {
@@ -33,6 +41,18 @@ export default function auth(state = initialState, action = {}) {
         isLoggedIn: false,
         error: action.error
       };
+    //case ON_AUTH_FORM_FIELD_CHANGE: {
+    //  const {field, value} = action.payload;
+    //  let nextState =  state.setIn(['form', 'fields', field], value)
+    //    .setIn(['form','error'],null);
+    //
+    //  var finalState = formValidation(
+    //    fieldValidation( nextState, action)
+    //    , action);
+    //
+    //  return finalState;
+    //}
+
     default:
       return state;
   }

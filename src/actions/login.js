@@ -53,3 +53,8 @@ export function login(credentials, cb = ()=> {
       });
   };
 }
+
+
+export function onAuthFormFieldChange(field,value) {
+
+}
