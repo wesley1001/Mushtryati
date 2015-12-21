@@ -2,7 +2,13 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  ON_LOGIN_FORM_FIELD_CHANGE
 } from '../constants/ActionTypes';
+
+import {Record} from 'immutable';
+import validate from './../validators/loginValidator';
+import rules from './../validators/validationRules';
+import _ from 'lodash';
 
 const initialState = {
   isLoggedIn: false,
@@ -10,15 +16,37 @@ const initialState = {
   error: null,
   disabled: false,
   isValid: false,
-  formFields: {
+  fields: {
     email: '',
     emailHasError: false,
     password: '',
-    passwordHasError: false,
+    passwordHasError: false
   }
-};
+}
 
-export default function auth(state = initialState, action = {}) {
+//const Form = Record({
+//  disabled: false,
+//  error: null,
+//  isValid: false,
+//  isFetching: false,
+//  fields: {
+//    email: '',
+//    emailHasError: false,
+//    password: '',
+//    passwordHasError: false
+//  }
+//});
+
+///**
+// * ## InitialState
+// * The form is set
+// */
+//var initialState = Record({
+//  form: new Form
+//});
+
+
+export default function login(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -41,17 +69,18 @@ export default function auth(state = initialState, action = {}) {
         isLoggedIn: false,
         error: action.error
       };
-    //case ON_AUTH_FORM_FIELD_CHANGE: {
-    //  const {field, value} = action.payload;
-    //  let nextState =  state.setIn(['form', 'fields', field], value)
-    //    .setIn(['form','error'],null);
-    //
-    //  var finalState = formValidation(
-    //    fieldValidation( nextState, action)
-    //    , action);
-    //
-    //  return finalState;
-    //}
+    case ON_LOGIN_FORM_FIELD_CHANGE:
+    {
+      const {field, value} = action.payload;
+
+      let nextState = Object.assign({}, state, _.set(state.fields, field, value));
+
+      var finalState = validate(
+        rules(nextState, action)
+        , action);
+
+      return finalState;
+    }
 
     default:
       return state;

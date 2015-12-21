@@ -1,10 +1,9 @@
-
-
 'use strict'
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
 import {assets} from './../../utils/assets';
 import t from 'tcomb-form-native';
 let Form = t.form.Form;
+
 
 export default class LoginScene extends Component {
 
@@ -43,6 +42,8 @@ export default class LoginScene extends Component {
     let email = {
       label: 'Email',
       keyboardType: 'email-address',
+      editable: !this.props.form.isFetching,
+      hasError: this.props.form.fields.emailHasError,
       error: 'Please enter valid email'
     };
 
@@ -51,13 +52,16 @@ export default class LoginScene extends Component {
       maxLength: 12,
       secureTextEntry: true,
       editable: !this.props.form.isFetching,
+      hasError: this.props.form.fields.passwordHasError,
       error: 'Must have 6-12 characters with at least 1 number and 1 special character'
     };
 
     const loginForm = t.struct({
-      username: t.String,
+      email: t.String,
       password: t.String
     });
+    options.fields['email'] = email;
+    options.fields['password'] = password;
 
     return (
 

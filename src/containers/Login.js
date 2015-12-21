@@ -2,7 +2,7 @@
 import React, { Component } from 'react-native';
 import LoadingIndicator from './../components/LoadingIndicator';
 import LoginScene from './../components/Auth/LoginScene';
-import {login} from '../actions/login';
+import {login,onLoginFormFieldChange} from '../actions/login';
 import {connect} from 'react-redux/native';
 import {getUser,saveUser} from './../utils/storage';
 
@@ -38,13 +38,14 @@ class Login extends Component {
   }
 
   onChange(value) {
+    //alert(JSON.stringify(value));
     const { dispatch } = this.props
 
     if (value.email != '') {
-      dispatch(onAuthFormFieldChange('email', value.email));
+      dispatch(onLoginFormFieldChange('email', value.email));
     }
     if (value.password != '') {
-      dispatch(onAuthFormFieldChange('password', value.password));
+      dispatch(onLoginFormFieldChange('password', value.password));
     }
 
     this.setState(
@@ -55,7 +56,7 @@ class Login extends Component {
 
   render() {
 
-    const { login } = this.props
+    const { login } = this.props;
 
     if (login.isFetching) {
       return <LoadingIndicator />;
@@ -67,7 +68,7 @@ class Login extends Component {
         onRegisterRouteClick={this.handleRegisterRoute}
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
         form={login}
-        onChange={()=>alert('wa')}
+        onChange={this.onChange.bind(this)}
         />
     );
 
