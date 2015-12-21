@@ -38,6 +38,16 @@ export default class App extends Component {
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
 
+            <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
+                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                   titleStyle={{ color:'white', fontSize:17}}
+              />
+
+            <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='fontawesome|heart' component={Favorites}
+                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                   titleStyle={{ color:'white', fontSize:17}}
+              />
+
             <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -49,16 +59,6 @@ export default class App extends Component {
                 <Route name="mediaCommentsTab" component={Comments} title="تعليقات"/>
               </Router>
             </Route>
-
-            <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                   titleStyle={{ color:'white', fontSize:17}}
-              />
-
-            <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='fontawesome|heart' component={Favorites}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                   titleStyle={{ color:'white', fontSize:17}}
-              />
 
             <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
                    component={Master}

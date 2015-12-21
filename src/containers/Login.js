@@ -11,11 +11,11 @@ const Actions = require('react-native-router-flux').Actions;
 class Login extends Component {
 
   componentWillMount() {
-    return getUser((user)=> {
-      if (user != null) {
-        return Actions.tabBar();
-      }
-    });
+    //return getUser((user)=> {
+    //  if (user != null) {
+    //    return Actions.tabBar();
+    //  }
+    //});
   }
 
   handleLogin = (credentials) => {
