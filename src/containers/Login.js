@@ -60,18 +60,20 @@ class Login extends Component {
     return Actions.tabBar();
   }
 
-  onChange(value) {
-    //alert(JSON.stringify(value));
+  onChange(value,field) {
+    //console.log('val is',value);
+
+    var changedField = field[0];
+
+    console.log('val of field is ',value[changedField]);
 
     const { dispatch } = this.props
 
-    if (value.email != '') {
-      dispatch(onLoginFormFieldChange('email', value.email));
-    }
-
-    if (value.password != '') {
-      dispatch(onLoginFormFieldChange('password', value.password));
-    }
+    dispatch(onLoginFormFieldChange(changedField, value[changedField]));
+    //
+    //if (value.password != '') {
+    //  dispatch(onLoginFormFieldChange('password', value.password));
+    //}
 
     this.setState(
       {value}

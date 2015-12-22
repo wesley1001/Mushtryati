@@ -90,7 +90,7 @@ export default class LoginScene extends Component {
               onChange={this.props.onChange}
           />
         <FormButton
-          //isDisabled={!login.form.isValid || login.isFetching}
+          isDisabled={!login.form.isValid || login.isFetching}
           onPress={this.handleLogin}
           buttonText='الدخول'/>
 
