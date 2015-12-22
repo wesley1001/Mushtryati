@@ -66,12 +66,12 @@ class Login extends Component {
 
     return (
       <LoginScene
-        onLoginPressed={this.handleLogin.bind(this)}
-        onRegisterRouteClick={this.handleRegisterRoute.bind(this)}
-        onForgotPasswordRouteClick={this.handleForgotPasswordRoute.bind(this)}
         login={login}
-        onChange={this.onFieldChange.bind(this)}
         credentials={this.state.credentials}
+        onLoginPressed={this.handleLogin.bind(this)}
+        onRegisterRoutePress={this.handleRegisterRoute.bind(this)}
+        onForgotPasswordRoutePress={this.handleForgotPasswordRoute.bind(this)}
+        onChange={this.onFieldChange.bind(this)}
         />
     );
 

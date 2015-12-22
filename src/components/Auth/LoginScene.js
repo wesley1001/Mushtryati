@@ -1,33 +1,24 @@
 'use strict'
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
 import t from 'tcomb-form-native';
-let Form = t.form.Form;
 import FormButton from './../FormButton';
 import stylesheet from './../../styles/form';
 import LoadingIndicator from './../LoadingIndicator';
 import {assets} from './../../utils/assets';
+const Form = t.form.Form;
 
 export default class LoginScene extends Component {
 
-  constructor(props) {
-    super(props);
-    //this.state = {
-    //  email: '',
-    //  password: ''
-    //}
+  handleLogin() {
+    this.props.onLoginPressed();
   }
 
-  handleLogin = () => {
-    return this.props.onLoginPressed();
+  handleForgotPasswordRoutePress() {
+    this.props.onForgotPasswordRoutePress();
   }
 
-
-  handleForgotPasswordRoute = () => {
-    return this.props.onForgotPasswordRouteClick();
-  }
-
-  handleRegisterRoute = () => {
-    return this.props.onRegisterRouteClick();
+  handleRegisterRoutePress() {
+    this.props.onRegisterRoutePress();
   }
 
   render() {
@@ -35,10 +26,6 @@ export default class LoginScene extends Component {
     Form.stylesheet = stylesheet;
 
     const {login} = this.props;
-
-    let options = {
-      fields: {}
-    };
 
     let email = {
       label: 'الايميل',
@@ -63,8 +50,13 @@ export default class LoginScene extends Component {
       email: t.String,
       password: t.String
     });
-    options.fields['email'] = email;
-    options.fields['password'] = password;
+
+    const options = {
+      fields: {
+        email: email,
+        password: password
+      }
+    };
 
     return (
 
@@ -81,17 +73,17 @@ export default class LoginScene extends Component {
           />
         <FormButton
           isDisabled={!login.form.isValid || login.isFetching}
-          onPress={this.handleLogin}
+          onPress={this.handleLogin.bind(this)}
           buttonText='الدخول'/>
 
-        <TouchableHighlight onPress={this.handleRegisterRoute} underlayColor='transparent'>
+        <TouchableHighlight onPress={this.handleRegisterRoutePress.bind(this)} underlayColor='transparent'>
           <Text style={[styles.label,styles.center,styles.textUnderline]}>لا يوجد الحساب ؟ سحل الان </Text>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={this.handleForgotPasswordRoute} style={styles.center} underlayColor='transparent'>
+        <TouchableHighlight onPress={this.handleForgotPasswordRoutePress.bind(this)} style={styles.center}
+                            underlayColor='transparent'>
           <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>نسيت كلمة السر</Text>
         </TouchableHighlight>
-
 
       </View>
     )
