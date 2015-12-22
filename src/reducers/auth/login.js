@@ -30,13 +30,6 @@ const initialState = new InitialState;
 
 export default function login(state = initialState, action = {}) {
 
-  //if (!(state instanceof InitialState)) return initialState.mergeDeep(state);
-  //if (!(state instanceof InitialState)) {
-  //  alert('no');
-  //} else {
-  //  alert('yes');
-  //}
-
   switch (action.type) {
     case LOGIN_REQUEST:
       return state.setIn(['isFetching'], true).setIn(['isLoggedIn'], false).setIn(['error'], null);
