@@ -1,11 +1,11 @@
 'use strict'
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
-import {assets} from './../../utils/assets';
 import t from 'tcomb-form-native';
 let Form = t.form.Form;
 import FormButton from './../FormButton';
 import stylesheet from './../../styles/form';
 import LoadingIndicator from './../LoadingIndicator';
+import {assets} from './../../utils/assets';
 
 export default class LoginScene extends Component {
 

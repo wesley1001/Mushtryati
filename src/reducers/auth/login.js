@@ -6,7 +6,7 @@ import {
 } from '../../constants/ActionTypes';
 
 import {Record} from 'immutable';
-import validate from './../../validators/loginValidator';
+import validate from './../../validators/Auth/loginValidator';
 import rules from './../../validators/validationRules';
 
 const InitialState = Record({

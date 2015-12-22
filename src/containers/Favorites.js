@@ -5,7 +5,6 @@ import {connect} from 'react-redux/native';
 import MediaList from './../components/Media/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
 import { fetchFavorites } from './../actions/favorites';
-
 const Actions = require('react-native-router-flux').Actions;
 
 class Favorites extends Component {

@@ -2,7 +2,7 @@
 import React, { Component } from 'react-native';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import LoginScene from './../../components/Auth/LoginScene';
-import {login,onLoginFormFieldChange} from '../../actions/auth/login';
+import {login,onLoginFormFieldChange} from '../../actions/Auth/login';
 import {connect} from '../../../node_modules/react-redux/native';
 import {getUser,saveUser} from './../../utils/storage';
 
