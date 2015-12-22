@@ -1,6 +1,10 @@
 'use strict'
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
 import {assets} from './../../utils/assets';
+import t from 'tcomb-form-native';
+let Form = t.form.Form;
+import FormButton from './../FormButton';
+import stylesheet from './../../styles/form';
 
 export default class LoginScene extends Component {
 
@@ -30,42 +34,64 @@ export default class LoginScene extends Component {
   }
 
   render() {
+
+    Form.stylesheet = stylesheet;
+
+    const {login} = this.props;
+
+    let options = {
+      fields: {}
+    };
+
+    let email = {
+      label: 'الايميل',
+      placeholder: 'الايميل',
+      keyboardType: 'email-address',
+      editable: !login.isFetching,
+      hasError: login.form.fields.emailHasError,
+      error: 'Please enter valid email',
+    };
+
+    let password = {
+      label: 'كلمة السر',
+      placeholder: 'كلمة السر',
+      maxLength: 12,
+      secureTextEntry: true,
+      editable: !login.isFetching,
+      hasError: login.form.fields.passwordHasError,
+      error: 'Must have 6-12 numbers, letters or special characters',
+    };
+
+    const loginForm = t.struct({
+      email: t.String,
+      password: t.String
+    });
+    options.fields['email'] = email;
+    options.fields['password'] = password;
+
     return (
-      <View style={{flex: 1,padding: 10,justifyContent: 'center',alignItems: 'center'}}>
 
+      <View style={{flex: 1,padding: 10}}>
         <Image style={styles.image} source={assets.mark}/>
-
-        <TextInput
-          style={[styles.loginInput,styles.mTop20]}
-          ref='email'
-          placeholder="الايميل"
-          onChangeText={(email) => this.setState({email})}
-          placeholderTextColor={'#E2E2E2'}
-          autoFocus={true}
-          autoCorrect={false}
+        <Form ref="form"
+              type={loginForm}
+              options={options}
+              value={this.props.value}
+              onChange={this.props.onChange}
           />
-
-        <TouchableHighlight onPress={this.handleForgotPasswordRoute} style={styles.ltr} underlayColor='transparent'>
-          <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
-        </TouchableHighlight>
-
-        <TextInput
-          style={[styles.loginInput]}
-          ref="password"
-          placeholder="كلمة السر" secureTextEntry={true}
-          onChangeText={(password) => this.setState({password})}
-          placeholderTextColor={'#E2E2E2'}
-          autoFocus={false}
-          autoCorrect={false}
-          />
-
-        <TouchableHighlight onPress={this.handleLogin} style={styles.buttonGreen} underlayColor='transparent'>
-          <Text style={styles.buttonText}>الدخول</Text>
-        </TouchableHighlight>
+        <FormButton
+          isDisabled={!login.form.isValid || login.isFetching}
+          onPress={this.handleLogin}
+          buttonText='الدخول'/>
 
         <TouchableHighlight onPress={this.handleRegisterRoute} underlayColor='transparent'>
-          <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>لا يوجد الحساب ؟ سحل الان </Text>
+          <Text style={[styles.label,styles.center,styles.textUnderline]}>لا يوجد الحساب ؟ سحل الان </Text>
         </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.handleForgotPasswordRoute} style={styles.center} underlayColor='transparent'>
+          <Text style={[styles.label,styles.textUnderline, styles.mTop20]}>نسيت كلمة السر</Text>
+        </TouchableHighlight>
+
 
       </View>
     )
@@ -75,35 +101,10 @@ export default class LoginScene extends Component {
 
 var styles = StyleSheet.create({
 
-  loginInput: {
-    height: 50,
-    padding: 10,
-    fontSize: 18,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: '#E7E7E7',
-    borderBottomColor: '#48BBEC',
-    borderRadius: 0,
-    color: '#5BC3BE',
-    textAlign: 'right'
-  },
-  buttonGreen: {
-    height: 50,
-    backgroundColor: '#5BC3BE',
-    borderColor: '#48BBEC',
-    alignSelf: 'stretch',
-    marginTop: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 2
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 24
-  },
   image: {
     height: 100,
-    marginBottom: 10
+    marginTop: 80,
+    alignSelf: 'center'
   },
   label: {
     fontSize: 14,
@@ -117,6 +118,9 @@ var styles = StyleSheet.create({
   },
   rtl: {
     alignSelf: 'flex-end'
+  },
+  center: {
+    alignSelf: 'center'
   },
   mTop20: {
     marginTop: 50

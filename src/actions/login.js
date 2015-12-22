@@ -5,6 +5,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  ON_LOGIN_FORM_FIELD_CHANGE
 } from '../constants/ActionTypes';
 
 function loginRequest() {
@@ -51,5 +52,13 @@ export function login(credentials, cb = ()=> {
         dispatch(loginFailure(err));
         return cb({success: false});
       });
+  };
+}
+
+
+export function onLoginFormFieldChange(field,value) {
+  return {
+    type: ON_LOGIN_FORM_FIELD_CHANGE,
+    payload: {field: field, value: value}
   };
 }

@@ -15,16 +15,18 @@ class Comments extends Component {
 
   constructor(props) {
     super(props);
-    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
     this.state = {
       visibleHeight: Dimensions.get('window').height
     }
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+  }
+
+  componentWillUnmount() {
   }
 
   componentWillMount() {
     const {dispatch,media} = this.props;
-    dispatch(fetchComments(media.entity.id))
-
+    dispatch(fetchComments(media.entity.id));
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
   }

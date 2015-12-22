@@ -2,7 +2,7 @@
 import React, { Component } from 'react-native';
 import LoadingIndicator from './../components/LoadingIndicator';
 import LoginScene from './../components/Auth/LoginScene';
-import {login} from '../actions/login';
+import {login,onLoginFormFieldChange} from '../actions/login';
 import {connect} from 'react-redux/native';
 import {getUser,saveUser} from './../utils/storage';
 
@@ -37,19 +37,35 @@ class Login extends Component {
     return Actions.tabBar();
   }
 
+  onChange(value) {
+    //alert(JSON.stringify(value));
+    const { dispatch } = this.props
+
+    if (value.email != '') {
+      dispatch(onLoginFormFieldChange('email', value.email));
+    }
+
+    if (value.password != '') {
+      dispatch(onLoginFormFieldChange('password', value.password));
+    }
+
+  }
+
   render() {
 
-    const { login } = this.props
+    const { login } = this.props;
 
-    if (login.isFetching) {
-      return <LoadingIndicator />;
-    }
+    //if (login.isFetching) {
+    //  return <LoadingIndicator />;
+    //}
 
     return (
       <LoginScene
         onLoginPressed={this.handleLogin}
         onRegisterRouteClick={this.handleRegisterRoute}
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
+        login={login}
+        onChange={this.onChange.bind(this)}
         />
     );
 
