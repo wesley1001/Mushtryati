@@ -10,6 +10,29 @@ const Actions = require('react-native-router-flux').Actions;
 
 class Login extends Component {
 
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: {
+        email: this.props.login.form.fields.email,
+        password: this.props.login.form.fields.password,
+      }
+    };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      value: {
+        email: props.login.form.fields.email,
+        password: props.login.form.fields.password,
+      }
+    });
+  }
+
   componentWillMount() {
     //return getUser((user)=> {
     //  if (user != null) {
@@ -38,6 +61,8 @@ class Login extends Component {
   }
 
   onChange(value) {
+    //alert(JSON.stringify(value));
+
     const { dispatch } = this.props
 
     if (value.email != '') {
@@ -48,6 +73,9 @@ class Login extends Component {
       dispatch(onLoginFormFieldChange('password', value.password));
     }
 
+    this.setState(
+      {value}
+    );
   }
 
   render() {
@@ -61,6 +89,7 @@ class Login extends Component {
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
         login={login}
         onChange={this.onChange.bind(this)}
+        value={this.state.value}
         />
     );
 

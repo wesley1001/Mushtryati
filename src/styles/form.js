@@ -28,7 +28,7 @@ var stylesheet = Object.freeze({
     normal: {
       color: LABEL_COLOR,
       fontSize: FONT_SIZE,
-      marginBottom: 7,
+      marginBottom: 2,
       fontWeight: FONT_WEIGHT,
       textAlign:'right'
     },
@@ -36,7 +36,7 @@ var stylesheet = Object.freeze({
     error: {
       color: ERROR_COLOR,
       fontSize: FONT_SIZE,
-      marginBottom: 7,
+      marginBottom: 2,
       fontWeight: FONT_WEIGHT,
       textAlign:'right'
     }

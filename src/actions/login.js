@@ -30,6 +30,7 @@ function loginFailure(message) {
 export function login(credentials, cb = ()=> {
   success: false
 }) {
+  console.log(JSON.stringify(credentials));
   let url = API_ROOT + '/auth/login';
   return dispatch => {
     dispatch(loginRequest());
