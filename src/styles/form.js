@@ -3,15 +3,15 @@
  */
 'use strict';
 
-var LABEL_COLOR = '#000000';
-var INPUT_COLOR = '#000000';
+var LABEL_COLOR = '#888888';
+var INPUT_COLOR = '#5BC3BE';
 var ERROR_COLOR = '#a94442';
 var HELP_COLOR = '#999999';
-var BORDER_COLOR = '#cccccc';
+var BORDER_COLOR = '#E7E7E7';
 var DISABLED_COLOR = '#777777';
-var DISABLED_BACKGROUND_COLOR = '#eeeeee';
+var DISABLED_BACKGROUND_COLOR = '#E7E7E7';
 var FONT_SIZE = 17;
-var FONT_WEIGHT = '500';
+var FONT_WEIGHT = '400';
 
 var stylesheet = Object.freeze({
   fieldset: {},
@@ -55,7 +55,7 @@ var stylesheet = Object.freeze({
     }
   },
   errorBlock: {
-    fontSize: FONT_SIZE,
+    fontSize: 14,
     marginBottom: 2,
     color: ERROR_COLOR,
     textAlign:'right'
@@ -64,21 +64,23 @@ var stylesheet = Object.freeze({
     normal: {
       color: INPUT_COLOR,
       fontSize: FONT_SIZE,
-      height: 36,
-      padding: 7,
-      borderRadius: 4,
+      borderRadius: 0,
       borderColor: BORDER_COLOR,
       borderWidth: 1,
       marginBottom: 5,
-      textAlign:'right'
+      height: 50,
+      padding: 10,
+      borderBottomColor: '#48BBEC',
+      textAlign: 'right'
     },
+
     // the style applied when a validation error occours
     error: {
       color: INPUT_COLOR,
       fontSize: FONT_SIZE,
-      height: 36,
-      padding: 7,
-      borderRadius: 4,
+      height: 50,
+      padding: 10,
+      borderRadius: 0,
       borderColor: ERROR_COLOR,
       borderWidth: 1,
       marginBottom: 5,

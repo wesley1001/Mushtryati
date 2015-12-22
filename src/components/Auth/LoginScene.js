@@ -5,6 +5,7 @@ import t from 'tcomb-form-native';
 let Form = t.form.Form;
 import FormButton from './../FormButton';
 import stylesheet from './../../styles/form';
+import LoadingIndicator from './../LoadingIndicator';
 
 export default class LoginScene extends Component {
 
@@ -73,6 +74,9 @@ export default class LoginScene extends Component {
 
       <View style={{flex: 1,padding: 10}}>
         <Image style={styles.image} source={assets.mark}/>
+
+        {login.isFetching ? <LoadingIndicator /> : <View />}
+
         <Form ref="form"
               type={loginForm}
               options={options}

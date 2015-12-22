@@ -68,8 +68,6 @@ class Media extends Component {
       return <LoadingIndicator />;
     }
 
-
-
     return (
       <ScrollView style={styles.container}>
         <MediaItem media={media.entity}/>

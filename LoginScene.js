@@ -2,6 +2,7 @@
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
 import {assets} from './../../utils/assets';
 import FormButton from './../../components/FormButton';
+
 export default class LoginScene extends Component {
 
   constructor(props) {
@@ -34,6 +35,9 @@ export default class LoginScene extends Component {
       <View style={{flex: 1,padding: 10,justifyContent: 'center',alignItems: 'center'}}>
 
         <Image style={styles.image} source={assets.mark}/>
+
+
+        {login.isFetching ?  <LoadingIndicator /> : <View />}
 
         <TextInput
           style={[styles.loginInput,styles.mTop20]}

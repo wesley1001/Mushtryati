@@ -2,7 +2,8 @@ import React,
 {
   PropTypes,
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -10,8 +11,9 @@ import Button from 'apsl-react-native-button';
 var styles = StyleSheet.create({
   container: {},
   button: {
-    backgroundColor: '#FF3366',
-    borderColor: '#FF3366'
+    backgroundColor: '#5BC3BE',
+    borderColor: '#5BC3BE',
+    borderRadius: 0
   }
 });
 
@@ -30,6 +32,7 @@ var FormButton = React.createClass({
           style={styles.button}
           isDisabled={this.props.isDisabled}
           onPress={this.props.onPress}
+          textStyle={{fontSize: 18, color:'white'}}
           >
           {this.props.buttonText}
         </Button>

@@ -30,7 +30,7 @@ class Favorites extends Component {
 
     const { favorites } = this.props;
 
-    console.log('favorites ', JSON.stringify(favorites));
+    //console.log('favorites ', JSON.stringify(favorites));
 
     if (favorites.isFetching) {
       return <LoadingIndicator />;
@@ -42,7 +42,6 @@ class Favorites extends Component {
 
   }
 }
-
 
 function mapStateToProps(state) {
   const { favorites,user } = state

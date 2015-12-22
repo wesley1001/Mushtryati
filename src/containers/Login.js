@@ -38,7 +38,6 @@ class Login extends Component {
   }
 
   onChange(value) {
-    //alert(JSON.stringify(value));
     const { dispatch } = this.props
 
     if (value.email != '') {
@@ -54,10 +53,6 @@ class Login extends Component {
   render() {
 
     const { login } = this.props;
-
-    //if (login.isFetching) {
-    //  return <LoadingIndicator />;
-    //}
 
     return (
       <LoginScene
