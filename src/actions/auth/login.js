@@ -1,12 +1,12 @@
-import {API_ROOT} from './../utils/config'
-import { setUser } from '../actions/user';
+import {API_ROOT} from './../../utils/config'
+import { setUser } from './user';
 
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE
-} from '../constants/ActionTypes';
+} from '../../constants/ActionTypes';
 
 function loginRequest() {
   return {

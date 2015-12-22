@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 
-import user from './../reducers/user';
-import login from './../reducers/login';
-import register from './../reducers/register';
+import user from './auth/user';
+import login from './auth/login';
+import register from './auth/register';
 import medias from './../reducers/medias';
 import media from './../reducers/media';
 import comments from './../reducers/comments';

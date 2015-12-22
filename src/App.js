@@ -2,8 +2,8 @@
 import React, { Component, StyleSheet,Navigator,Text,View,Image} from 'react-native';
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
 import Master from './components/Master';
-import Login from './containers/Login';
-import Register from './containers/Register';
+import Login from './containers/auth/Login';
+import Register from './containers/auth/Register';
 import Medias from './containers/Medias';
 import Media from './containers/Media';
 import Comments from './containers/Comments';

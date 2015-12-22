@@ -2,7 +2,7 @@ import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS
-} from '../constants/ActionTypes';
+} from '../../constants/ActionTypes';
 
 const initialState = {
   isFetching: false,

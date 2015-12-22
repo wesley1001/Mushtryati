@@ -1,17 +1,5 @@
-/**
- * # Login.js
- *
- * This class is a little complicated as it handles 4 states. It's also
- * a container so there is boilerplate from Redux similiar to ```App```.
- */
 'use strict';
 
-/**
- * ## Imports
- *
- * validate and underscore
- *
- */
 import validate from 'validate.js';
 import _ from 'lodash';
 
@@ -129,14 +117,6 @@ export default function rules(state, action ) {
       }
       break;
 
-  /**
-   * ### showPassword
-   * toggle the display of the password
-   */
-    case('showPassword'):
-      return state.setIn(['form', 'fields',
-        'showPassword'], value);
-      break;
   }
   return state;
 

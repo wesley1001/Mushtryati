@@ -1,6 +1,6 @@
 import {
   SET_USER
-} from '../constants/ActionTypes';
+} from '../../constants/ActionTypes';
 
 export default function user(state = {}, action = {}) {
   switch (action.type) {

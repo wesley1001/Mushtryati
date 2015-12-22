@@ -18,17 +18,7 @@ export default class LoginScene extends Component {
   }
 
   handleLogin = () => {
-    const {email,password} = this.props.login.form.fields;
-    console.log('email', this.props.login.form.email);
-    //let credentials = {
-    //  email: this.state.email,
-    //  password: this.state.password
-    //}
-    let credentials = {
-      email: email,
-      password: password
-    }
-    return this.props.onLoginPressed(credentials);
+    return this.props.onLoginPressed();
   }
 
 
@@ -86,7 +76,7 @@ export default class LoginScene extends Component {
         <Form ref="form"
               type={loginForm}
               options={options}
-              value={this.props.value}
+              value={this.props.credentials}
               onChange={this.props.onChange}
           />
         <FormButton

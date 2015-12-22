@@ -3,11 +3,11 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE
-} from '../constants/ActionTypes';
+} from '../../constants/ActionTypes';
 
 import {Record} from 'immutable';
-import validate from './../validators/loginValidator';
-import rules from './../validators/validationRules';
+import validate from './../../validators/loginValidator';
+import rules from './../../validators/validationRules';
 
 const InitialState = Record({
   isLoggedIn: false,

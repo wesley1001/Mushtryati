@@ -1,32 +1,31 @@
 'use strict'
 import React, { Component } from 'react-native';
-import LoadingIndicator from './../components/LoadingIndicator';
-import LoginScene from './../components/Auth/LoginScene';
-import {login,onLoginFormFieldChange} from '../actions/login';
-import {connect} from 'react-redux/native';
-import {getUser,saveUser} from './../utils/storage';
+import LoadingIndicator from './../../components/LoadingIndicator';
+import LoginScene from './../../components/Auth/LoginScene';
+import {login,onLoginFormFieldChange} from '../../actions/auth/login';
+import {connect} from '../../../node_modules/react-redux/native';
+import {getUser,saveUser} from './../../utils/storage';
 
 const Actions = require('react-native-router-flux').Actions;
 
 class Login extends Component {
 
-
   constructor(props) {
     super(props);
 
     this.state = {
-      value: {
+      credentials: {
         email: this.props.login.form.fields.email,
         password: this.props.login.form.fields.password,
       }
     };
 
-    this.onChange = this.onChange.bind(this);
+    this.onFieldChange = this.onFieldChange.bind(this);
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      value: {
+      credentials: {
         email: props.login.form.fields.email,
         password: props.login.form.fields.password,
       }
@@ -41,8 +40,9 @@ class Login extends Component {
     //});
   }
 
-  handleLogin = (credentials) => {
+  handleLogin = () => {
     const {dispatch} = this.props;
+    const credentials = this.state.credentials;
     dispatch(login(credentials, (cb)=> {
       if (cb.success) {
         saveUser(cb.user);
@@ -60,24 +60,15 @@ class Login extends Component {
     return Actions.tabBar();
   }
 
-  onChange(value,field) {
-    //console.log('val is',value);
+  onFieldChange(value, field) {
 
-    var changedField = field[0];
-
-    console.log('val of field is ',value[changedField]);
+    let changedField = field[0];
 
     const { dispatch } = this.props
 
     dispatch(onLoginFormFieldChange(changedField, value[changedField]));
-    //
-    //if (value.password != '') {
-    //  dispatch(onLoginFormFieldChange('password', value.password));
-    //}
 
-    this.setState(
-      {value}
-    );
+    this.setState({credentials: value});
   }
 
   render() {
@@ -90,8 +81,8 @@ class Login extends Component {
         onRegisterRouteClick={this.handleRegisterRoute}
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
         login={login}
-        onChange={this.onChange.bind(this)}
-        value={this.state.value}
+        onChange={this.onFieldChange.bind(this)}
+        credentials={this.state.credentials}
         />
     );
 

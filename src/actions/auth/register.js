@@ -1,10 +1,10 @@
-import {API_ROOT} from './../utils/config'
+import {API_ROOT} from './../../utils/config'
 
 import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS
-} from '../constants/ActionTypes';
+} from '../../constants/ActionTypes';
 
 function registerRequest() {
   return {
