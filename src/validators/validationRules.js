@@ -79,9 +79,9 @@ export default function rules(state, action) {
       let validName = _.isUndefined(validate({name: value},
         nameConstraints));
       if (validName) {
-        return Object.assign({}, state, _.set(state.form.fields, 'nameHasError', false));
+        return state.setIn(['form', 'fields', 'nameHasError'], false);
       } else {
-        return Object.assign({}, state, _.set(state.form.fields, 'nameHasError', true));
+        return state.setIn(['form', 'fields', 'nameHasError'], true);
       }
       break;
 
@@ -93,9 +93,9 @@ export default function rules(state, action) {
       let validEmail = _.isUndefined(validate({from: value},
         emailConstraints));
       if (validEmail) {
-        return Object.assign({}, state, _.set(state.form.fields, 'emailHasError', false));
+        return state.setIn(['form', 'fields', 'emailHasError'], false);
       } else {
-        return Object.assign({}, state, _.set(state.form.fields, 'emailHasError', true));
+        return state.setIn(['form', 'fields', 'emailHasError'], true);
       }
       break;
 
@@ -107,9 +107,9 @@ export default function rules(state, action) {
       let validPassword = _.isUndefined(validate({password: value},
         passwordConstraints));
       if (validPassword) {
-        return Object.assign({}, state, _.set(state.form.fields, 'passwordHasError', false));
+        return state.setIn(['form', 'fields', 'passwordHasError'], false);
       } else {
-        return Object.assign({}, state, _.set(state.form.fields, 'passwordHasError', true));
+        return state.setIn(['form', 'fields', 'passwordHasError'], true);
       }
       break;
 
@@ -124,9 +124,9 @@ export default function rules(state, action) {
         confirmPassword: value
       }, passwordConfirmationConstraints));
       if (validPasswordAgain) {
-        return Object.assign({}, state, _.set(state.form.fields, 'passwordConfirmationHasError', false));
+        return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], false);
       } else {
-        return Object.assign({}, state, _.set(state.form.fields, 'passwordConfirmationHasError', false));
+        return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], true);
       }
       break;
   }

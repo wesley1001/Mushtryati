@@ -44,13 +44,10 @@ class Login extends Component {
     if (value.email != '') {
       dispatch(onLoginFormFieldChange('email', value.email));
     }
+
     if (value.password != '') {
       dispatch(onLoginFormFieldChange('password', value.password));
     }
-
-    this.setState(
-      {value}
-    );
 
   }
 
@@ -67,7 +64,7 @@ class Login extends Component {
         onLoginPressed={this.handleLogin}
         onRegisterRouteClick={this.handleRegisterRoute}
         onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
-        form={login.form}
+        login={login}
         onChange={this.onChange.bind(this)}
         />
     );

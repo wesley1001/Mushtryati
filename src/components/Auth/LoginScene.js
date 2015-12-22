@@ -34,6 +34,8 @@ export default class LoginScene extends Component {
 
   render() {
 
+    const {login} = this.props;
+
     let options = {
       auto: 'placeholders',
       fields: {}
@@ -42,8 +44,8 @@ export default class LoginScene extends Component {
     let email = {
       label: 'Email',
       keyboardType: 'email-address',
-      editable: !this.props.form.isFetching,
-      hasError: this.props.form.fields.emailHasError,
+      editable: !login.isFetching,
+      hasError: login.form.fields.emailHasError,
       error: 'Please enter valid email'
     };
 
@@ -51,8 +53,8 @@ export default class LoginScene extends Component {
       label: 'Password',
       maxLength: 12,
       secureTextEntry: true,
-      editable: !this.props.form.isFetching,
-      hasError: this.props.form.fields.passwordHasError,
+      editable: !login.isFetching,
+      hasError: login.form.fields.passwordHasError,
       error: 'Must have 6-12 characters with at least 1 number and 1 special character'
     };
 
@@ -74,6 +76,13 @@ export default class LoginScene extends Component {
               value={this.props.value}
               onChange={this.props.onChange}
           />
+        <TouchableHighlight onPress={this.handleLogin} style={styles.buttonGreen} underlayColor='transparent'>
+          <Text style={styles.buttonText}>الدخول</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight onPress={this.handleForgotPasswordRoute} style={styles.ltr} underlayColor='transparent'>
+          <Text style={[styles.label,styles.textUnderline]}>نسيت كلمة السر</Text>
+        </TouchableHighlight>
       </View>
     )
   }

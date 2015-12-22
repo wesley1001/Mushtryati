@@ -38,6 +38,12 @@ export default class App extends Component {
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
 
+            <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
+                   component={Master}
+                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                   titleStyle={{ color:'white', fontSize:17}}
+              />
+
             <Route name="mediaTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -60,11 +66,6 @@ export default class App extends Component {
                    titleStyle={{ color:'white', fontSize:17}}
               />
 
-            <Route name="tab4" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
-                   component={Master}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                   titleStyle={{ color:'white', fontSize:17}}
-              />
 
           </Router>
         </Route>

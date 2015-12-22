@@ -10,23 +10,23 @@ import validate from './../validators/loginValidator';
 import rules from './../validators/validationRules';
 import _ from 'lodash';
 
-const initialState = {
-  form: {
-    isValid: false,
+const InitialState = Record({
+  isFetching: false,
+  error: null,
+  form: new (Record({
     disabled: false,
-    fields: {
+    isValid: false,
+    fields: new (Record({
       email: '',
       emailHasError: false,
       password: '',
       passwordHasError: false
-    }
-  },
-  isLoggedIn: false,
-  isFetching: false,
-  error: null,
-}
+    }))
+  }))
+});
 
-export default function login(state = initialState, action = {}) {
+export default function login(state = new InitialState, action = {}) {
+
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -51,12 +51,21 @@ export default function login(state = initialState, action = {}) {
       };
     case ON_LOGIN_FORM_FIELD_CHANGE:
     {
+      console.log(state);
       const {field, value} = action.payload;
 
-      let nextState = Object.assign({}, state, _.set(state.form.fields, field, value));
+      let nextState = state.setIn(['form', 'fields', field], value);
+
+      //let nextState =  state.setIn(['form', 'fields', field], value)
+      //  .setIn(['form','error'],null);
+
+      //var finalState = formValidation(
+      //  fieldValidation( nextState, action)
+      //  , action);
 
       var finalState = validate(rules(nextState, action), action);
 
+      //return nextState;
       return finalState;
     }
 

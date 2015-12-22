@@ -6,6 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "apsl-react-native-button": "^2.3.0",
     "immutable": "^3.7.6",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
