@@ -1,10 +1,8 @@
 'use strict'
-import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image } from 'react-native';
+import React, { Component, StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native';
 import t from 'tcomb-form-native';
 import FormButton from './../FormButton';
 import stylesheet from './../../styles/form';
-import LoadingIndicator from './../LoadingIndicator';
-import {assets} from './../../utils/assets';
 const Form = t.form.Form;
 
 export default class LoginScene extends Component {
@@ -60,10 +58,7 @@ export default class LoginScene extends Component {
 
     return (
 
-      <View style={{flex: 1,padding: 10}}>
-        <Image style={styles.image} source={assets.mark}/>
-
-        {login.isFetching ? <LoadingIndicator /> : <View />}
+      <View>
 
         <Form ref="form"
               type={loginForm}
@@ -71,6 +66,7 @@ export default class LoginScene extends Component {
               value={this.props.credentials}
               onChange={this.props.onChange}
           />
+
         <FormButton
           isDisabled={!login.form.isValid || login.isFetching}
           onPress={this.handleLogin.bind(this)}
@@ -93,11 +89,6 @@ export default class LoginScene extends Component {
 
 var styles = StyleSheet.create({
 
-  image: {
-    height: 100,
-    marginTop: 80,
-    alignSelf: 'center'
-  },
   label: {
     fontSize: 14,
     color: '#888888',
@@ -118,3 +109,4 @@ var styles = StyleSheet.create({
     marginTop: 50
   }
 })
+
