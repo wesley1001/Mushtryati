@@ -19,17 +19,6 @@ class Login extends Component {
         password: this.props.login.form.fields.password,
       }
     };
-
-    this.onFieldChange = this.onFieldChange.bind(this);
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      credentials: {
-        email: props.login.form.fields.email,
-        password: props.login.form.fields.password,
-      }
-    });
   }
 
   componentWillMount() {
@@ -40,7 +29,7 @@ class Login extends Component {
     //});
   }
 
-  handleLogin = () => {
+  handleLogin() {
     const {dispatch} = this.props;
     const credentials = this.state.credentials;
     dispatch(login(credentials, (cb)=> {
@@ -51,11 +40,11 @@ class Login extends Component {
     }));
   }
 
-  handleRegisterRoute = () => {
+  handleRegisterRoute() {
     return Actions.register();
   }
 
-  handleForgotPasswordRoute = () => {
+  handleForgotPasswordRoute() {
     // @todo: implement route
     return Actions.tabBar();
   }
@@ -64,7 +53,7 @@ class Login extends Component {
 
     let changedField = field[0];
 
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
 
     dispatch(onLoginFormFieldChange(changedField, value[changedField]));
 
@@ -77,9 +66,9 @@ class Login extends Component {
 
     return (
       <LoginScene
-        onLoginPressed={this.handleLogin}
-        onRegisterRouteClick={this.handleRegisterRoute}
-        onForgotPasswordRouteClick={this.handleForgotPasswordRoute}
+        onLoginPressed={this.handleLogin.bind(this)}
+        onRegisterRouteClick={this.handleRegisterRoute.bind(this)}
+        onForgotPasswordRouteClick={this.handleForgotPasswordRoute.bind(this)}
         login={login}
         onChange={this.onFieldChange.bind(this)}
         credentials={this.state.credentials}
