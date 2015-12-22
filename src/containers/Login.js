@@ -55,9 +55,9 @@ class Login extends Component {
 
     const { login } = this.props;
 
-    if (login.isFetching) {
-      return <LoadingIndicator />;
-    }
+    //if (login.isFetching) {
+    //  return <LoadingIndicator />;
+    //}
 
     return (
       <LoginScene

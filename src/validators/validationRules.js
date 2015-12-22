@@ -26,14 +26,14 @@ const emailConstraints = {
 };
 
 /**
- * ## name validation rule
+ * ## username validation rule
  * read the message.. ;)
  */
-const namePattern = /^[a-zA-Z0-9]{6,12}$/;
-const nameConstraints = {
-  name: {
+const usernamePattern = /^[a-zA-Z0-9]{6,12}$/;
+const usernameConstraints = {
+  username: {
     format: {
-      pattern: namePattern,
+      pattern: usernamePattern,
       flags: 'i',
       message: "must have 6-12 numbers, letters or special characters"
     }
@@ -44,7 +44,8 @@ const nameConstraints = {
  * ## password validation rule
  * read the message... ;)
  */
-const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$/;
+//const passwordPattern =  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$/;
+const passwordPattern =  /^[a-zA-Z0-9]{6,12}$/;
 const passwordConstraints = {
   password: {
     format: {
@@ -56,7 +57,7 @@ const passwordConstraints = {
   }
 };
 
-const passwordConfirmationConstraints = {
+const passwordAgainConstraints = {
   confirmPassword: {
     equality: "password"
   }
@@ -67,21 +68,21 @@ const passwordConfirmationConstraints = {
  * @param {Object} state Redux state
  * @param {Object} action type & payload
  */
-export default function rules(state, action) {
+export default function rules(state, action ) {
   const {field, value} = action.payload;
 
-  switch (field) {
+  switch(field) {
   /**
-   * ### name validation
+   * ### username validation
    * set the form field error
    */
-    case('name'):
-      let validName = _.isUndefined(validate({name: value},
-        nameConstraints));
-      if (validName) {
-        return state.setIn(['form', 'fields', 'nameHasError'], false);
+    case('username'):
+      let validUsername  = _.isUndefined(validate({username: value},
+        usernameConstraints));
+      if (validUsername) {
+        return state.setIn(['form', 'fields', 'usernameHasError'], false);
       } else {
-        return state.setIn(['form', 'fields', 'nameHasError'], true);
+        return state.setIn(['form', 'fields', 'usernameHasError'], true);
       }
       break;
 
@@ -90,7 +91,7 @@ export default function rules(state, action) {
    * set the form field error
    */
     case('email'):
-      let validEmail = _.isUndefined(validate({from: value},
+      let validEmail  = _.isUndefined(validate({from: value},
         emailConstraints));
       if (validEmail) {
         return state.setIn(['form', 'fields', 'emailHasError'], false);
@@ -114,23 +115,29 @@ export default function rules(state, action) {
       break;
 
   /**
-   * ### passwordConfirmation validation
+   * ### passwordAgain validation
    * set the form field error
    */
-    case('passwordConfirmation'):
+    case('passwordAgain'):
       var validPasswordAgain
-        = _.isUndefined(validate({
-        password: state.form.fields.password,
-        confirmPassword: value
-      }, passwordConfirmationConstraints));
+        = _.isUndefined(validate({password: state.form.fields.password,
+        confirmPassword: value}, passwordAgainConstraints));
       if (validPasswordAgain) {
-        return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], false);
+        return state.setIn(['form', 'fields', 'passwordAgainHasError'], false);
       } else {
-        return state.setIn(['form', 'fields', 'passwordConfirmationHasError'], true);
+        return  state.setIn(['form', 'fields', 'passwordAgainHasError'], true);
       }
       break;
-  }
 
+  /**
+   * ### showPassword
+   * toggle the display of the password
+   */
+    case('showPassword'):
+      return state.setIn(['form', 'fields',
+        'showPassword'], value);
+      break;
+  }
   return state;
 
 }
