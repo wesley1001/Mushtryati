@@ -3,17 +3,17 @@
 import React, { Component, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-icons';
 
-export default class MediaFavoriteIcon extends Component {
+export default class MediaLikeIcon extends Component {
 
   render() {
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
         <Text style={{alignSelf:'center'}}>20</Text>
-        <TouchableHighlight onPress={() => this.props.onFavoriteIconPress()} underlayColor="transparent">
+        <TouchableHighlight onPress={() => this.props.onLikeIconPress()} underlayColor="transparent">
           <Icon
             name='ion|android-favorite-outline'
-            size={24}
-            color={ this.props.hasFavorited ? 'red' :'black'}
+            size={20}
+            color={ this.props.hasLiked ? 'red' :'black'}
             style={styles.favoriteImg}
             />
         </TouchableHighlight>
@@ -24,7 +24,7 @@ export default class MediaFavoriteIcon extends Component {
 
 const styles = StyleSheet.create({
   favoriteImg: {
-    width: 24,
-    height: 22
+    width: 20,
+    height: 20
   }
 });

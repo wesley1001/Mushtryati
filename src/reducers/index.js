@@ -4,8 +4,8 @@ import user from './Auth/user';
 import login from './Auth/login';
 import register from './Auth/register';
 import medias from './medias';
-import media from './media';
-import comments from './comments';
+import media from './Media/media';
+import comments from './Media/comments';
 import favorites from './favorites';
 
 const rootReducer = combineReducers({

@@ -2,9 +2,9 @@ import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
   COMMENTS_FAILURE,
-  SAVING_COMMENT,
+  COMMENT_SAVING,
   COMMENT_SAVED
-} from '../constants/ActionTypes'
+} from '../../constants/ActionTypes'
 
 const initialState = {
   collection: [],
@@ -33,7 +33,7 @@ export default function comments(state = initialState, action = {}) {
         isFetching: false,
         error: action.error
       }
-    case SAVING_COMMENT:
+    case COMMENT_SAVING:
       return {
         ...state,
         isFetching: true

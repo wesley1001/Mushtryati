@@ -2,7 +2,7 @@
 
 import React, { Component, View, Text, TextInput, StyleSheet, TouchableHighlight} from 'react-native';
 
-export default class CommentAdd extends Component {
+export default class MediaCommentAdd extends Component {
 
   constructor(props) {
     super(props);

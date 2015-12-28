@@ -18,7 +18,7 @@ class Medias extends Component {
   }
 
   loadMedia(media) {
-    Actions.mediaEntityTab({
+    Actions.mediaEntityScene({
       data: media
     });
   }

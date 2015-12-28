@@ -1,17 +1,17 @@
 'use strict';
 
 import React, { Component, ScrollView, Text, StyleSheet, Dimensions, DeviceEventEmitter } from 'react-native';
-import {connect} from 'react-redux/native';
+import {connect} from '../../../node_modules/react-redux/native';
 
-import CommentList from './../components/Comment/CommentList';
-import CommentAdd from './../components/Comment/CommentAdd';
+import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
+import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
 
-import { assets }  from '../utils/assets';
+import { assets }  from '../../utils/assets';
 import { Icon } from 'react-native-icons';
-import { addComment, fetchComments } from './../actions/comments';
-import LoadingIndicator from './../components/LoadingIndicator';
+import { addComment, fetchComments } from './../../actions/Media/comments';
+import LoadingIndicator from './../../components/LoadingIndicator';
 
-class Comments extends Component {
+class MediaComments extends Component {
 
   constructor(props) {
     super(props);
@@ -65,9 +65,9 @@ class Comments extends Component {
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]}>
 
-        <CommentList comments={comments.collection} line={assets.line} contentInset={0}/>
+        <MediaCommentList comments={comments.collection} line={assets.line} contentInset={0}/>
 
-        <CommentAdd onCommentSubmit={this.handleCommentSubmit}/>
+        <MediaCommentAdd onCommentSubmit={this.handleCommentSubmit}/>
 
       </ScrollView>
     )
@@ -92,4 +92,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Comments)
+export default connect(mapStateToProps)(MediaComments)

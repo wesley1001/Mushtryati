@@ -1,31 +1,29 @@
-import {API_ROOT} from './../utils/config';
+import {API_ROOT} from './../../utils/config'
 import {
-  MEDIA_REQUEST,
-  MEDIA_SUCCESS,
-  MEDIA_FAILURE,
   MEDIA_FAVORITE,
-} from '../constants/ActionTypes';
+  MEDIA_FAVORITE_REQUEST,
+  MEDIA_FAVORITE_SUCCESS,
+  MEDIA_FAVORITE_FAILURE,
+} from '../../constants/ActionTypes'
 
-import {fetchFavorites} from './favorites';
-
-function mediaRequest() {
+function favoriteRequest() {
   return {
-    type: MEDIA_REQUEST
+    type: MEDIA_FAVORITE_REQUEST
   }
 }
 
-function mediaSuccess(payload) {
+function favoriteSuccess(payload) {
   return {
-    type: MEDIA_SUCCESS,
+    type: MEDIA_FAVORITE_SUCCESS,
     entity: payload.data,
     hasFavorited: payload.hasFavorited,
     comments: payload.comments
   }
 }
 
-function mediaFailure(error) {
+function favoriteFailure(error) {
   return {
-    type: MEDIA_FAILURE,
+    type: MEDIA_FAVORITE_FAILURE,
     error: error
   }
 }
@@ -37,17 +35,16 @@ function toggleFavorite(hasFavorited) {
   }
 }
 
-export function fetchMedia(mediaID) {
-  const url = API_ROOT + '/medias/' + mediaID;
+export function fetchFavorites(mediaID) {
   return (dispatch) => {
-    dispatch(mediaRequest());
-    return fetch(url)
+    dispatch(favoriteRequest());
+    return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
       .then(response => response.json())
       .then(json => {
-        dispatch(mediaSuccess(json))
+        dispatch(favoriteSuccess(json));
       })
       .catch((err)=> {
-        dispatch(mediaFailure(err))
+        dispatch(favoriteFailure(err));
       })
   }
 }
@@ -66,9 +63,8 @@ export function favoriteMedia(params) {
       .then(response => response.json())
       .then(json => {
         dispatch(toggleFavorite(json));
-        dispatch(fetchFavorites(params.user));
-      })
-      .catch((err)=> {
+        dispatch(favoriteSuccess(json));
+      }).catch((err)=> {
       })
   }
 }

@@ -1,0 +1,131 @@
+'use strict';
+
+import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,Modal } from 'react-native';
+import {connect} from '../../../node_modules/react-redux/native';
+import {fetchFavorites,favoriteMedia} from './../../actions/Media/favorites';
+import {fetchMedia,likeMedia} from './../../actions/Media/media';
+import MediaItem from './../../components/Media/MediaItem';
+import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
+import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';
+import MediaFavoritesScreen from './../../components/Media/Favorite/MediaFavoritesScreen';
+import MediaLikeIcon from './../../components/Media/Like/MediaLikeIcon';
+import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
+import MediaAuthorInfo from './../../components/Media/MediaAuthorInfo';
+import LoadingIndicator from './../../components/LoadingIndicator';
+import {assets} from '../../utils/assets'
+import { Icon } from 'react-native-icons';
+const Actions = require('react-native-router-flux').Actions;
+
+class Media extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    const {dispatch} = this.props;
+    //dispatch(fetchMedia(this.props.data.id));
+    dispatch(fetchMedia());
+  }
+
+  handleCommentIconClick() {
+    const {media} = this.props;
+    Actions.mediaCommentsScene({
+      data: media
+    });
+  }
+
+  handleFavoriteCountPress() {
+    const {media} = this.props;
+    Actions.mediaFavoritesScene(media.entity.id);
+  }
+
+  handleFavoriteIconPress() {
+    //console.log('fav button pressed');
+    const {dispatch,user,media} = this.props;
+
+    user.id = 1; // for testing purpose only.. uncomment while in production
+
+    const params = {
+      user: user.id,
+      media: media.entity.id
+    };
+
+    dispatch(favoriteMedia(params));
+  }
+
+  handleLikeIconPress() {
+    //console.log('fav button pressed');
+    const {dispatch,user,media} = this.props;
+
+    user.id = 1; // for testing purpose only.. uncomment while in production
+
+    const params = {
+      user: user.id,
+      media: media.entity.id
+    };
+
+    dispatch(likeMedia(params));
+  }
+
+
+  render() {
+
+    const {media} = this.props;
+
+    if (media.isFetching) {
+      return <LoadingIndicator />;
+    }
+
+    return (
+      <ScrollView style={styles.container}>
+        <MediaAuthorInfo user={media.entity}/>
+        <View style={styles.buttonWrapper}>
+          <MediaCommentIcon
+            onCommentIconClick={() => this.handleCommentIconClick()}
+            />
+          <MediaFavoriteIcon
+            hasFavorited={media.hasFavorited}
+            onFavoriteIconPress={() => this.handleFavoriteIconPress()}
+            onFavoriteCountPress={() => this.handleFavoriteCountPress()}
+            />
+          <MediaLikeIcon
+            hasLiked={media.hasLiked}
+            onLikeIconPress={() => this.handleLikeIconPress()}
+            />
+        </View>
+        <MediaItem media={media.entity}/>
+
+        <MediaCommentList comments={media.comments} line={assets.line} contentInset={0}/>
+
+      </ScrollView>
+    );
+
+  }
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 5,
+    paddingTop: 64,
+  },
+  buttonWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+    justifyContent: "flex-start"
+  }
+});
+
+function mapStateToProps(state) {
+  const { media } = state
+  return {
+    ...state,
+    media: media,
+  }
+}
+
+export default connect(mapStateToProps)(Media)

@@ -2,7 +2,7 @@
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView } from 'react-native';
 
-export default class CommentList extends Component {
+export default class MediaCommentList extends Component {
 
   constructor(props) {
     super(props);

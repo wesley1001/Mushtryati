@@ -17,7 +17,7 @@ export default class MediaCommentIcon extends Component {
         <TouchableHighlight onPress={() => this.props.onCommentIconClick()} underlayColor="transparent">
           <Icon
             name='ion|ios-chatbubble-outline'
-            size={26}
+            size={20}
             color={'black'}
             style={styles.commentImg}
             />
@@ -29,7 +29,7 @@ export default class MediaCommentIcon extends Component {
 
 const styles = StyleSheet.create({
   commentImg: {
-    width: 24,
-    height: 22
+    width: 20,
+    height: 20
   }
 });

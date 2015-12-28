@@ -1,11 +1,10 @@
-import {API_ROOT} from './../utils/config'
+import {API_ROOT} from './../../utils/config'
 import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
   COMMENTS_FAILURE,
-  COMMENT_SAVED,
-  SAVING_COMMENT
-} from '../constants/ActionTypes'
+  COMMENT_SAVING,
+} from '../../constants/ActionTypes'
 
 function commentsRequest() {
   return {
@@ -27,9 +26,9 @@ function commentsFailure(error) {
   }
 }
 
-function savingCommment() {
+function commentSaving() {
   return {
-    type: SAVING_COMMENT
+    type: COMMENT_SAVING
   }
 }
 
@@ -56,7 +55,7 @@ export function fetchComments(mediaID) {
 
 export function addComment(inputs) {
   return (dispatch) => {
-    dispatch(savingCommment());
+    dispatch(commentSaving());
     return fetch(API_ROOT + '/medias/comment', {
       method: 'POST',
       body: JSON.stringify(inputs)
