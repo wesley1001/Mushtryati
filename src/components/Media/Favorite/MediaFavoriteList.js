@@ -8,29 +8,24 @@ export default class MediaFavoriteList extends Component {
   renderRow(user) {
     return (
 
-      <View style={styles.container}>
+      <View style={styles.cellContainer}>
         <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
 
-          <View style={{flexDirection:'row',flex:1}}>
-            <View style={{flex:1}}>
+          <View style={styles.cellWrapper}>
+            <View style={styles.imageContainer}>
               {user.thumbnail ? <Image style={styles.image} source={{uri:user.thumbnail.name}}/> : <View/>}
             </View>
 
-            <View style={[styles.postDetailsContainer,{flex:2,justifyContent:'flex-start',alignSelf:'center'}]}>
-              <Text style={styles.postTitle}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>
                 {user.name}
-              </Text>
-            </View>
-            <View style={[styles.followContainer,{flex:1,justifyContent:'flex-start',alignSelf:'center'}]}>
-              <Text style={styles.votes}>
-                20
               </Text>
             </View>
           </View>
 
         </TouchableHighlight>
 
-        <View style={{height:0.5,backgroundColor:'gray',marginLeft:10,marginTop:10}}/>
+        <View style={styles.separator}/>
 
       </View>
     );
@@ -47,7 +42,7 @@ export default class MediaFavoriteList extends Component {
       <ListView
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
-        style={{backgroundColor: '#FFFFFD'}}/>
+        style={styles.container}/>
     )
   }
 
@@ -56,59 +51,38 @@ export default class MediaFavoriteList extends Component {
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
-    marginTop: 5,
-    marginBottom: 5,
+    margin:10
   },
-  followContainer: {
-    backgroundColor: 'white',
-    borderWidth: .5,
-    borderColor: 'black',
-    borderRadius: 2,
-    margin: 5,
+  cellContainer:{
+
+  },
+  cellWrapper: {
+    flexDirection:'row',
+    flex:1,
+    justifyContent:'flex-start',
+    marginTop:10,
+    marginBottom:10
+  },
+  imageContainer: {
+    flex:1,
   },
   image: {
-    height: 48,
-    width: 48,
-    borderRadius: 25,
-    alignSelf: 'center',
+    height: 36,
+    width: 36,
+    borderRadius: 18,
   },
-  icon: {
-    alignSelf: 'center'
+  titleContainer: {
+    flex:4,
+    alignSelf:'center'
   },
-  votes: {
-    textAlign: 'center',
-    fontSize: 15,
-    color: 'gray',
-  },
-  postCount: {
-    fontSize: 20,
-    textAlign: 'right',
-    margin: 10,
-    color: 'gray',
-    marginLeft: 15,
-  },
-  postDetailsContainer: {
-    flex: 1,
-  },
-  postTitle: {
+  title: {
     fontSize: 15,
     textAlign: 'left',
     color: '#DA552F',
   },
-  postDetailsLine: {
-    fontSize: 12,
-    marginBottom: 10,
-    color: 'gray',
-  },
   separator: {
-    height: 0.5,
-    backgroundColor: '#CCCCCC',
-  },
-  thumb: {
-    width: 48,
-    height: 44,
-    borderRadius: 24,
-  },
+    height:0.5,
+    backgroundColor:'#E8E8E8'
+  }
 
 })
-

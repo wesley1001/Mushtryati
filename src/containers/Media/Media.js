@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 10,
     paddingBottom: 10,
-    justifyContent: "flex-start"
+    justifyContent: "space-around"
   }
 });
 

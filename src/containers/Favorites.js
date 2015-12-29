@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react-native';
 import {connect} from 'react-redux/native';
-import MediaList from './../components/Media/MediaList';
+import MediaList from './../components/Favorites/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
 import { fetchFavorites } from './../actions/favorites';
 const Actions = require('react-native-router-flux').Actions;

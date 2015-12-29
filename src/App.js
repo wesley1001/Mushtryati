@@ -6,6 +6,7 @@ import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Medias';
 import Media from './containers/Media/Media';
+import User from './containers/Auth/User';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
 import Favorites from './containers/Favorites';
@@ -53,7 +54,7 @@ export default class App extends Component {
                 <Route name="mediasScene" component={Medias} title="مشترياتي"/>
                 <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
                 <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
-
+                <Route name="userEntityScene" component={User} title="user"/>
               </Router>
             </Route>
 
@@ -81,4 +82,3 @@ export default class App extends Component {
     )
   }
 }
-
