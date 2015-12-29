@@ -23,11 +23,7 @@ class Medias extends Component {
     });
   }
 
-  loadUser(user) {
-    Actions.userEntityScene({
-      data:user
-    })
-  }
+
 
   render() {
 

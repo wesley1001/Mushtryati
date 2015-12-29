@@ -7,10 +7,11 @@ export default class UserScene extends Component {
 
     const {user} = this.props;
 
+alert(JSON.stringify(user));
     return (
 
       <View>
-        <Text>Welcome, {user.name} </Text>
+        <Text>Welcome </Text>
       </View>
     )
   }
@@ -18,5 +19,5 @@ export default class UserScene extends Component {
 }
 
 var styles = StyleSheet.create({
-
-})
+  container:{flex:1}
+});

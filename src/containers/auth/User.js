@@ -45,13 +45,6 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingTop: 64,
   },
-  buttonWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 10,
-    justifyContent: "space-around"
-  }
 });
 
 function mapStateToProps(state) {

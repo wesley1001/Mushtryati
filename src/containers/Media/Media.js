@@ -70,6 +70,11 @@ class Media extends Component {
     dispatch(likeMedia(params));
   }
 
+  loadUser(user) {
+    Actions.userEntityScene({
+      data:user
+    })
+  }
 
   render() {
 
@@ -81,7 +86,7 @@ class Media extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <MediaAuthorInfo user={media.entity}/>
+        <MediaAuthorInfo user={media.entity} loadUser={this.loadUser.bind(this)}/>
         <View style={styles.buttonWrapper}>
           <MediaCommentIcon
             onCommentIconClick={() => this.handleCommentIconClick()}
@@ -96,7 +101,7 @@ class Media extends Component {
             onLikeIconPress={() => this.handleLikeIconPress()}
             />
         </View>
-        <MediaItem media={media.entity}/>
+        <MediaItem media={media.entity} />
 
         <MediaCommentList comments={media.comments} line={assets.line} contentInset={0}/>
 

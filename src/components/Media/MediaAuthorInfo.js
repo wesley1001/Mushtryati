@@ -10,9 +10,10 @@ export default class MediaAuthorInfo extends Component {
       <View style={{flexDirection: "row", padding:5}}>
         <Text style={styles.createdAt}>2h</Text>
         <TouchableHighlight onPress={() => this.props.loadUser(user)} underlayColor="transparent">
-          <Text style={styles.name}>{user.name}</Text>
-          <Image style={[styles.thumbnail]} source={{uri:"http://mushtryati.app/images/test.png"}}/>
-
+          <View>
+            <Text style={styles.name}>{user.name}</Text>
+            <Image style={[styles.thumbnail]} source={{uri:"http://mushtryati.app/images/test.png"}}/>
+          </View>
         </TouchableHighlight>
       </View>
     );

@@ -1,10 +1,10 @@
-import {API_ROOT} from './../../utils/config'
+import {API_ROOT} from './../../utils/config';
 import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
   COMMENTS_FAILURE,
   COMMENT_SAVING,
-} from '../../constants/ActionTypes'
+} from '../../constants/ActionTypes';
 
 function commentsRequest() {
   return {

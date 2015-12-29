@@ -12,18 +12,28 @@ export default class MediaCommentList extends Component {
 
   renderRow(comment) {
     return (
-      <View>
-        <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-          <View style={{flexDirection:"row", justifyContent:"flex-end", padding:5}}>
-            <View style={[{flexDirection:"column",paddingRight:10}]}>
-              <Text style={[{color:'#D49393', fontSize:14},styles.rtl]}>{comment.user.name}</Text>
-              <Text style={styles.rtl}>{comment.comment}</Text>
-            </View>
-            {comment.user.thumbnail ? <Image style={styles.thumb} source={{uri:comment.user.thumbnail.name}}/> :
-              <View/>}
+      <View style={styles.cellContainer}>
+        <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
 
+          <View style={styles.cellWrapper}>
+            <View style={styles.imageContainer}>
+              {comment.user.thumbnail ? <Image style={styles.image} source={{uri:comment.user.thumbnail.name}}/> : <View/>}
+            </View>
+
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>
+                {comment.user.name}
+              </Text>
+              <Text style={styles.comment}>
+                {comment.comment}
+              </Text>
+            </View>
           </View>
+
         </TouchableHighlight>
+
+        <View style={styles.separator}/>
+
       </View>
     )
   }
@@ -41,6 +51,7 @@ export default class MediaCommentList extends Component {
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
           contentInset={{bottom:this.props.contentInset ? this.props.contentInset : 49 }}
+          style={styles.container}
           />
       )
     }
@@ -49,22 +60,43 @@ export default class MediaCommentList extends Component {
 }
 
 var styles = StyleSheet.create({
-  list: {},
-  row: {
-    justifyContent: 'flex-end',
-    padding: 5,
-    margin: 3,
+  container: {
+    backgroundColor: '#FFFFFD',
+    margin:10
   },
-  thumb: {
-    width: 48,
-    height: 44,
-    borderRadius: 24,
+  cellContainer:{
+
   },
-  text: {
-    marginTop: 5,
-    marginBottom: 5,
+  cellWrapper: {
+    flexDirection:'row',
+    flex:1,
+    justifyContent:'flex-start',
+    marginTop:10,
+    marginBottom:10
   },
-  rtl: {
-    textAlign: 'right'
+  imageContainer: {
+    flex:1,
+  },
+  image: {
+    height: 36,
+    width: 36,
+    borderRadius: 18,
+  },
+  titleContainer: {
+    flex:4,
+    flexDirection:'column'
+  },
+  title: {
+    fontSize: 15,
+    textAlign: 'left',
+    color: '#DA552F',
+  },
+  comment: {
+    fontSize:13
+  },
+  separator: {
+    height:0.5,
+    backgroundColor:'#E8E8E8'
   }
+
 });
