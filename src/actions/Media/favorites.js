@@ -15,9 +15,7 @@ function favoriteRequest() {
 function favoriteSuccess(payload) {
   return {
     type: MEDIA_FAVORITE_SUCCESS,
-    entity: payload.data,
-    hasFavorited: payload.hasFavorited,
-    comments: payload.comments
+    users: payload.data,
   }
 }
 

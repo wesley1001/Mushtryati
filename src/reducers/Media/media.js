@@ -9,57 +9,58 @@ import {
   MEDIA_LIKE
 } from '../../constants/ActionTypes'
 
-const initialState = {
+import {Record} from 'immutable';
+
+const InitialState = Record({
   entity: {},
   isFetching: false,
   hasFavorited: false,
   hasLiked: false,
   error: null,
   comments: [],
-  favorites: {
+  favorites: new (Record({
     isFetching: false,
-    users: [
+    users: new (Record([
       {
         id: 1, name: 'zal'
       },
       {id: 2, name: 'asd'}
-    ]
-  }
-}
+    ]))
+  }))
+});
 
-export default function mediaReducer(state = initialState, action = {}) {
+const initialState = new InitialState;
+
+export default function media(state = initialState, action = {}) {
   switch (action.type) {
     case MEDIA_REQUEST:
-      return {
-        ... state,
-        isFetching: true,
-        error: null
-      }
+      return state
+        .setIn('isFetching', true).set('error', null);
     case MEDIA_SUCCESS:
-      return {
-        ... state,
-        isFetching: false,
-        entity: action.entity,
-        hasFavorited: action.hasFavorited,
-        comments: action.comments,
-        error: null
-      }
+      return state
+        .set('isFetching', false)
+        .set('entity', action.entity)
+        .set('hasFavorited', action.hasFavorited)
+        .set('comments', action.comments)
+        .set('error', null)
+        ;
     case MEDIA_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.error
-      }
+      return state.set('isFetching', true).set('error', action.error);
     case MEDIA_FAVORITE :
-      return Object.assign({}, state, action.hasFavorited);
+      return state.set('error', action.error);
     case MEDIA_LIKE :
-      return Object.assign({}, state, action.hasLiked);
+      return state.set('hasLiked', action.hasLiked);
     case MEDIA_FAVORITE_REQUEST:
-      return Object.assign({}, state, state.favorites.isFetching = true);
+      return state.setIn(['favorites', 'isFetching'], true);
     case MEDIA_FAVORITE_SUCCESS:
-      return Object.assign({}, state, state.favorites.isFetching = false, state.favorites.users = action.users);
+      return state
+        .setIn(['favorites', 'isFetching'], false)
+        .setIn(['favorites', 'users'], action.users)
+        ;
     case MEDIA_FAVORITE_FAILURE:
-      return Object.assign({}, state, state.favorites.isFetching = false);
+      return state
+        .setIn(['favorites', 'isFetching'], false)
+        ;
     default:
       return state
   }

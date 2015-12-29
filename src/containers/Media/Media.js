@@ -7,7 +7,6 @@ import {fetchMedia,likeMedia} from './../../actions/Media/media';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';
-import MediaFavoritesScreen from './../../components/Media/Favorite/MediaFavoritesScreen';
 import MediaLikeIcon from './../../components/Media/Like/MediaLikeIcon';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaAuthorInfo from './../../components/Media/MediaAuthorInfo';
@@ -37,7 +36,10 @@ class Media extends Component {
 
   handleFavoriteCountPress() {
     const {media} = this.props;
-    Actions.mediaFavoritesScene(media.entity.id);
+    Actions.mediaFavoritesScene({
+      data: media.entity
+    });
+
   }
 
   handleFavoriteIconPress() {
@@ -104,7 +106,6 @@ class Media extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -128,4 +129,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Media)
+export
+default
+
+connect(mapStateToProps)
+
+(
+  Media
+)

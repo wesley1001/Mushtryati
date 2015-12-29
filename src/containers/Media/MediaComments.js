@@ -78,6 +78,7 @@ var styles = StyleSheet.create({
   contentContainer: {
     paddingBottom: 64,
     paddingTop: 64,
+    margin:5
   }
 });
 

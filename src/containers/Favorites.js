@@ -20,7 +20,7 @@ class Favorites extends Component {
   }
 
   loadMedia(media) {
-    Actions.mediaEntityTab({
+    Actions.mediaEntityScene({
       data: media
     });
   }
@@ -28,8 +28,6 @@ class Favorites extends Component {
   render() {
 
     const { favorites } = this.props;
-
-    //console.log('favorites ', JSON.stringify(favorites));
 
     if (favorites.isFetching) {
       return <LoadingIndicator />;

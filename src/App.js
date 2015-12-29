@@ -6,8 +6,8 @@ import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Medias';
 import Media from './containers/Media/Media';
-import MediaFavoritesList from './components/Media/Favorite/MediaFavoritesList';
 import MediaComments from './containers/Media/MediaComments';
+import MediaFavorites from './containers/Media/MediaFavorites';
 import Favorites from './containers/Favorites';
 import TabIcon from './components/TabIcon';
 
@@ -41,20 +41,18 @@ export default class App extends Component {
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
 
-            <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon='fontawesome|suitcase'>
-              
+            <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
+
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                 titleStyle={{ color:'white', fontSize:17}}
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
+                schema="default"
                 >
+                <Route name="mediaEntityScene" component={Media}/>
                 <Route name="mediasScene" component={Medias} title="مشترياتي"/>
-
-                <Route name="mediaWrapper" wrapRouter={true}>
-                  <Route name="mediaEntityScene" component={Media}/>
-                  <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
-                  <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
-                </Route>
+                <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
+                <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
 
               </Router>
             </Route>
