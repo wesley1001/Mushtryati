@@ -5,48 +5,56 @@ export default class UserScene extends Component {
 
   render() {
 
-    // const {user} = this.props;
+    const {user} = this.props;
     let imageUrl = 'http://mushtryati.app/images/test.png';
 
-    return (
 
-      <View style={styles.container}>
+      if(user && user.id) {
+        return (
 
-        <View style={styles.imageWrapper}>
-          <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-            <Image style={styles.image} source={{uri:imageUrl}} />
-          </TouchableHighlight>
-          <Text style={styles.username}>
-            username
-          </Text>
-        </View>
-        <View style={styles.infoColumnWrapper}>
-          <View style={styles.infoWrapper}>
-            <View>
-              <Text style={styles.count}>200</Text>
-              <Text style={styles.countInfo}>Followers</Text>
+        <View style={styles.container}>
+
+          <View style={styles.imageWrapper}>
+            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+              <Image style={styles.image} source={{uri:imageUrl}} />
+            </TouchableHighlight>
+            <Text style={styles.username}>
+              {user.name}
+            </Text>
+          </View>
+          <View style={styles.infoColumnWrapper}>
+            <View style={styles.infoWrapper}>
+              <View>
+                <Text style={styles.count}>200</Text>
+                <Text style={styles.countInfo}>Followers</Text>
+              </View>
+              <View>
+                <Text style={styles.count}>200</Text>
+                <Text style={styles.countInfo}>Medias</Text>
+              </View>
+              <View>
+                <Text style={styles.count}>200</Text>
+                <Text style={styles.countInfo}>Followings</Text>
+              </View>
             </View>
-            <View>
-              <Text style={styles.count}>200</Text>
-              <Text style={styles.countInfo}>Medias</Text>
-            </View>
-            <View>
-              <Text style={styles.count}>200</Text>
-              <Text style={styles.countInfo}>Followings</Text>
+            <View style={styles.followingWrapperFollowing}>
+              <Icon
+                name='ion|android-done'
+                size={18}
+                color='white'
+                style={styles.checked}
+                />
+              <Text style={styles.following}> Following</Text>
             </View>
           </View>
-          <View style={styles.followingWrapperFollowing}>
-            <Icon
-              name='ion|android-done'
-              size={18}
-              color='white'
-              style={styles.checked}
-              />
-            <Text style={styles.following}> Following</Text>
-          </View>
         </View>
-      </View>
-    )
+        );
+      } else {
+        return(
+        <View/>
+        );
+      }
+
   }
 
 }
@@ -54,7 +62,8 @@ export default class UserScene extends Component {
 var styles = StyleSheet.create({
   container:{
     flexDirection:'row',
-    paddingTop:10
+    padding:10,
+
   },
   imageWrapper:{
     flex:1,
