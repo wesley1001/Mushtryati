@@ -6,17 +6,22 @@ export default class MediaAuthorInfo extends Component {
 
   render() {
     const {user} = this.props;
-    return (
-      <View style={{flexDirection: "row", padding:5}}>
-        <Text style={styles.createdAt}>2h</Text>
-        <TouchableHighlight onPress={() => this.props.loadUser(user)} underlayColor="transparent">
-          <View>
-            <Text style={styles.name}>{user.name}</Text>
-            <Image style={[styles.thumbnail]} source={{uri:"http://mushtryati.app/images/test.png"}}/>
-          </View>
-        </TouchableHighlight>
-      </View>
-    );
+    if(user && user.id) {
+      return (
+        <View style={{flexDirection: "row", padding:5}}>
+          <Text style={styles.createdAt}>2h</Text>
+          <TouchableHighlight onPress={() => this.props.loadUser(user)} underlayColor="transparent">
+            <View style={{flexDirection:'row'}}>
+              <Text style={styles.name}>{user.name}</Text>
+              <Image style={[styles.thumbnail]} source={{uri:"http://mushtryati.app/images/test.png"}}/>
+            </View>
+          </TouchableHighlight>
+        </View>
+      );
+    } else {
+      return <View/>;
+    }
+
   }
 }
 

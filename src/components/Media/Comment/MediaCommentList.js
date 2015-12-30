@@ -50,7 +50,6 @@ export default class MediaCommentList extends Component {
           dataSource={dataSource}
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
-          contentInset={{bottom:this.props.contentInset ? this.props.contentInset : 49 }}
           style={styles.container}
           />
       )

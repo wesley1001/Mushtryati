@@ -11,7 +11,6 @@ import MediaLikeIcon from './../../components/Media/Like/MediaLikeIcon';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaAuthorInfo from './../../components/Media/MediaAuthorInfo';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import {assets} from '../../utils/assets'
 import { Icon } from 'react-native-icons';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -23,8 +22,8 @@ class Media extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchMedia(this.props.data.id));
-    // dispatch(fetchMedia());
+    // dispatch(fetchMedia(this.props.data.id));
+    dispatch(fetchMedia());
   }
 
   handleCommentIconClick() {
@@ -85,8 +84,8 @@ class Media extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
-        <MediaAuthorInfo user={media.entity} loadUser={this.loadUser.bind(this)}/>
+      <ScrollView style={styles.container} contentInset={{bottom:49}} >
+        <MediaAuthorInfo user={media.entity.user} loadUser={this.loadUser.bind(this)}/>
         <View style={styles.buttonWrapper}>
           <MediaCommentIcon
             onCommentIconClick={() => this.handleCommentIconClick()}
@@ -101,9 +100,10 @@ class Media extends Component {
             onLikeIconPress={() => this.handleLikeIconPress()}
             />
         </View>
+
         <MediaItem media={media.entity} />
 
-        <MediaCommentList comments={media.comments} line={assets.line} contentInset={0}/>
+        <MediaCommentList comments={media.comments}/>
 
       </ScrollView>
     );
@@ -134,11 +134,4 @@ function mapStateToProps(state) {
   }
 }
 
-export
-default
-
-connect(mapStateToProps)
-
-(
-  Media
-)
+export default connect(mapStateToProps)(Media)

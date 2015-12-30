@@ -13,12 +13,12 @@ export default class MediaCommentIcon extends Component {
   render() {
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
-        <Text style={{alignSelf:'center'}}>100</Text>
+        <Text style={styles.count}>100</Text>
         <TouchableHighlight onPress={() => this.props.onCommentIconClick()} underlayColor="transparent">
           <Icon
             name='ion|ios-chatbubble-outline'
             size={20}
-            color={'black'}
+            color={'gray'}
             style={styles.commentImg}
             />
         </TouchableHighlight>
@@ -30,6 +30,11 @@ export default class MediaCommentIcon extends Component {
 const styles = StyleSheet.create({
   commentImg: {
     width: 20,
-    height: 20
+    height: 20,
+  },
+  count: {
+    fontSize:12,
+    color:'gray',
+    alignSelf:'center'
   }
 });

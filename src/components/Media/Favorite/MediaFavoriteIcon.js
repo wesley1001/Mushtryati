@@ -7,15 +7,15 @@ export default class MediaFavoriteIcon extends Component {
 
   render() {
     return (
-      <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
+      <View style={{flex:1, flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
         <TouchableHighlight onPress={() => this.props.onFavoriteCountPress()} underlayColor="transparent">
-          <Text style={{alignSelf:'center'}}>20</Text>
+          <Text style={styles.count}>20</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => this.props.onFavoriteIconPress()} underlayColor="transparent">
           <Icon
             name='ion|android-star-outline'
-            size={20}
-            color={ this.props.hasFavorited ? 'red' :'black'}
+            size={22}
+            color={ this.props.hasFavorited ? 'red' :'gray'}
             style={styles.favoriteImg}
             />
         </TouchableHighlight>
@@ -27,6 +27,12 @@ export default class MediaFavoriteIcon extends Component {
 const styles = StyleSheet.create({
   favoriteImg: {
     width: 20,
-    height: 20
+    height: 20,
+    alignSelf:'center'
+  },
+  count: {
+    fontSize:12,
+    color:'gray',
+    alignSelf:'center'
   }
 });

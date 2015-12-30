@@ -27,8 +27,9 @@ class MediaComments extends Component {
   componentWillMount() {
     const {dispatch,media} = this.props;
     dispatch(fetchComments(media.entity.id));
-    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
-    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
+
+    // DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
+    // DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
   }
 
   keyboardWillShow(e) {

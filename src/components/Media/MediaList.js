@@ -24,8 +24,6 @@ export default class MediaList extends Component {
         contentContainerStyle={styles.list}
         dataSource={dataSource}
         renderRow={this.renderRow.bind(this)}
-        contentInset={{bottom:49}}
-        style={{paddingTop:64}}
         automaticallyAdjustContentInsets={false}
         ref='listView'
         />

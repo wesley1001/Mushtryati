@@ -8,12 +8,12 @@ export default class MediaLikeIcon extends Component {
   render() {
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
-        <Text style={{alignSelf:'center'}}>20</Text>
+        <Text style={styles.count}>20</Text>
         <TouchableHighlight onPress={() => this.props.onLikeIconPress()} underlayColor="transparent">
           <Icon
             name='ion|android-favorite-outline'
-            size={20}
-            color={ this.props.hasLiked ? 'red' :'black'}
+            size={22}
+            color={ this.props.hasLiked ? 'red' :'gray'}
             style={styles.favoriteImg}
             />
         </TouchableHighlight>
@@ -26,5 +26,10 @@ const styles = StyleSheet.create({
   favoriteImg: {
     width: 20,
     height: 20
+  },
+  count: {
+    fontSize:12,
+    color:'gray',
+    alignSelf:'center'
   }
 });

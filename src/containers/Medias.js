@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View,ScrollView } from 'react-native';
 import {connect} from 'react-redux/native';
 import {fetchMedias} from './../actions/medias';
 import MediaList from './../components/Media/MediaList';
@@ -34,7 +34,9 @@ class Medias extends Component {
     }
 
     return (
-      <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
+      <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:64}}>
+        <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
+      </ScrollView>
     );
 
   }

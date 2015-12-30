@@ -36,12 +36,11 @@ class User extends Component {
     }
 
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer} contentInset={{bottom:49}}>
 
         <UserScene user={user.entity}/>
 
-        {user.entity != null ?   <MediaList medias={user.entity.medias} loadMedia={this.loadMedia.bind(this)}/> : <View/>}
+        {user.entity != null ?   <MediaList medias={user.entity.medias} loadMedia={this.loadMedia.bind(this)}  contentInset={{top:1}}/> : <View/>}
 
       </ScrollView>
     );
