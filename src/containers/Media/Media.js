@@ -94,10 +94,12 @@ class Media extends Component {
             hasFavorited={media.hasFavorited}
             onFavoriteIconPress={() => this.handleFavoriteIconPress()}
             onFavoriteCountPress={() => this.handleFavoriteCountPress()}
+            loadUser={this.loadUser.bind(this)}
             />
           <MediaLikeIcon
             hasLiked={media.hasLiked}
             onLikeIconPress={() => this.handleLikeIconPress()}
+            loadUser={this.loadUser.bind(this)}
             />
         </View>
 

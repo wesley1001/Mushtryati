@@ -7,27 +7,38 @@ export default class MediaFavoriteList extends Component {
 
   renderRow(user) {
     return (
-
-      <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
-
+      <View>
+        <View style={styles.cellContainer}>
           <View style={styles.cellWrapper}>
-            <View style={styles.imageContainer}>
-              {user.thumbnail ? <Image style={styles.image} source={{uri:user.thumbnail.name}}/> : <View/>}
-            </View>
+            <TouchableHighlight onPress={() => this.props.loadUser(user)} underlayColor="transparent">
+              <View style={{flexDirection:'row'}}>
+                <View style={styles.imageContainer}>
+                  {user.thumbnail ? <Image style={styles.image} source={{uri:user.thumbnail.name}}/> : <View/>}
+                </View>
 
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>
-                {user.name}
-              </Text>
-            </View>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>
+                    {user.name}
+                  </Text>
+                </View>
+              </View>
+            </TouchableHighlight>
           </View>
+          <View style={styles.followWrapper}>
 
-        </TouchableHighlight>
-
+            <TouchableHighlight onPress={() => this.props.followUser(user)} underlayColor="transparent">
+              <Icon
+                name='ion|person-add'
+                size={24}
+                color={'gray'}
+                style={styles.followIcon}
+                />
+            </TouchableHighlight>
+          </View>
+        </View>
         <View style={styles.separator}/>
-
       </View>
+
     );
   }
 
@@ -51,17 +62,17 @@ export default class MediaFavoriteList extends Component {
 var styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFD',
-    margin:10
+    margin:5
   },
   cellContainer:{
-
+    flexDirection:'row',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    marginTop:5,
+    marginBottom:5
   },
   cellWrapper: {
-    flexDirection:'row',
-    flex:1,
-    justifyContent:'flex-start',
-    marginTop:10,
-    marginBottom:10
+    flex:5,
   },
   imageContainer: {
     flex:1,
@@ -83,6 +94,15 @@ var styles = StyleSheet.create({
   separator: {
     height:0.5,
     backgroundColor:'#E8E8E8'
+  },
+  followWrapper: {
+    flex:1,
+    justifyContent:'flex-end'
+  },
+  followIcon: {
+    height:20,
+    width:20,
+
   }
 
 })

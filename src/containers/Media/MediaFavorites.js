@@ -7,12 +7,22 @@ import { assets }  from '../../utils/assets';
 import { Icon } from 'react-native-icons';
 import {fetchFavorites} from './../../actions/Media/favorites';
 import LoadingIndicator from './../../components/LoadingIndicator';
-
+const Actions = require('react-native-router-flux').Actions;
 class MediaFavorites extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
     dispatch(fetchFavorites(this.props.data.id));
+  }
+
+  loadUser(user) {
+    Actions.userEntityScene({
+      data:user
+    })
+  }
+
+  followUser(user) {
+
   }
 
   render() {
@@ -24,12 +34,15 @@ class MediaFavorites extends Component {
     }
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer]}>
-        <MediaFavoriteList users={media.favorites.users}/>
+        <MediaFavoriteList users={media.favorites.users} loadUser={this.loadUser.bind(this)}
+          followUser={this.followUser.bind(this)}
+          />
       </ScrollView>
 
     )
   }
 }
+
 
 var styles = StyleSheet.create({
   contentContainer: {

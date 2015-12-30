@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignSelf:'center'
   },
   count: {
-    fontSize:12,
+    fontSize:14,
     color:'gray',
     alignSelf:'center'
   }

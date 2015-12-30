@@ -57,10 +57,11 @@ export default class App extends Component {
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
                 schema="default"
                 >
+                <Route name="mediasScene" component={Medias} title="مشترياتي"/>
+                
                 <Route name="mediaEntityScene" component={Media}/>
                   <Route name="userScene" component={User} title="user"/>
-                
-                <Route name="mediasScene" component={Medias} title="مشترياتي"/>
+
                 <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
                 <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
                 <Route name="userEntityScene" component={User} title="user"/>
