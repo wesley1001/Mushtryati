@@ -23,8 +23,8 @@ class Media extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    //dispatch(fetchMedia(this.props.data.id));
-    dispatch(fetchMedia());
+    dispatch(fetchMedia(this.props.data.id));
+    // dispatch(fetchMedia());
   }
 
   handleCommentIconClick() {

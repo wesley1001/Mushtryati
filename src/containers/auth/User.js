@@ -5,6 +5,7 @@ import {connect} from '../../../node_modules/react-redux/native';
 import {fetchUser} from './../../actions/Auth/user';
 import UserScene from './../../components/Auth/UserScene';
 import LoadingIndicator from './../../components/LoadingIndicator';
+import MediaList from './../../components/Media/MediaList';
 import { Icon } from 'react-native-icons';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -16,8 +17,14 @@ class User extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    //dispatch(fetchMedia(this.props.data.id));
-    dispatch(fetchUser(this.props.data.id));
+    dispatch(fetchUser());
+    // dispatch(fetchUser(this.props.data.id));
+  }
+
+  loadMedia(media) {
+    Actions.mediaEntityScene({
+      data: media
+    });
   }
 
   render() {
@@ -29,9 +36,12 @@ class User extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-        <UserScene user={user.entity} contentInset={0}/>
+
+        <UserScene user={user.entity}/>
+
+        {user.entity != null ?   <MediaList medias={user.entity.medias} loadMedia={this.loadMedia.bind(this)}/> : <View/>}
 
       </ScrollView>
     );
@@ -41,10 +51,10 @@ class User extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 5,
-    paddingTop: 64,
+    paddingTop:64
   },
+  contentContainer:{
+  }
 });
 
 function mapStateToProps(state) {

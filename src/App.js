@@ -7,6 +7,7 @@ import Register from './containers/Auth/Register';
 import Medias from './containers/Medias';
 import Media from './containers/Media/Media';
 import User from './containers/Auth/User';
+import UserScene from './components/Auth/UserScene';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
 import Favorites from './containers/Favorites';
@@ -56,6 +57,7 @@ export default class App extends Component {
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
                 schema="default"
                 >
+                <Route name="userScene" component={User} title="user"/>
                 <Route name="mediaEntityScene" component={Media}/>
                 <Route name="mediasScene" component={Medias} title="مشترياتي"/>
                 <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>

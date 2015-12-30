@@ -35,7 +35,7 @@ export default function media(state = initialState, action = {}) {
   switch (action.type) {
     case MEDIA_REQUEST:
       return state
-        .setIn('isFetching', true).set('error', null);
+        .set('isFetching', true).set('error', null);
     case MEDIA_SUCCESS:
       return state
         .set('isFetching', false)

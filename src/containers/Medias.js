@@ -34,7 +34,7 @@ class Medias extends Component {
     }
 
     return (
-      <MediaList medias={medias.collection} loadMedia={this.loadMedia}/>
+      <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
     );
 
   }
