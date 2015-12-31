@@ -19,6 +19,7 @@ class Medias extends Component {
 
   loadMedia(media) {
     Actions.mediaEntityScene({
+      title:media.caption,
       data: media
     });
   }

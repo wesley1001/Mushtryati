@@ -71,6 +71,7 @@ class Media extends Component {
 
   loadUser(user) {
     Actions.userEntityScene({
+      title:user.name,
       data:user
     })
   }

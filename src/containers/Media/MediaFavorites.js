@@ -17,6 +17,7 @@ class MediaFavorites extends Component {
 
   loadUser(user) {
     Actions.userEntityScene({
+      title:user.name,
       data:user
     })
   }
