@@ -1,24 +1,19 @@
+import {Record} from 'immutable';
+
 import {
-  MEDIAS_REQUEST,
   MEDIAS_SUCCESS,
-  MEDIAS_FAILURE,
 } from '../constants/ActionTypes'
 
-const initialState = {
-  collection: [],
-  isFetching: false,
-  error: null
-}
+const InitialState = Record({
+  collection: []
+});
+
+const initialState = new InitialState;
 
 export default function medias(state = initialState, action = {}) {
   switch (action.type) {
     case MEDIAS_SUCCESS:
-      return {
-        ... state,
-        isFetching: false,
-        collection: action.collection.entities.medias,
-        error: null
-      }
+      return state.set('collection', action.collection);
     default:
       return state
   }

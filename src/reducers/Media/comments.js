@@ -1,25 +1,28 @@
+import {Record} from 'immutable';
+
 import {
-  COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
-  COMMENTS_FAILURE,
   COMMENT_SAVING,
   COMMENT_SAVED
-} from '../../constants/ActionTypes';
+} from '../../constants/ActionTypes'
 
-const initialState = {
+const InitialState = Record({
   collection: [],
   isFetching: false,
   error: null
-};
+});
+
+const initialState = new InitialState;
 
 export default function comments(state = initialState, action = {}) {
   switch (action.type) {
+    case COMMENTS_SUCCESS:
+      return state.set('isFetching', false).set('error', null);
     case COMMENT_SAVING:
-      return {
-        ...state,
-        isFetching: true
-      };
+      return state.set('isFetching', true).set('error', null);
+    case COMMENT_SAVED:
+      return state.set('isFetching', false).set('error', null);
     default:
-      return state;
+      return state
   }
 }

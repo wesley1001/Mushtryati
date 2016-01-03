@@ -1,7 +1,5 @@
 import {
-  MEDIA_REQUEST,
   MEDIA_SUCCESS,
-  MEDIA_FAILURE,
   MEDIA_FAVORITE,
   MEDIA_FAVORITE_REQUEST,
   MEDIA_FAVORITE_SUCCESS,
@@ -13,20 +11,10 @@ import {Record} from 'immutable';
 
 const InitialState = Record({
   entity: {},
-  isFetching: false,
   hasFavorited: false,
   hasLiked: false,
-  error: null,
   comments: [],
-  favorites: new (Record({
-    isFetching: false,
-    users: new (Record([
-      {
-        id: 1, name: 'zal'
-      },
-      {id: 2, name: 'asd'}
-    ]))
-  }))
+  favorites: []
 });
 
 const initialState = new InitialState;
@@ -41,8 +29,6 @@ export default function media(state = initialState, action = {}) {
         .set('comments', action.comments)
         .set('error', null)
         ;
-    case MEDIA_FAVORITE :
-      return state.set('error', action.error);
     case MEDIA_LIKE :
       return state.set('hasLiked', action.hasLiked);
     case MEDIA_FAVORITE_SUCCESS:
