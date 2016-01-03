@@ -23,11 +23,9 @@ export default function media(state = initialState, action = {}) {
   switch (action.type) {
     case MEDIA_SUCCESS:
       return state
-        .set('isFetching', false)
         .set('entity', action.entity)
         .set('hasFavorited', action.hasFavorited)
         .set('comments', action.comments)
-        .set('error', null)
         ;
     case MEDIA_LIKE :
       return state.set('hasLiked', action.hasLiked);

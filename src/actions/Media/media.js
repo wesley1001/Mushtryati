@@ -5,7 +5,7 @@ import {
 } from '../../constants/ActionTypes';
 
 import {fetchFavorites} from './../favorites';
-import {xhrRequest,xhrRequestFailure} from './../global';
+import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './../global';
 
 function mediaSuccess(payload) {
   return {
@@ -26,11 +26,11 @@ function toggleLike(hasLiked) {
 export function fetchMedia(mediaID) {
   const url = API_ROOT + '/medias/' + mediaID;
   return (dispatch) => {
-
     dispatch(xhrRequest());
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        dispatch(xhrRequestSuccess())
         dispatch(mediaSuccess(json))
       })
       .catch((err)=> {

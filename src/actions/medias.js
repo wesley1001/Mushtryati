@@ -3,13 +3,13 @@ import { normalize, Schema, arrayOf } from 'normalizr';
 
 import {
   MEDIAS_SUCCESS,
-} from '../constants/ActionTypes'
+} from '../constants/ActionTypes';
 
 import {
   mediaSchema
 } from '../constants/Schemas';
 
-import {xhrRequest,xhrRequestFailure} from './global';
+import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './global';
 
 function mediasSuccess(payload) {
   return {
@@ -25,10 +25,11 @@ export function fetchMedias() {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(mediasSuccess(json))
+        dispatch(xhrRequestSuccess());
+        dispatch(mediasSuccess(json));
       })
       .catch((err)=> {
-        dispatch(xhrRequestFailure(err))
+        dispatch(xhrRequestFailure(err));
       })
   }
 }

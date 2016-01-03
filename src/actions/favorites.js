@@ -3,7 +3,7 @@ import {
   FAVORITES_SUCCESS,
 } from '../constants/ActionTypes'
 
-import {xhrRequest,xhrRequestFailure} from './global';
+import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './global';
 
 function favoritesSuccess(payload) {
   return {
@@ -19,6 +19,7 @@ export function fetchFavorites(userID) {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        dispatch(xhrRequestSuccess());
         dispatch(favoritesSuccess(json));
       })
       .catch((err)=> {
