@@ -2,8 +2,6 @@ import {API_ROOT} from './../../utils/config'
 
 import {
   LOGIN_SUCCESS,
-  XHR_REQUEST,
-  XHR_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE
 } from '../../constants/ActionTypes';
 

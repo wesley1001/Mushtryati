@@ -1,28 +1,14 @@
 import {API_ROOT} from './../../utils/config';
 import {
-  COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
-  COMMENTS_FAILURE,
-  COMMENT_SAVING,
 } from '../../constants/ActionTypes';
 
-function commentsRequest() {
-  return {
-    type: COMMENTS_REQUEST,
-  }
-}
+import {xhrRequest,xhrRequestFailure} from './../global';
 
 function commentsSuccess(payload) {
   return {
     type: COMMENTS_SUCCESS,
     collection: payload.data
-  }
-}
-
-function commentsFailure(error) {
-  return {
-    type: COMMENTS_FAILURE,
-    error: error,
   }
 }
 
@@ -41,14 +27,14 @@ function commentSaved(payload) {
 
 export function fetchComments(mediaID) {
   return (dispatch) => {
-    dispatch(commentsRequest());
+    dispatch(xhrRequest());
     return fetch(API_ROOT + '/medias/' + mediaID + '/comments')
       .then(response => response.json())
       .then(json => {
         dispatch(commentsSuccess(json));
       })
       .catch((err)=> {
-        dispatch(commentsFailure(err));
+        dispatch(xhrRequestFailure(err));
       })
   }
 }

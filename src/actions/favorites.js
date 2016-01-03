@@ -1,15 +1,9 @@
 import {API_ROOT} from './../utils/config'
 import {
-  FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
-  FAVORITES_FAILURE,
 } from '../constants/ActionTypes'
 
-function favoritesRequest() {
-  return {
-    type: FAVORITES_REQUEST,
-  }
-}
+import {xhrRequest,xhrRequestFailure} from './global';
 
 function favoritesSuccess(payload) {
   return {
@@ -18,24 +12,17 @@ function favoritesSuccess(payload) {
   }
 }
 
-function favoritesFailure(error) {
-  return {
-    type: FAVORITES_FAILURE,
-    error: error,
-  }
-}
-
 export function fetchFavorites(userID) {
   const url = API_ROOT + '/user/' + userID + '/favorites';
   return (dispatch) => {
-    dispatch(favoritesRequest());
+    dispatch(xhrRequest());
     return fetch(url)
       .then(response => response.json())
       .then(json => {
         dispatch(favoritesSuccess(json));
       })
       .catch((err)=> {
-        dispatch(favoritesFailure(err))
+        dispatch(xhrRequestFailure(err))
       })
   }
 }
