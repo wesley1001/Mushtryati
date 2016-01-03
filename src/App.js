@@ -23,7 +23,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <Router hideNavBar={true} initialRoutes={['login']}>
+      <Router hideNavBar={true} initialRoutes={['tabBar']}>
 
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
@@ -49,8 +49,6 @@ export default class App extends Component {
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
-
-
 
                 <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
 
