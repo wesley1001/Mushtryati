@@ -26,15 +26,15 @@ class Medias extends Component {
 
   render() {
 
-    const {  medias } = this.props;
+    const {  global,entities } = this.props;
 
-    if (medias.isFetching) {
+    if (global.isFetching) {
       return <LoadingIndicator />;
     }
 
     return (
         <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:64}}>
-          <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
+          <MediaList medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
         </ScrollView>
     );
 
@@ -42,10 +42,11 @@ class Medias extends Component {
 }
 
 function mapStateToProps(state) {
-  const { medias } = state
+  const {entities,global } = state
   return {
     ...state,
-    medias: medias,
+    global,
+    entities
   }
 }
 

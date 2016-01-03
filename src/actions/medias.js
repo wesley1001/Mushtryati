@@ -11,10 +11,21 @@ import {
 
 import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './global';
 
-function mediasSuccess(payload) {
+function mediasSuccess(result,entities) {
   return {
     type: MEDIAS_SUCCESS,
-    collection: normalize(payload.data,arrayOf(mediaSchema))
+    entities:entities
+  }
+}
+
+
+function receiveSongs(songs, entities, songTitle) {
+  return {
+    type: types.RECEIVE_SONGS,
+    entities,
+    nextUrl: null,
+    playlist: songTitle,
+    songs
   }
 }
 
@@ -25,8 +36,10 @@ export function fetchMedias() {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
+        const normalized = normalize(json.data, arrayOf(mediaSchema));
+        dispatch(mediasSuccess(normalized.result, normalized.entities));
         dispatch(xhrRequestSuccess());
-        dispatch(mediasSuccess(json));
+
       })
       .catch((err)=> {
         dispatch(xhrRequestFailure(err));
