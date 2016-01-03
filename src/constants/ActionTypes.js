@@ -1,4 +1,4 @@
-export const USER_XHR_RSUCCESS = 'USER_XHR_SUCCESS';
+export const USER_XHR_SUCCESS = 'USER_XHR_SUCCESS';
 
 export const XHR_REQUEST = 'XHR_REQUEST';
 export const XHR_SUCCESS = 'XHR_SUCCESS';

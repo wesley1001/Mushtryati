@@ -1,17 +1,10 @@
 import {API_ROOT} from './../../utils/config'
 
 import {
-  LOGIN_SUCCESS,
   ON_LOGIN_FORM_FIELD_CHANGE
 } from '../../constants/ActionTypes';
 
-import {xhrRequest,xhrRequestFailure} from './../global';
-
-function loginSuccess() {
-  return {
-    type: LOGIN_SUCCESS
-  };
-}
+import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './../global';
 
 export function login(credentials, cb = ()=> {success: false}) {
 
@@ -29,7 +22,7 @@ export function login(credentials, cb = ()=> {success: false}) {
           dispatch(xhrRequestFailure(json.message));
           return cb({success: false});
         } else {
-          dispatch(loginSuccess());
+          dispatch(xhrRequestSuccess());
           return cb({success: true,user:json});
         }
       })

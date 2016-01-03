@@ -33,9 +33,6 @@ const initialState = new InitialState;
 
 export default function media(state = initialState, action = {}) {
   switch (action.type) {
-    case MEDIA_REQUEST:
-      return state
-        .set('isFetching', true).set('error', null);
     case MEDIA_SUCCESS:
       return state
         .set('isFetching', false)
@@ -44,23 +41,14 @@ export default function media(state = initialState, action = {}) {
         .set('comments', action.comments)
         .set('error', null)
         ;
-    case MEDIA_FAILURE:
-      return state.set('isFetching', true).set('error', action.error);
     case MEDIA_FAVORITE :
       return state.set('error', action.error);
     case MEDIA_LIKE :
       return state.set('hasLiked', action.hasLiked);
-    case MEDIA_FAVORITE_REQUEST:
-      return state.setIn(['favorites', 'isFetching'], true);
     case MEDIA_FAVORITE_SUCCESS:
       return state
         .setIn(['favorites', 'isFetching'], false)
-        .setIn(['favorites', 'users'], action.users)
-        ;
-    case MEDIA_FAVORITE_FAILURE:
-      return state
-        .setIn(['favorites', 'isFetching'], false)
-        ;
+        .setIn(['favorites', 'users'], action.users);
     default:
       return state
   }

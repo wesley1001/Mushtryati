@@ -1,12 +1,16 @@
 import {API_ROOT} from './../../utils/config'
 
 import {
-  REGISTER_SUCCESS,
-  XHR_REQUEST,
-  XHR_FAILURE,
+  REGISTER_FAILURE,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS
 } from '../../constants/ActionTypes';
 
-import {xhrRequest,xhrRequestFailure} from './../global';
+function registerRequest() {
+  return {
+    type: REGISTER_REQUEST
+  };
+}
 
 function registerSuccess() {
   return {
@@ -14,9 +18,18 @@ function registerSuccess() {
   };
 }
 
-export function register(inputs, cb = ()=> { success: false }) {
+function registerFailure(errors) {
+  return {
+    type: REGISTER_FAILURE,
+    validationErrors: errors
+  };
+}
+
+export function register(inputs, cb = ()=> {
+  success: false
+}) {
   return dispatch => {
-    dispatch(xhrRequest());
+    dispatch(registerRequest());
     return fetch(API_ROOT + '/auth/register', {
       method: 'POST',
       body: JSON.stringify(inputs)
@@ -24,14 +37,14 @@ export function register(inputs, cb = ()=> { success: false }) {
       .then(response => response.json())
       .then(json => {
         if (json.success == false) {
-          dispatch(xhrRequestFailure(json.errors));
+          dispatch(registerFailure(json.errors));
         } else {
           dispatch(registerSuccess());
           return cb({success: true});
         }
       })
       .catch((err)=> {
-        dispatch(xhrRequestFailure(err))
+        dispatch(registerFailure(err))
       });
   };
 }

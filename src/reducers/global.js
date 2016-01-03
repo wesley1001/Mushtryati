@@ -7,7 +7,6 @@ import {
 } from '../constants/ActionTypes';
 
 const InitialState = Record({
-  isLoggedIn: false,
   isFetching: false,
   error: null,
 });
@@ -15,17 +14,14 @@ const InitialState = Record({
 const initialState = new InitialState;
 
 export default function global(state = initialState, action = {}) {
-
   switch (action.type) {
     case XHR_REQUEST:
-      return state.setIn(['isFetching'], true).setIn(['isLoggedIn'], false).setIn(['error'], null);
+      return state.set('isFetching', true).set('error', null);
     case XHR_SUCCESS:
-      return state.setIn(['isFetching'], false).setIn(['isLoggedIn'], true).setIn(['error'], null);
+      return state.set('isFetching', false).set('error', null);
     case XHR_FAILURE:
-      return state.setIn(['isFetching'], false).setIn(['isLoggedIn'], false).setIn(['error'], action.error);
+      return state.set('isFetching', false).set('error', action.error);
     default:
       return state;
   }
 }
-
-

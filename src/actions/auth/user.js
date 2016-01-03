@@ -1,8 +1,6 @@
 import {
   SET_USER,
-  XHR_REQUEST,
-  USER_XHR_RSUCCESS,
-  XHR_FAILURE
+  USER_XHR_SUCCESS,
 } from './../../constants/ActionTypes';
 
 import {xhrRequest,xhrRequestFailure} from './../global';
@@ -11,7 +9,7 @@ import {API_ROOT} from './../../utils/config';
 
 function userSuccess(payload) {
   return {
-    type: USER_XHR_RSUCCESS,
+    type: USER_XHR_SUCCESS,
     entity: payload.data,
   }
 }
