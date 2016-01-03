@@ -30,11 +30,11 @@ export function fetchMedia(mediaID) {
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(xhrRequestSuccess())
-        dispatch(mediaSuccess(json))
+        dispatch(xhrRequestSuccess());
+        dispatch(mediaSuccess(json));
       })
       .catch((err)=> {
-        dispatch(xhrRequestFailure(err))
+        dispatch(xhrRequestFailure(err));
       })
   }
 }
