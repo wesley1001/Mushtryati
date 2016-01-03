@@ -1,18 +1,13 @@
 import {API_ROOT} from './../../utils/config'
-import { setUser } from './user';
 
 import {
-  LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE,
+  XHR_REQUEST,
+  XHR_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE
 } from '../../constants/ActionTypes';
 
-function loginRequest() {
-  return {
-    type: LOGIN_REQUEST
-  };
-}
+import {xhrRequest,xhrRequestFailure} from './../global';
 
 function loginSuccess() {
   return {
@@ -20,20 +15,12 @@ function loginSuccess() {
   };
 }
 
-function loginFailure(message) {
-  return {
-    type: LOGIN_FAILURE,
-    error: message
-  };
-}
+export function login(credentials, cb = ()=> {success: false}) {
 
-export function login(credentials, cb = ()=> {
-  success: false
-}) {
-  console.log(JSON.stringify(credentials));
   let url = API_ROOT + '/auth/login';
+
   return dispatch => {
-    dispatch(loginRequest());
+    dispatch(xhrRequest());
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(credentials)
@@ -41,16 +28,15 @@ export function login(credentials, cb = ()=> {
       .then(response => response.json())
       .then(json => {
         if (json.success == false) {
-          dispatch(loginFailure(json.message));
+          dispatch(xhrRequestFailure(json.message));
           return cb({success: false});
         } else {
           dispatch(loginSuccess());
-          dispatch(setUser(json));
           return cb({success: true,user:json});
         }
       })
       .catch((err)=> {
-        dispatch(loginFailure(err));
+        dispatch(xhrRequestFailure(err));
         return cb({success: false});
       });
   };

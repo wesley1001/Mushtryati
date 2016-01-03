@@ -23,7 +23,7 @@ export default class App extends Component {
   render() {
 
     return (
-      <Router hideNavBar={true} initialRoutes={['login','tabBar']}>
+      <Router hideNavBar={true} initialRoutes={['login']}>
 
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
@@ -42,14 +42,17 @@ export default class App extends Component {
 
         <Route name="tabBar">
 
-          <Router footer={TabBar} showNavigationBar={false}
+
+            <Router footer={TabBar} showNavigationBar={false}
                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                   style={{backgroundColor:'#5BC3BE'}}
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
 
-            <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
+
+
+                <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
 
               <Router
                 navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
@@ -77,14 +80,15 @@ export default class App extends Component {
                    navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
-
-            <Route name="homeTab" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
-                   component={Master}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                   titleStyle={{ color:'white', fontSize:17}}
+              <Route name="homeTab" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
+                     component={Master}
+                     navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                     titleStyle={{ color:'white', fontSize:17}}
               />
 
-          </Router>
+
+
+            </Router>
         </Route>
 
       </Router>

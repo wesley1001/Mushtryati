@@ -22,7 +22,7 @@ export default function medias(state = initialState, action = {}) {
       return {
         ... state,
         isFetching: false,
-        collection: action.collection,
+        collection: action.collection.entities.medias,
         error: null
       }
     case MEDIAS_FAILURE:

@@ -24,8 +24,6 @@ class Medias extends Component {
     });
   }
 
-
-
   render() {
 
     const {  medias } = this.props;
@@ -35,9 +33,9 @@ class Medias extends Component {
     }
 
     return (
-      <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:64}}>
-        <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
-      </ScrollView>
+        <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:64}}>
+          <MediaList medias={medias.collection} loadMedia={this.loadMedia.bind(this)}/>
+        </ScrollView>
     );
 
   }

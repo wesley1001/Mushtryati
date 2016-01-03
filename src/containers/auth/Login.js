@@ -63,14 +63,14 @@ class Login extends Component {
 
   render() {
 
-    const { login } = this.props;
+    const { login,global } = this.props;
 
     return (
       <View style={{flex: 1,padding: 10}}>
 
         <Image style={{  height: 100, marginTop: 80,  alignSelf: 'center'}} source={assets.mark}/>
 
-        {login.isFetching ? <LoadingIndicator /> : <View />}
+        {global.isFetching ? <LoadingIndicator /> : <View />}
 
         <LoginScene
           login={login}
@@ -90,10 +90,11 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  const { login } = state
+  const { login,global } = state
   return {
     ...state,
-    login
+    login,
+    global
   }
 }
 

@@ -5,10 +5,12 @@
   "scripts": {
     "start": "react-native start"
   },
+  "postinstall": "find node_modules -type f -name .babelrc | grep -v /react-native/ | xargs rm",
   "dependencies": {
     "apsl-react-native-button": "^2.3.0",
     "immutable": "^3.7.6",
     "lodash": "^3.10.1",
+    "normalizr": "^1.4.1",
     "react": "^0.14.3",
     "react-native": "^0.16.0",
     "react-native-icons": "^0.7.0",
