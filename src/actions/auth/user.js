@@ -14,7 +14,8 @@ function userSuccess(payload) {
 }
 
 export function fetchUser(userID) {
-  const url = API_ROOT + '/user/' + userID ;
+  //const url = API_ROOT + '/user/' + userID ; // @todo : fix userID
+  const url = API_ROOT + '/user/1' ;
   return (dispatch) => {
      dispatch(xhrRequest());
      return fetch(url)

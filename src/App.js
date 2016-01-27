@@ -32,7 +32,7 @@ export default class App extends Component {
 
         <Route name="login" component={Login} wrapRouter={true} title="تسجيل الدخول"
                hideNavBar={false}
-               navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+               navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                titleStyle={{ color:'white', fontSize:17}}
                barButtonTextStyle={{ fontSize:17, color:'white' }}
                schema="default"
@@ -44,8 +44,8 @@ export default class App extends Component {
 
 
             <Router footer={TabBar} showNavigationBar={false}
-                  navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
-                  style={{backgroundColor:'#5BC3BE'}}
+                  navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
+                  style={{backgroundColor:'#343459'}}
                   titleStyle={{ color:'white', fontSize:17}}
                   barButtonTextStyle={{ fontSize:17, color:'white' }}
             >
@@ -53,7 +53,7 @@ export default class App extends Component {
                 <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
 
               <Router
-                navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                 titleStyle={{ color:'white', fontSize:17}}
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
                 schema="default"
@@ -70,17 +70,17 @@ export default class App extends Component {
             </Route>
 
             <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                   navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
 
             <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='ion|android-star' component={Favorites}
-                   navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                   navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                    titleStyle={{ color:'white', fontSize:17}}
               />
               <Route name="homeTab" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
                      component={Master}
-                     navigationBarStyle={{backgroundColor: '#5BC3BE',borderBottomColor: '#5BC3BE'}}
+                     navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                      titleStyle={{ color:'white', fontSize:17}}
               />
 

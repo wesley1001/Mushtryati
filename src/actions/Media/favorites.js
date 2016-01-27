@@ -1,15 +1,22 @@
 import {API_ROOT} from './../../utils/config'
 import {
-  MEDIA_FAVORITE_SUCCESS,
-  MEDIA_FAVORITE
+  FAVORITES_SUCCESS,
+  MEDIA_FAVORITE,
+  FAVORITES_REQUEST
 } from '../../constants/ActionTypes';
 
 import {xhrRequest,xhrRequestFailure} from './../global';
 
 
+
+function favoriteRequest() {
+  return {
+    type: FAVORITES_REQUEST
+  }
+}
 function favoriteSuccess(payload) {
   return {
-    type: MEDIA_FAVORITE_SUCCESS,
+    type: FAVORITES_SUCCESS,
     users: payload.data,
   }
 }
@@ -23,7 +30,7 @@ function toggleFavorite(hasFavorited) {
 
 export function fetchFavorites(mediaID) {
   return (dispatch) => {
-    dispatch(xhrRequest());
+    dispatch(favoriteRequest());
     return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
       .then(response => response.json())
       .then(json => {

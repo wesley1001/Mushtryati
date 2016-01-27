@@ -30,7 +30,7 @@ export function register(inputs, cb = ()=> {
 }) {
   return dispatch => {
     dispatch(registerRequest());
-    return fetch(API_ROOT + '/auth/register', {
+    return fetch(API_ROOT + '/Auth/register', {
       method: 'POST',
       body: JSON.stringify(inputs)
     })

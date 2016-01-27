@@ -2,7 +2,7 @@
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,Modal } from 'react-native';
 import {connect} from '../../../node_modules/react-redux/native';
-import {fetchUser} from './../../actions/Auth/user';
+import {fetchUser} from '../../actions/Auth/user';
 import UserScene from './../../components/Auth/UserScene';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import MediaList from './../../components/Media/MediaList';

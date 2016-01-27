@@ -42,7 +42,7 @@ class Media extends Component {
   }
 
   handleFavoriteIconPress() {
-    //console.log('fav button pressed');
+    console.log('fav button pressed');
     const {dispatch,user,media} = this.props;
 
     user.id = 1; // for testing purpose only.. uncomment while in production
@@ -56,7 +56,7 @@ class Media extends Component {
   }
 
   handleLikeIconPress() {
-    //console.log('fav button pressed');
+    console.log('fav button pressed');
     const {dispatch,user,media} = this.props;
 
     user.id = 1; // for testing purpose only.. uncomment while in production
@@ -72,7 +72,7 @@ class Media extends Component {
   loadUser(user) {
     Actions.userEntityScene({
       title:user.name,
-      data:user
+      data:user.id
     })
   }
 

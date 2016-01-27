@@ -1,7 +1,8 @@
 import {
   MEDIA_SUCCESS,
   MEDIA_FAVORITE,
-  MEDIA_FAVORITE_SUCCESS,
+  FAVORITES_SUCCESS,
+  FAVORITES_REQUEST,
   MEDIA_LIKE
 } from '../../constants/ActionTypes'
 
@@ -12,7 +13,10 @@ const InitialState = Record({
   hasFavorited: false,
   hasLiked: false,
   comments: [],
-  favorites: []
+  favorites: new (Record({
+    users:null,
+    isFetching:false
+  }))
 });
 
 const initialState = new InitialState;
@@ -27,7 +31,10 @@ export default function media(state = initialState, action = {}) {
         ;
     case MEDIA_LIKE :
       return state.set('hasLiked', action.hasLiked);
-    case MEDIA_FAVORITE_SUCCESS:
+    case FAVORITES_REQUEST:
+      return state
+        .setIn(['favorites', 'isFetching'], true)
+    case FAVORITES_SUCCESS:
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'users'], action.users);

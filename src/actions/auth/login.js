@@ -8,7 +8,7 @@ import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './../global';
 
 export function login(credentials, cb = ()=> {success: false}) {
 
-  let url = API_ROOT + '/auth/login';
+  let url = API_ROOT + '/Auth/login';
 
   return dispatch => {
     dispatch(xhrRequest());

@@ -8,7 +8,12 @@ import { Icon } from 'react-native-icons';
 import {fetchFavorites} from './../../actions/Media/favorites';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
+
 class MediaFavorites extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   componentWillMount() {
     const {dispatch} = this.props;
@@ -33,6 +38,7 @@ class MediaFavorites extends Component {
     if (media.favorites.isFetching) {
       return <LoadingIndicator />;
     }
+
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer]}>
         <MediaFavoriteList users={media.favorites.users} loadUser={this.loadUser.bind(this)}
