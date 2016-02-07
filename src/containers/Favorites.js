@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react-native';
-import {connect} from 'react-redux/native';
+import {connect} from 'react-redux';
 import MediaList from './../components/Favorites/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
 import { fetchFavorites } from './../actions/favorites';

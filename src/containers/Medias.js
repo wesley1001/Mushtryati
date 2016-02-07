@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View,ScrollView } from 'react-native';
-import {connect} from 'react-redux/native';
+import {connect} from 'react-redux';
 import {fetchMedias} from './../actions/medias';
 import MediaList from './../components/Media/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';

@@ -1,7 +1,7 @@
 'use strict';
 import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native';
 import {register} from '../../actions/Auth/register';
-import { connect } from '../../../node_modules/react-redux/native';
+import { connect } from '../../../node_modules/react-redux';
 import RegisterScene from './../../components/Auth/RegisterScene';
 import LoadingIndicator from './../../components/LoadingIndicator';
 
@@ -15,11 +15,11 @@ class Register extends Component {
         Actions.login();
       }
     }));
-  }
+  };
 
   handleLoginRoute = () => {
     return Actions.login();
-  }
+  };
 
   render() {
     const { register } = this.props;

@@ -28,7 +28,7 @@ export default class RegisterScene extends Component {
 
   onLoginRoutePress = () => {
     return this.props.onLoginRouteClick();
-  }
+  };
 
   render() {
 

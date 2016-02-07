@@ -15,78 +15,46 @@ import TabIcon from './components/TabIcon';
 
 export default class App extends Component {
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     StatusBarIOS.setStyle('light-content');
   }
 
   render() {
 
     return (
-      <Router hideNavBar={true} initialRoutes={['tabBar']}>
+      <Router hideNavBar={true} name="root">
 
         <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
-        <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}/>
-        <Schema name="withoutAnimation"/>
-        <Schema name="tab" type="switch" icon={TabIcon}/>
-
-        <Route name="login" component={Login} wrapRouter={true} title="تسجيل الدخول"
-               hideNavBar={false}
-               navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
-               titleStyle={{ color:'white', fontSize:17}}
-               barButtonTextStyle={{ fontSize:17, color:'white' }}
-               schema="default"
-          />
-
-        <Route name="register" component={Register} title="تسجيل الدخول" schema="default" hideNavBar={true}/>
-
-        <Route name="tabBar">
-
-
-            <Router footer={TabBar} showNavigationBar={false}
-                  navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
-                  style={{backgroundColor:'#343459'}}
-                  titleStyle={{ color:'white', fontSize:17}}
-                  barButtonTextStyle={{ fontSize:17, color:'white' }}
-            >
-
-                <Route name="mediasTab" schema="tab" title="مشترياتي" tabIcon="fontawesome|suitcase">
-
-              <Router
+        <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}
                 navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                 titleStyle={{ color:'white', fontSize:17}}
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
-                schema="default"
-                >
-                <Route name="mediasScene" component={Medias} title="مشترياتي"/>
-                
-                <Route name="mediaEntityScene" component={Media}/>
-                  <Route name="userScene" component={User} title="user"/>
+        />
+        <Schema name="tab" type="switch" icon={TabIcon}/>
 
+        <Route name="tabBar">
+          <Router footer={TabBar} tabBarStyle={{backgroundColor:'#343459'}} showNavigationBar={false}>
+            <Route name="settingsTab" schema="tab" selectedTabIcon="fontawesome|cog" tabIcon="fontawesome|cog" title="الاعدادات" component={Master} />
+            <Route name="favoritesTab" schema="tab" title="مفضلات" selectedTabIcon="ion|android-star" tabIcon="ion|android-star"  component={Favorites} />
+            <Route name="mediasTab" schema="tab" title="مشترياتي" selectedTabIcon="fontawesome|suitcase" tabIcon="fontawesome|suitcase" >
+              <Router schema="default">
+                <Route name="mediasScene" component={Medias} title="مشترياتي"/>
+                <Route name="mediaEntityScene" component={Media}/>
+                <Route name="userScene" component={User} title="user"/>
                 <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
                 <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
                 <Route name="userEntityScene" component={User} title="user"/>
               </Router>
             </Route>
+            <Route name="homeTab" initial={true} schema="tab" title="الرئيسية"  selectedTabIcon="fontawesome|home" tabIcon="fontawesome|home" component={Master}  />
+          </Router>
+        </Route>
 
-            <Route name="settingsTab" schema="tab" tabIcon='fontawesome|cog' title="الاعدادات" component={Master}
-                   navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
-                   titleStyle={{ color:'white', fontSize:17}}
-              />
-
-            <Route name="favoritesTab" schema="tab" title="مفضلات" tabIcon='ion|android-star' component={Favorites}
-                   navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
-                   titleStyle={{ color:'white', fontSize:17}}
-              />
-              <Route name="homeTab" schema="tab" title="الرئيسية" tabIcon='fontawesome|home'
-                     component={Master}
-                     navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
-                     titleStyle={{ color:'white', fontSize:17}}
-              />
-
-
-
-            </Router>
+        <Route name="auth" hideNavBar={true}>
+          <Router>
+            <Route name="login" component={Login}  />
+            <Route name="register" component={Register} title="تسجيل الدخول"   hideNavBar={false}/>
+          </Router>
         </Route>
 
       </Router>

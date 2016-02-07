@@ -17,7 +17,7 @@ export default class MediaCommentAdd extends Component {
     return this.setState({
       comment: comment
     })
-  }
+  };
 
   submitComment() {
     const {onCommentSubmit} = this.props;

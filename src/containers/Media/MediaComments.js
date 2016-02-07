@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, ScrollView, Text, StyleSheet, Dimensions, DeviceEventEmitter } from 'react-native';
-import {connect} from '../../../node_modules/react-redux/native';
+import {connect} from '../../../node_modules/react-redux';
 
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
@@ -27,9 +27,8 @@ class MediaComments extends Component {
   componentWillMount() {
     const {dispatch,media} = this.props;
     dispatch(fetchComments(media.entity.id));
-
-    // DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
-    // DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
+    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
+    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
   }
 
   keyboardWillShow(e) {
@@ -44,7 +43,7 @@ class MediaComments extends Component {
   handleCommentSubmit(comment) {
     const {dispatch,user,media} = this.props;
 
-    //user.id = 1; // for test only
+    user.id = 1; // for test only
 
     const inputs = {
       media: media.entity.id,
@@ -57,7 +56,9 @@ class MediaComments extends Component {
 
   render() {
 
-    const {comments} = this.props;
+    const {comments,entities} = this.props;
+
+    {console.log('comments',comments,null,2)}
 
     if (comments.isFetching) {
       return <LoadingIndicator />;
@@ -66,7 +67,7 @@ class MediaComments extends Component {
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]}>
 
-        <MediaCommentList comments={comments.collection} line={assets.line} contentInset={0}/>
+        <MediaCommentList comments={entities.medias.id.comments} line={assets.line} contentInset={0}/>
 
         <MediaCommentAdd onCommentSubmit={this.handleCommentSubmit}/>
 
@@ -84,13 +85,14 @@ var styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const { comments,user,media } = state
+  const { comments,user,media,entities } = state;
 
   return {
     ...state,
     comments,
     user,
-    media
+    media,
+    entities
   }
 }
 

@@ -1,6 +1,8 @@
 import {API_ROOT} from './../../utils/config';
 import {
   COMMENTS_SUCCESS,
+  COMMENT_SAVING,
+  COMMENT_SAVED
 } from '../../constants/ActionTypes';
 
 import {xhrRequest,xhrRequestFailure} from './../global';
