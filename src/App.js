@@ -11,6 +11,7 @@ import UserScene from './components/Auth/UserScene';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
 import Favorites from './containers/Favorites';
+import Home from './containers/Home';
 import TabIcon from './components/TabIcon';
 
 export default class App extends Component {
@@ -24,7 +25,7 @@ export default class App extends Component {
     return (
       <Router hideNavBar={true} name="root">
 
-        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
+        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} wrapRouter={true} />
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}
                 navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                 titleStyle={{ color:'white', fontSize:17}}
@@ -34,7 +35,7 @@ export default class App extends Component {
 
         <Route name="tabBar">
           <Router footer={TabBar} tabBarStyle={{backgroundColor:'#343459'}} showNavigationBar={false}>
-            <Route name="settingsTab" schema="tab" selectedTabIcon="fontawesome|cog" tabIcon="fontawesome|cog" title="الاعدادات" component={Master} />
+            <Route name="settingsTab" schema="tab" selected={false} selectedTabIcon="fontawesome|cog" tabIcon="fontawesome|cog" title="الاعدادات" component={Master} />
             <Route name="favoritesTab" schema="tab" title="مفضلات" selectedTabIcon="ion|android-star" tabIcon="ion|android-star"  component={Favorites} />
             <Route name="mediasTab" schema="tab" title="مشترياتي" selectedTabIcon="fontawesome|suitcase" tabIcon="fontawesome|suitcase" >
               <Router schema="default">
@@ -46,7 +47,7 @@ export default class App extends Component {
                 <Route name="userEntityScene" component={User} title="user"/>
               </Router>
             </Route>
-            <Route name="homeTab" initial={true} schema="tab" title="الرئيسية"  selectedTabIcon="fontawesome|home" tabIcon="fontawesome|home" component={Master}  />
+            <Route name="homeTab" initial={true} selected={true} schema="tab" title="الرئيسية"  selectedTabIcon="fontawesome|home" tabIcon="fontawesome|home" component={Home}  />
           </Router>
         </Route>
 
