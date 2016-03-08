@@ -1,31 +1,13 @@
-import {API_ROOT} from './../utils/config';
+import { API_ROOT } from './../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-
-import {
-  MEDIAS_SUCCESS,
-} from '../constants/ActionTypes';
-
-import {
-  mediaSchema
-} from '../constants/Schemas';
-
-import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './global';
+import { xhrRequest,xhrRequestSuccess,xhrRequestFailure } from './global';
+import { MEDIAS_SUCCESS } from '../constants/ActionTypes';
+import { mediaSchema } from '../constants/Schemas';
 
 function mediasSuccess(result,entities) {
   return {
     type: MEDIAS_SUCCESS,
     entities:entities
-  }
-}
-
-
-function receiveSongs(songs, entities, songTitle) {
-  return {
-    type: types.RECEIVE_SONGS,
-    entities,
-    nextUrl: null,
-    playlist: songTitle,
-    songs
   }
 }
 

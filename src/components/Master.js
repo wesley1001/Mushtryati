@@ -3,6 +3,7 @@ import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, Li
 
 import {connect} from 'react-redux';
 var Lightbox = require('react-native-lightbox');
+import VideoPlayer from './Video';
 
 export default class Master extends Component {
 
@@ -22,6 +23,26 @@ export default class Master extends Component {
     return (
       <View style={styles.row}>
         <Lightbox underlayColor="transparent" springConfig={{ tension: 30, friction: 7 }} swipeToDismiss={true} renderContent={()=>this.renderImage(media.url)}  >
+          <Image
+            style={styles.thumbnail}
+            resizeMode="stretch"
+            source={{ uri: media.url }}
+          />
+        </Lightbox>
+      </View>
+    )
+  }
+
+  renderVideoContent() {
+    return (
+      <VideoPlayer uri="http://mushtryati.app/broadchurch.mp4" />
+    );
+  }
+
+  renderVideo(media) {
+    return (
+      <View style={styles.row}>
+        <Lightbox underlayColor="transparent" springConfig={{ tension: 30, friction: 7 }} swipeToDismiss={true} renderContent={()=> this.renderVideoContent()}  >
           <Image
             style={styles.thumbnail}
             resizeMode="stretch"
@@ -58,7 +79,7 @@ export default class Master extends Component {
         <ListView
           contentContainerStyle={styles.list}
           dataSource={dataSource}
-          renderRow={this.renderRow.bind(this)}
+          renderRow={this.renderVideo.bind(this)}
           automaticallyAdjustContentInsets={false}
           ref='listView'
           horizontal={true}

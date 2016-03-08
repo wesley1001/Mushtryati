@@ -8,11 +8,11 @@ export default class TabIcon extends Component {
       <View>
         <Icon
           name={this.props.selected ? this.props.selectedTabIcon : this.props.tabIcon }
-          size={25}
+          size={22}
           color={ this.props.selected ? '#66b2ff' :'#FFFFFF'}
-          style={{width:25,height:25,alignSelf:'center',fontWeight:'600',}}
+          style={{width:22,height:22,alignSelf:'center',fontWeight:'300',}}
         />
-        <Text style={{color: this.props.selected ? '#66b2ff' :'#FFFFFF', fontSize:12, fontWeight:'600',fontFamily:'Menlo-Bold'}}>{this.props.title}</Text>
+        <Text style={{color: this.props.selected ? '#66b2ff' :'#FFFFFF', fontSize:12, fontWeight:'300',fontFamily:'Menlo-Bold'}}>{this.props.title}</Text>
       </View>
     );
   }

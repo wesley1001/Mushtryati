@@ -25,6 +25,10 @@ class Medias extends Component {
     });
   }
 
+  loadVideo() {
+    Actions.videoEntity();
+  }
+
   render() {
 
     const {  global,entities } = this.props;

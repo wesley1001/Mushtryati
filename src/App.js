@@ -21,45 +21,48 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
       <Router hideNavBar={true} name="root">
-
-        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom} wrapRouter={true} />
+        <Schema name="modal" sceneConfig={Navigator.SceneConfigs.FloatFromBottom}/>
         <Schema name="default" sceneConfig={Navigator.SceneConfigs.FloatFromRight}
                 navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                 titleStyle={{ color:'white', fontSize:17}}
                 barButtonTextStyle={{ fontSize:17, color:'white' }}
         />
-        <Schema name="tab" type="switch" icon={TabIcon}/>
+        <Schema name="withoutAnimation"/>
+        <Schema name="tab" type="switch" icon={TabIcon} />
+
+        <Route name="auth" hideNavBar={true} >
+          <Router name="authRouter">
+            <Route name="login" component={Login}  />
+            <Route name="register" component={Register} title="تسجيل الدخول"   />
+          </Router>
+        </Route>
 
         <Route name="tabBar">
-          <Router footer={TabBar} tabBarStyle={{backgroundColor:'#343459'}} showNavigationBar={false}>
-            <Route name="settingsTab" schema="tab" selected={false} selectedTabIcon="fontawesome|cog" tabIcon="fontawesome|cog" title="الاعدادات" component={Master} />
-            <Route name="favoritesTab" schema="tab" title="مفضلات" selectedTabIcon="ion|android-star" tabIcon="ion|android-star"  component={Favorites} />
-            <Route name="mediasTab" schema="tab" title="مشترياتي" selectedTabIcon="fontawesome|suitcase" tabIcon="fontawesome|suitcase" >
-              <Router schema="default">
-                <Route name="mediasScene" component={Medias} title="مشترياتي"/>
+          <Router footer={TabBar} hideNavBar={true} tabBarStyle={{backgroundColor:'#343459', justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, paddingTop:10}}>
+            <Route name="settingsTab" schema="tab" component={Master} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
+            <Route name="favoritesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
+            <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
+            <Route name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
+              <Router name="mediasRouter">
+                <Route name="mediasScene" hideNavBar={true} component={Medias}  />
                 <Route name="mediaEntityScene" component={Media}/>
-                <Route name="userScene" component={User} title="user"/>
-                <Route name="mediaCommentsScene" component={MediaComments} title="تعليقات"/>
-                <Route name="mediaFavoritesScene" component={MediaFavorites} title="Likers"/>
-                <Route name="userEntityScene" component={User} title="user"/>
+                <Route name="userScene" component={User} />
+                <Route name="mediaCommentsScene" component={MediaComments} />
+                <Route name="mediaFavoritesScene" component={MediaFavorites} />
+                <Route name="userEntityScene" component={User} />
               </Router>
             </Route>
-            <Route name="homeTab" initial={true} selected={true} schema="tab" title="الرئيسية"  selectedTabIcon="fontawesome|home" tabIcon="fontawesome|home" component={Home}  />
+            <Route initial={true} hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
+              <Router name="homeRouter">
+                <Route name="home" component={Home}/>
+              </Router>
+            </Route>
           </Router>
         </Route>
-
-        <Route name="auth" hideNavBar={true}>
-          <Router>
-            <Route name="login" component={Login}  />
-            <Route name="register" component={Register} title="تسجيل الدخول"   hideNavBar={false}/>
-          </Router>
-        </Route>
-
       </Router>
+    );
 
-    )
   }
 }

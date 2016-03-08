@@ -33,7 +33,7 @@ class Medias extends Component {
     }
 
     return (
-        <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:64}}>
+        <ScrollView contentInset={{bottom:49}} contentContainerStyle={{paddingTop:10}}>
           <MediaList medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
         </ScrollView>
     );
