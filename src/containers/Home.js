@@ -15,7 +15,7 @@ class Medias extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-    dispatch(fetchMedias());
+    //dispatch(fetchMedias());
   }
 
   loadMedia(media) {
@@ -23,10 +23,6 @@ class Medias extends Component {
       title:media.caption,
       data: media
     });
-  }
-
-  loadVideo() {
-    Actions.videoEntity();
   }
 
   render() {

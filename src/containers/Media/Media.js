@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,Modal } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
+import {connect} from 'react-redux';
 import {fetchFavorites,favoriteMedia} from './../../actions/Media/favorites';
 import {fetchMedia,likeMedia} from './../../actions/Media/media';
 import MediaItem from './../../components/Media/MediaItem';

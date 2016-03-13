@@ -26,6 +26,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage(),
+        new RCTCameraPackage(),
         new ReactVideoPackage(),
         new ReactNativeIcons())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
