@@ -9,41 +9,57 @@ class CaptureMedia extends Component {
     super(props);
     this.state = ({
       cameraType:'back',
-      cameraMode:'still'
+      cameraMode:'still',
+      isRecording:false
     });
 
-    this.shiftCameraType = this.shiftCameraType.bind(this);
-    this.shiftCameraMode = this.shiftCameraMode.bind(this);
+    this.switchCameraType = this.switchCameraType.bind(this);
+    this.switchCameraMode = this.switchCameraMode.bind(this);
+    this.startRecording = this.startRecording.bind(this);
+    this.pauseRecording = this.pauseRecording.bind(this);
   }
 
-  shiftCameraType() {
+  switchCameraType = () => {
     return this.setState({
       cameraType: this.state.cameraType == 'back' ? 'front' : 'back'
     })
   }
 
-  shiftCameraMode() {
-    return this.setState({
+  switchCameraMode = () => {
+    this.setState({
       cameraMode: this.state.cameraMode == 'still' ? 'video' : 'still'
-    })
+    });
+    console.log(this.state.cameraMode);
   }
 
-  captureMedia(media) {
-    console.log('saveed media');
+  startRecording = () => {
+    this.setState({
+      isRecording: true
+    });
+  }
+
+  pauseRecording = () => {
+    this.setState({
+      isRecording: false
+    });
+  }
+
+  saveMedia(media) {
+    console.log('saveed media',media);
     this.displayMedia(media);
   }
 
-  shiftCameraMode() {
+  switchCameraMode() {
     console.log('shifting camera mode');
   }
 
-  shiftCameraType() {
+  switchCameraType() {
     console.log('shifting camera type');
   }
 
-  displayMedia(data) {
+  displayMedia(media) {
     return Actions.displayMedia({
-      data
+      data:media
     });
   }
 
@@ -52,9 +68,12 @@ class CaptureMedia extends Component {
       <CaptureMediaScene
         cameraMode={this.state.cameraMode}
         cameraType={this.state.cameraType}
-        shiftCameraType={()=>this.shiftCameraType.bind(this)}
-        shiftCameraMode={()=>this.shiftCameraMode.bind(this)}
-        onCapture={this.captureMedia.bind(this)}
+        isRecording={this.state.isRecording}
+        switchCameraType={this.switchCameraType.bind(this)}
+        switchCameraMode={this.switchCameraMode.bind(this)}
+        onCapture={this.saveMedia.bind(this)}
+        startRecording={this.startRecording.bind(this)}
+        pauseRecording={this.pauseRecording.bind(this)}
       />
     );
 

@@ -39,19 +39,22 @@ export default class App extends Component {
             <Route name="settingsTab" schema="tab" component={Master} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
             <Route name="favoritesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
             <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
-            <Route name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
+            <Route initial={true} name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
+
+                <Route name="captureMedia" schema="modal" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
+                <Route name="displayMedia" schema="modal" hideTabBar={true} component={DisplayMedia} />
+
                 <Route name="mediasScene" hideNavBar={true} component={Medias} />
                 <Route name="mediaEntityScene" component={Media} />
                 <Route name="userScene" component={User} />
                 <Route name="mediaCommentsScene" component={MediaComments} />
                 <Route name="mediaFavoritesScene" component={MediaFavorites} />
                 <Route name="userEntityScene" component={User} />
-                <Route name="captureMedia" schema="modal" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
-                <Route name="displayMedia" schema="modal" hideTabBar={true} component={DisplayMedia} />
+
               </Router>
             </Route>
-            <Route initial={true} hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
+            <Route  hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router name="homeRouter">
                 <Route name="home" component={Home}/>
               </Router>

@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {PropTypes,Component} from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View, ListView,Dimensions,ScrollView,Modal } from 'react-native';
 import { Icon } from 'react-native-icons';
@@ -7,51 +5,68 @@ import Camera from 'react-native-camera';
 
 export default class CaptureMediaScene extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    console.log('state change',((nextProps.cameraMode != this.props.cameraMode) || (nextProps.cameraType != this.props.cameraType)));
-  }
-
   captureMedia() {
-    console.log('capturing image');
-    this.camera.capture()
-      .then((media) => this.props.onCapture(media))
-      .catch(err => console.error(err));
+    const { cameraMode, cameraType, isRecording, startRecording, pauseRecording } = this.props;
+
+    if(cameraMode == 'still') {
+      console.log('cam mode is still');
+      return this.camera.capture();
+      //.then((media) => this.props.onCapture(media))
+      //.catch(err => console.error(err));
+
+    } else if(cameraMode == 'video') {
+      console.log('cam mode is video');
+      if(isRecording) {
+        console.log('stopping video cap');
+        pauseRecording();
+        this.camera.stopCapture();
+      } else {
+        console.log('starting video cap');
+        startRecording();
+        this.camera.capture({
+          mode:Camera.constants.CaptureMode.video
+        })
+      }
+    }
+    //
+    //return this.camera.capture({
+    //    mode: cameraMode
+    //  })
+    //  .then((media) => {})
+    //  .catch(err => console.error(err));
 
   }
 
-  shiftCameraMode() {
-    console.log('shifting camera mode');
-    return this.props.shiftCameraMode();
+  switchCameraMode() {
+    return this.props.switchCameraMode();
   }
 
-  shiftCameraType() {
-    console.log('shifting camera type');
-    return this.props.shiftCameraType();
+  switchCameraType() {
+    return this.props.switchCameraType();
   }
 
   render() {
-
-    const { cameraMode,cameraType} = this.props;
-    console.log(cameraMode);
-
+    const { cameraMode,cameraType,isRecording} = this.props;
     return (
       <View style={styles.container}>
-
         <Camera
           ref={(cam) => {
             this.camera = cam;
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
-          captureTarget={Camera.constants.CaptureTarget.disk}
+          target={Camera.constants.CaptureTarget.disk}
+          mode={cameraMode == 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
+          type={cameraType == 'front' ? Camera.constants.Type.front : Camera.constants.Type.back }
+          defaultOnFocusComponent={false}
         />
 
         <View style={styles.buttonWrapper}>
           <View style={styles.rightCol}>
-            <TouchableHighlight onPress={()=> this.shiftCameraMode() } underlayColor="transparent">
+            <TouchableHighlight onPress={()=> this.switchCameraMode() } underlayColor="transparent">
               <Icon
-                name={cameraMode == 'still' ? 'ion|videocamera' : 'ion|ios-camera'}
-                size={40}
+                name={cameraMode == 'video' ? 'ion|ios-camera' : 'ion|videocamera'}
+                size={30}
                 color={'white'}
                 style={styles.videoCameraButton}
               />
@@ -62,17 +77,17 @@ export default class CaptureMediaScene extends Component {
               <Icon
                 name='ion|ios-circle-filled'
                 size={60}
-                color={'white'}
+                color={ isRecording ?  'red' : 'white' }
                 style={styles.cameraCaptureButton}
               />
             </TouchableHighlight>
           </View>
           <View style={styles.rightCol}>
-            <TouchableHighlight onPress={()=> this.shiftCameraType() } underlayColor="transparent">
+            <TouchableHighlight onPress={()=> this.switchCameraType() } underlayColor="transparent">
               <Icon
                 name='ion|ios-reverse-camera-outline'
-                name={cameraType == 'back' ? 'ion|ios-reverse-camera' : 'ion|ios-reverse-camera-outline'}
-                size={40}
+                name={cameraType == 'back' ? 'ion|ios-reverse-camera-outline' : 'ion|ios-reverse-camera'}
+                size={30}
                 color={'white'}
                 style={styles.cameraShiftButton}
               />
@@ -123,20 +138,13 @@ const styles = StyleSheet.create({
     color: 'black',
     alignSelf:'center'
   },
-  cameraStyleWrapper: {
-    alignSelf:'flex-end',
-    width:60,
-    height:60,
-    borderRadius:30,
-    backgroundColor:'white'
-  },
   cameraCaptureButton:{
     height:60,
     width:60,
   },
   videoCameraButton:{
-    height:60,
-    width:60,
+    height:30,
+    width:40,
   },
   cameraShiftButton:{
     height:30,
@@ -148,7 +156,7 @@ const styles = StyleSheet.create({
 CaptureMediaScene.propTypes = {
   cameraMode:PropTypes.string.isRequired,
   cameraType:PropTypes.string.isRequired,
-  shiftCameraType:PropTypes.func.isRequired,
-  shiftCameraMode:PropTypes.func.isRequired,
+  switchCameraType:PropTypes.func.isRequired,
+  switchCameraMode:PropTypes.func.isRequired,
   onCapture:PropTypes.func.isRequired
 }
