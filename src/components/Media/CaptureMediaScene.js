@@ -6,34 +6,27 @@ import Camera from 'react-native-camera';
 export default class CaptureMediaScene extends Component {
 
   captureMedia() {
-    const { cameraMode, cameraType, isRecording, startRecording, pauseRecording } = this.props;
 
-    if(cameraMode == 'still') {
-      console.log('cam mode is still');
-      return this.camera.capture();
-      //.then((media) => this.props.onCapture(media))
-      //.catch(err => console.error(err));
+    const { cameraMode, isRecording, startRecording, pauseRecording } = this.props;
 
-    } else if(cameraMode == 'video') {
-      console.log('cam mode is video');
+    if(cameraMode == 'video') {
       if(isRecording) {
-        console.log('stopping video cap');
         pauseRecording();
         this.camera.stopCapture();
       } else {
-        console.log('starting video cap');
         startRecording();
         this.camera.capture({
           mode:Camera.constants.CaptureMode.video
         })
       }
+    } else {
+      //this.camera.capture().then(data => {
+      //  onCapture(data)
+      //});
+      this.camera.capture()
+        .then((data) => this.props.onCapture(data))
+        .catch(err => console.error(err));
     }
-    //
-    //return this.camera.capture({
-    //    mode: cameraMode
-    //  })
-    //  .then((media) => {})
-    //  .catch(err => console.error(err));
 
   }
 

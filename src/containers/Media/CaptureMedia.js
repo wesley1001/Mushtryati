@@ -44,9 +44,8 @@ class CaptureMedia extends Component {
     });
   }
 
-  saveMedia(media) {
-    console.log('saveed media',media);
-    this.displayMedia(media);
+  saveMedia = (media) => {
+    return this.displayMedia(media);
   }
 
   switchCameraMode() {

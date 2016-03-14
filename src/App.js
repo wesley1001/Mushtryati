@@ -19,7 +19,7 @@ import DisplayMedia from './containers/Media/DisplayMedia';
 export default class App extends Component {
 
   componentDidMount() {
-    StatusBar.setBarStyle('light-content');
+    //StatusBar.setBarStyle('light-content');
   }
 
   render() {

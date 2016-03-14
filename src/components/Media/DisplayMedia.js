@@ -10,6 +10,7 @@ import Camera from 'react-native-camera';
 class DisplayMedia extends Component {
 
   render() {
+    console.log('media to display',this.props.data);
     return (
       <View style={{ flex:1 }}>
         <Image source={{uri:this.props.data,isStatic:true}} style={{ flex:1,width:null,height:null,padding:10}} />
