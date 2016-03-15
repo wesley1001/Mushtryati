@@ -1,5 +1,4 @@
 import { normalize, Schema, arrayOf } from 'normalizr';
-
 const mediaSchema = new Schema('medias');
 const userSchema = new Schema('users');
 const commentSchema = new Schema('comments');
@@ -8,7 +7,7 @@ const downloadSchema = new Schema('downloads');
 
 mediaSchema.define({
   user:userSchema,
-  comments:arrayOf(commentSchema),
+  comments:arrayOf(commentSchema)
 });
 
 userSchema.define({
