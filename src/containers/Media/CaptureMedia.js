@@ -10,13 +10,16 @@ class CaptureMedia extends Component {
     this.state = ({
       cameraType:'back',
       cameraMode:'still',
-      isRecording:false
+      isRecording:false,
+      hasCaptured:false,
+      mediaUri:null
     });
 
     this.switchCameraType = this.switchCameraType.bind(this);
     this.switchCameraMode = this.switchCameraMode.bind(this);
     this.startRecording = this.startRecording.bind(this);
     this.pauseRecording = this.pauseRecording.bind(this);
+    this.saveMedia = this.saveMedia.bind(this);
   }
 
   switchCameraType = () => {
@@ -44,7 +47,11 @@ class CaptureMedia extends Component {
   }
 
   saveMedia = (media) => {
-    return this.displayMedia(media);
+    this.setState({
+      hasCaptured:true,
+      mediaUri: media
+    });
+    //return this.displayMedia(media);
   }
 
   switchCameraMode() {
@@ -67,6 +74,8 @@ class CaptureMedia extends Component {
         cameraMode={this.state.cameraMode}
         cameraType={this.state.cameraType}
         isRecording={this.state.isRecording}
+        hasCaptured={this.state.hasCaptured}
+        mediaUri={this.state.mediaUri}
         switchCameraType={this.switchCameraType.bind(this)}
         switchCameraMode={this.switchCameraMode.bind(this)}
         onCapture={this.saveMedia.bind(this)}
