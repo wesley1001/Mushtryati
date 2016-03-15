@@ -145,7 +145,7 @@ export default class CaptureMediaScene extends Component {
                   name={cameraType == 'back' ? 'ion|ios-reverse-camera-outline' : 'ion|ios-reverse-camera'}
                   size={30}
                   color={'white'}
-                  style={styles.cameraShiftButton}
+                  style={styles.closeButton}
                 />
               </TouchableHighlight>
             </View>
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     bottom:0,
     left:0,
     right:0,
+    backgroundColor:'black'
   },
   topLeftButton:{
     position: 'absolute',
