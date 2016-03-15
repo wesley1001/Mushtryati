@@ -29,7 +29,6 @@ class CaptureMedia extends Component {
     this.setState({
       cameraMode: this.state.cameraMode == 'still' ? 'video' : 'still'
     });
-    console.log(this.state.cameraMode);
   }
 
   startRecording = () => {

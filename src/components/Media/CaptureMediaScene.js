@@ -7,7 +7,7 @@ export default class CaptureMediaScene extends Component {
 
   captureMedia() {
 
-    const { cameraMode, isRecording, startRecording, pauseRecording } = this.props;
+    const { cameraMode, isRecording, startRecording, pauseRecording, onCapture } = this.props;
 
     if(cameraMode == 'video') {
       if(isRecording) {
@@ -15,16 +15,11 @@ export default class CaptureMediaScene extends Component {
         this.camera.stopCapture();
       } else {
         startRecording();
-        this.camera.capture({
-          mode:Camera.constants.CaptureMode.video
-        })
+        this.camera.capture()
       }
     } else {
-      //this.camera.capture().then(data => {
-      //  onCapture(data)
-      //});
       this.camera.capture()
-        .then((data) => this.props.onCapture(data))
+        .then((data) => onCapture(data))
         .catch(err => console.error(err));
     }
 
@@ -48,10 +43,9 @@ export default class CaptureMediaScene extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}
-          target={Camera.constants.CaptureTarget.disk}
-          mode={cameraMode == 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
+          captureTarget={Camera.constants.CaptureTarget.disk}
+          captureMode={cameraMode == 'video' ? Camera.constants.CaptureMode.video : Camera.constants.CaptureMode.still }
           type={cameraType == 'front' ? Camera.constants.Type.front : Camera.constants.Type.back }
-          defaultOnFocusComponent={false}
         />
 
         <View style={styles.buttonWrapper}>
