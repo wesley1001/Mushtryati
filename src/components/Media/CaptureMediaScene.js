@@ -6,17 +6,20 @@ import VideoPlayer from './../Video';
 
 export default class CaptureMediaScene extends Component {
 
-  captureMedia() {
+
+  _captureMedia() {
     this.camera.capture()
       .then((data) => this.props.onCapture(data))
       .catch(err => console.error(err));
   }
 
+  takePhoto() {
+    this._captureMedia();
+  }
+
   startVideoRecording() {
     this.props.startRecording();
-    this.camera.capture()
-      .then((data) => this.props.onCapture(data))
-      .catch(err => console.error(err));
+    this._captureMedia();
   }
 
   pauseVideoRecording() {
@@ -45,7 +48,7 @@ export default class CaptureMediaScene extends Component {
           <View style={styles.container}>
             <Image source={{uri:mediaUri,isStatic:true}} style={{ flex:1,width:null,height:null,padding:10}} />
           </View>
-        )
+        );
       }
     } else {
       return (
@@ -75,7 +78,7 @@ export default class CaptureMediaScene extends Component {
             </View>
 
             <View style={styles.middleCol}>
-              {cameraMode == 'video' ?
+              { cameraMode == 'video' ?
                 <TouchableWithoutFeedback
                   onPressIn={()=> this.startVideoRecording()}
                   onPressOut={()=> this.pauseVideoRecording()}
@@ -88,7 +91,7 @@ export default class CaptureMediaScene extends Component {
                   />
                 </TouchableWithoutFeedback>
                 :
-                <TouchableHighlight onPress={()=> this.captureMedia() } underlayColor="transparent">
+                <TouchableHighlight onPress={()=> this.takePhoto() } underlayColor="transparent">
                   <Icon
                     name='ion|ios-circle-filled'
                     size={60}

@@ -51,7 +51,6 @@ class CaptureMedia extends Component {
       hasCaptured:true,
       mediaUri: media
     });
-    //return this.displayMedia(media);
   }
 
   switchCameraMode() {
@@ -60,12 +59,6 @@ class CaptureMedia extends Component {
 
   switchCameraType() {
     console.log('shifting camera type');
-  }
-
-  displayMedia(media) {
-    return Actions.displayMedia({
-      data:media
-    });
   }
 
   render() {

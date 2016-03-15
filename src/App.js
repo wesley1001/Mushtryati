@@ -1,7 +1,7 @@
 'use strict';
-import React, { Component, StyleSheet,Navigator,Text,View,Image,StatusBar} from 'react-native';
-import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux';
-import Master from './components/Master';
+import React, { Component } from 'react';
+import {StatusBar} from 'react-native';
+import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Medias';
@@ -12,14 +12,13 @@ import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
 import Favorites from './containers/Favorites';
 import Home from './containers/Home';
-import TabIcon from './components/TabIcon';
 import CaptureMedia from './containers/Media/CaptureMedia';
-import DisplayMedia from './containers/Media/DisplayMedia';
+import TabIcon from './components/TabIcon';
 
 export default class App extends Component {
 
   componentDidMount() {
-    //StatusBar.setBarStyle('light-content');
+    StatusBar.setBarStyle('light-content');
   }
 
   render() {
@@ -36,15 +35,13 @@ export default class App extends Component {
 
         <Route name="tabBar">
           <Router footer={TabBar} hideNavBar={true} tabBarStyle={{backgroundColor:'#343459', justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, paddingTop:10}}>
-            <Route name="settingsTab" schema="tab" component={Master} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
+            <Route name="settingsTab" schema="tab" component={Login} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
             <Route name="favoritesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
             <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
             <Route initial={true} name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
 
                 <Route name="captureMedia" schema="modal" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
-                <Route name="displayMedia" schema="modal" hideTabBar={true} component={DisplayMedia} />
-
                 <Route name="mediasScene" hideNavBar={true} component={Medias} />
                 <Route name="mediaEntityScene" component={Media} />
                 <Route name="userScene" component={User} />
