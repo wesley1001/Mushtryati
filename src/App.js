@@ -33,14 +33,14 @@ export default class App extends Component {
         <Schema name="withoutAnimation"/>
         <Schema name="tab" type="switch" icon={TabIcon} />
 
-        <Route name="tabBar">
+        <Route initial={true}  name="tabBar">
           <Router footer={TabBar} hideNavBar={true} tabBarStyle={{backgroundColor:'#343459', justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, paddingTop:10}}>
             <Route name="settingsTab" schema="tab" component={Login} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
             <Route name="favoritesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
             <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
+
             <Route initial={true} name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
-                <Route name="captureMedia" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
                 <Route name="mediasScene" hideNavBar={true} component={Medias} />
                 <Route name="mediaEntityScene" component={Media} />
                 <Route name="userScene" component={User} />
@@ -56,7 +56,7 @@ export default class App extends Component {
             </Route>
           </Router>
         </Route>
-
+        <Route name="captureMedia" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
         <Route name="auth" hideNavBar={true} >
           <Router name="authRouter">
             <Route name="login" component={Login}  />

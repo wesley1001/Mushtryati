@@ -39,9 +39,13 @@ export default class CaptureMediaScene extends Component {
   retake() {
     return this.props.retake();
   }
+  returnBack() {
+    return this.props.returnBack();
+  }
 
   render() {
     const { cameraMode,cameraType,isRecording,hasCaptured,mediaUri} = this.props;
+    console.log('props',this.props);
     if(hasCaptured) {
       return (
         <View style={styles.container}>
@@ -53,11 +57,11 @@ export default class CaptureMediaScene extends Component {
             :
             <Image source={{uri:mediaUri,isStatic:true}} style={{ flex:1,width:null,height:null}} />
           }
-          <View style={styles.closeButtonWrapper}>
+          <View style={styles.topLeftButton}>
             <TouchableHighlight underlayColor="transparent" onPress={() => this.retake()}>
               <Icon
                 name='ion|close-round'
-                size={20}
+                size={30}
                 color={'white'}
                 style={styles.closeButton}
               />
@@ -85,9 +89,9 @@ export default class CaptureMediaScene extends Component {
               <View style={styles.rightCol}>
                 <TouchableHighlight onPress={()=> this.switchCameraMode() } underlayColor="transparent">
                   <Icon
-                    name={cameraMode == 'video' ? 'ion|ios-camera' : 'ion|videocamera'}
+                    name={cameraMode == 'video' ? 'ion|ios-camera' : 'fontawesome|video-camera'}
                     size={30}
-                    color={'white'}
+                    color='white'
                     style={styles.videoCameraButton}
                   />
                 </TouchableHighlight>
@@ -101,8 +105,8 @@ export default class CaptureMediaScene extends Component {
                   >
                     <Icon
                       name='ion|ios-circle-filled'
-                      size={60}
-                      color='red'
+                      size={70}
+                      color={isRecording ? 'red' : 'white'}
                       style={styles.cameraCaptureButton}
                     />
                   </TouchableWithoutFeedback>
@@ -110,7 +114,7 @@ export default class CaptureMediaScene extends Component {
                   <TouchableHighlight onPress={()=> this.takePhoto() } underlayColor="transparent">
                     <Icon
                       name='ion|ios-circle-filled'
-                      size={60}
+                      size={70}
                       color='white'
                       style={styles.cameraCaptureButton}
                     />
@@ -119,18 +123,33 @@ export default class CaptureMediaScene extends Component {
               </View>
 
               <View style={styles.rightCol}>
-                <TouchableHighlight onPress={()=> this.switchCameraType() } underlayColor="transparent">
-                  <Icon
-                    name='ion|ios-reverse-camera-outline'
-                    name={cameraType == 'back' ? 'ion|ios-reverse-camera-outline' : 'ion|ios-reverse-camera'}
-                    size={30}
-                    color={'white'}
-                    style={styles.cameraShiftButton}
-                  />
-                </TouchableHighlight>
               </View>
 
             </View>
+
+            <View style={styles.topLeftButton}>
+              <TouchableHighlight underlayColor="transparent" onPress={() => this.returnBack()}>
+                <Icon
+                  name='ion|chevron-left'
+                  size={30}
+                  color={'white'}
+                  style={styles.closeButton}
+                />
+              </TouchableHighlight>
+            </View>
+
+            <View style={styles.topRightButton}>
+              <TouchableHighlight onPress={()=> this.switchCameraType() } underlayColor="transparent">
+                <Icon
+                  name='ion|ios-reverse-camera-outline'
+                  name={cameraType == 'back' ? 'ion|ios-reverse-camera-outline' : 'ion|ios-reverse-camera'}
+                  size={30}
+                  color={'white'}
+                  style={styles.cameraShiftButton}
+                />
+              </TouchableHighlight>
+            </View>
+
 
           </Camera>
         </View>
@@ -143,8 +162,7 @@ export default class CaptureMediaScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingBottom:40
+    flex: 1
   },
   preview: {
     flex: 1,
@@ -159,17 +177,10 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-around',
     alignItems:'center',
-    padding:5
-  },
-  captureButtonWrapper:{
-    width:60,
-    height:60,
-    borderRadius:30,
-    backgroundColor:'white',
-    alignSelf:'center'
+    paddingTop:5,
+    paddingBottom:5
   },
   leftCol:{
-    alignSelf:'flex-start'
   },
   middleCol:{
   },
@@ -180,12 +191,12 @@ const styles = StyleSheet.create({
     alignSelf:'center'
   },
   cameraCaptureButton:{
-    height:60,
-    width:60,
+    height:70,
+    width:70,
   },
   videoCameraButton:{
     height:30,
-    width:40,
+    width:30,
   },
   cameraShiftButton:{
     height:30,
@@ -199,15 +210,21 @@ const styles = StyleSheet.create({
     left:0,
     right:0,
   },
-  closeButtonWrapper:{
+  topLeftButton:{
     position: 'absolute',
-    top: 20,
-    left: 0,
+    top: 10,
+    left: 5,
+    padding:10
+  },
+  topRightButton:{
+    position: 'absolute',
+    top: 10,
+    right: 5,
     padding:10
   },
   closeButton :{
-    height:20,
-    width:20,
+    height:30,
+    width:30,
   }
 });
 

@@ -39,13 +39,12 @@ class Medias extends Component {
     }
 
     return (
-      <View/>
-      //<ScrollView contentInset={{bottom:49}}>
-      //  <View style={{ height:64, backgroundColor:'#343459', justifyContent:'flex-end',alignItems:'center',paddingLeft:10,paddingRight:10, paddingBottom:5}}>
-      //    <Text style={{ alignSelf:'flex-end', color:'white',fontSize:30,fontWeight:'700' }} onPress={ () => this.postMedia()} > + </Text>
-      //  </View>
-      //  <MediaList medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
-      //</ScrollView>
+      <ScrollView contentInset={{bottom:40}}>
+        <View style={{ height:64, backgroundColor:'#343459', justifyContent:'flex-end',alignItems:'center',paddingLeft:10,paddingRight:10, paddingBottom:5}}>
+          <Text style={{ alignSelf:'flex-end', color:'white',fontSize:30,fontWeight:'700' }} onPress={ () => this.postMedia()} > + </Text>
+        </View>
+        <MediaList medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
+      </ScrollView>
     );
 
   }
