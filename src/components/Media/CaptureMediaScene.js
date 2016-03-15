@@ -8,7 +8,10 @@ export default class CaptureMediaScene extends Component {
 
   _captureMedia() {
     this.camera.capture()
-      .then((data) => this.props.onCapture(data))
+      .then((data) => {
+        //console.log('data',data);
+        this.props.onCapture(data)
+      })
       .catch(err => console.error(err));
   }
 
@@ -18,12 +21,14 @@ export default class CaptureMediaScene extends Component {
   }
 
   startVideoRecording() {
+    //console.log('started video recording');
     this.camera.stopCapture();
     this.props.startRecording();
     this._captureMedia();
   }
 
   pauseVideoRecording() {
+    //console.log('stoped video recording');
     this.props.pauseRecording();
     this.camera.stopCapture();
   }
@@ -39,8 +44,13 @@ export default class CaptureMediaScene extends Component {
   retake() {
     return this.props.retake();
   }
+
   returnBack() {
     return this.props.returnBack();
+  }
+
+  saveMedia(media) {
+    return this.props.saveMedia(media);
   }
 
   render() {
@@ -67,6 +77,17 @@ export default class CaptureMediaScene extends Component {
               />
             </TouchableHighlight>
           </View>
+          <View style={[styles.topRightButton,{top:5}]}>
+            <TouchableHighlight underlayColor="transparent" onPress={() => this.saveMedia(mediaUri)}>
+              <Icon
+                name='ion|ios-checkmark'
+                size={45}
+                color={'white'}
+                style={styles.checkMarkButton}
+              />
+            </TouchableHighlight>
+          </View>
+
         </View>
 
       );
@@ -226,6 +247,11 @@ const styles = StyleSheet.create({
   closeButton :{
     height:30,
     width:30,
+  },
+  checkMarkButton : {
+    height:40,
+    width:40,
+    borderColor:'black'
   }
 });
 

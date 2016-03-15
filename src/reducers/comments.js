@@ -4,10 +4,9 @@ import {
   COMMENTS_SUCCESS,
   COMMENT_SAVING,
   COMMENT_SAVED
-} from '../../constants/ActionTypes'
+} from '../constants/ActionTypes'
 
 const InitialState = Record({
-  collection: [],
   isFetching: false,
   error: null
 });

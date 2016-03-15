@@ -1,19 +1,25 @@
 import {Record} from 'immutable';
 
 import {
+  FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
+  FAVORITES_FAILURE,
 } from '../constants/ActionTypes'
 
 const InitialState = Record({
-  collection: []
+  isFetching:false
 });
 
 const initialState = new InitialState;
 
-export default function comments(state = initialState, action = {}) {
+export default function favorites(state = initialState, action = {}) {
   switch (action.type) {
+    case FAVORITES_REQUEST:
+      return state.set('isFetching', true);
     case FAVORITES_SUCCESS:
-      return state.set('collection', action.collection);
+      return state.set('isFetching', false);
+    case FAVORITES_FAILURE:
+      return state.set('isFetching', false);
     default:
       return state
   }

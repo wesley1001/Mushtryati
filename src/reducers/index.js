@@ -1,17 +1,16 @@
 import {combineReducers} from 'redux';
 
-import global from './global'
-import user from './auth/user';
-import login from './auth/login';
-import register from './auth/register';
+import user from 'Auth/user';
+import login from 'Auth/login';
+import register from 'Auth/register';
 import medias from './medias';
 import entities from './entities';
-import media from './Media/media';
-import comments from './Media/comments';
+import media from './media';
+import comments from './comments';
 import favorites from './favorites';
+import downloads from './downloads';
 
 const rootReducer = combineReducers({
-  global,
   entities,
   user,
   login,
@@ -19,7 +18,8 @@ const rootReducer = combineReducers({
   medias,
   media,
   comments,
-  favorites
+  favorites,
+  downloads
 });
 
 export default rootReducer;

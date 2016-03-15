@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {StatusBar,Navigator} from 'react-native';
+import { StatusBar, Navigator } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
@@ -49,7 +49,7 @@ export default class App extends Component {
                 <Route name="userEntityScene" component={User} />
               </Router>
             </Route>
-            <Route  hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
+            <Route hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router name="homeRouter">
                 <Route name="home" component={Home}/>
               </Router>

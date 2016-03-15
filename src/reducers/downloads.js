@@ -1,9 +1,9 @@
 import {Record} from 'immutable';
 
 import {
-  MEDIAS_REQUEST,
-  MEDIAS_SUCCESS,
-  MEDIAS_FAILURE,
+  DOWNLOADS_REQUEST,
+  DOWNLOADS_SUCCESS,
+  DOWNLOADS_FAILURE,
 } from '../constants/ActionTypes'
 
 const InitialState = Record({
@@ -12,13 +12,13 @@ const InitialState = Record({
 
 const initialState = new InitialState;
 
-export default function medias(state = initialState, action = {}) {
+export default function downloads(state = initialState, action = {}) {
   switch (action.type) {
-    case MEDIAS_REQUEST:
+    case DOWNLOADS_REQUEST:
       return state.set('isFetching', true);
-    case MEDIAS_SUCCESS:
+    case DOWNLOADS_SUCCESS:
       return state.set('isFetching', false);
-    case MEDIAS_FAILURE:
+    case DOWNLOADS_FAILURE:
       return state.set('isFetching', false);
     default:
       return state

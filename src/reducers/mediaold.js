@@ -4,7 +4,7 @@ import {
   FAVORITES_SUCCESS,
   FAVORITES_REQUEST,
   MEDIA_LIKE
-} from '../../constants/ActionTypes'
+} from '../constants/ActionTypes'
 
 import {Record} from 'immutable';
 
