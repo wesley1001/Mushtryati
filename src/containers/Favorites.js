@@ -1,6 +1,4 @@
-'use strict';
-
-import React, { Component } from 'react-native';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import MediaList from './../components/Favorites/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
@@ -41,12 +39,11 @@ class Favorites extends Component {
 }
 
 function mapStateToProps(state) {
-  const { favorites,user } = state
+  const { favorites,user } = state;
 
   return {
-    ...state,
     favorites,
-    user,
+    user
   }
 }
 

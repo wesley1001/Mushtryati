@@ -1,5 +1,5 @@
-'use strict';
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View,ScrollView,Dimensions,Stylesheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { Image, Text, TouchableHighlight, View, ScrollView, Dimensions } from 'react-native';
 import {connect} from 'react-redux';
 import {fetchMedias} from './../actions/medias';
 import MediaList from './../components/Media/MediaList';
