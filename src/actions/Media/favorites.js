@@ -5,15 +5,12 @@ import {
   FAVORITES_REQUEST
 } from '../../constants/ActionTypes';
 
-import {xhrRequest,xhrRequestFailure} from './../global';
-
-
-
 function favoriteRequest() {
   return {
     type: FAVORITES_REQUEST
   }
 }
+
 function favoriteSuccess(payload) {
   return {
     type: FAVORITES_SUCCESS,
