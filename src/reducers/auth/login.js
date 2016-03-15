@@ -1,3 +1,6 @@
+import { Record } from 'immutable';
+import validate from './../../validators/Auth/loginValidator';
+import rules from './../../validators/validationRules';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -5,10 +8,6 @@ import {
   ON_LOGIN_FORM_FIELD_CHANGE,
   LOGOUT_USER
 } from '../../constants/ActionTypes';
-
-import {Record} from 'immutable';
-import validate from './../../validators/Auth/loginValidator';
-import rules from './../../validators/validationRules';
 
 const InitialState = Record({
   isFetching: false,

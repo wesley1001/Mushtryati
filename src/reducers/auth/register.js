@@ -1,13 +1,12 @@
+import { Record } from 'immutable';
+import validate from './../../validators/Auth/registerValidator';
+import rules from './../../validators/validationRules';
 import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   ON_REGISTER_FORM_FIELD_CHANGE
 } from '../../constants/ActionTypes';
-
-import {Record} from 'immutable';
-import validate from './../../validators/Auth/registerValidator';
-import rules from './../../validators/validationRules';
 
 const InitialState = Record({
   isLoggedIn: false,

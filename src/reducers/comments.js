@@ -13,7 +13,7 @@ const InitialState = Record({
 
 const initialState = new InitialState;
 
-export default function comments(state = initialState, action = {}) {
+export default function commentsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case COMMENTS_SUCCESS:
       return state.set('isFetching', false).set('error', null);

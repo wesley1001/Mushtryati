@@ -12,7 +12,7 @@ const InitialState = Record({
 
 const initialState = new InitialState;
 
-export default function favorites(state = initialState, action = {}) {
+export default function favoritesReducer(state = initialState, action = {}) {
   switch (action.type) {
     case FAVORITES_REQUEST:
       return state.set('isFetching', true);

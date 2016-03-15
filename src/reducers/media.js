@@ -12,7 +12,7 @@ const InitialState = Record({
 
 const initialState = new InitialState;
 
-export default function media(state = initialState, action = {}) {
+export default function mediaReducer(state = initialState, action = {}) {
   switch (action.type) {
     case MEDIA_REQUEST:
       return state.set('isFetching', true);
