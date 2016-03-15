@@ -53,6 +53,13 @@ class CaptureMedia extends Component {
     });
   }
 
+  retake = () => {
+    this.setState({
+      hasCaptured: false,
+      mediaUri: null
+    });
+  }
+
   switchCameraMode() {
     console.log('shifting camera mode');
   }
@@ -74,6 +81,7 @@ class CaptureMedia extends Component {
         onCapture={this.saveMedia.bind(this)}
         startRecording={this.startRecording.bind(this)}
         pauseRecording={this.pauseRecording.bind(this)}
+        retake={this.retake.bind(this)}
       />
     );
 

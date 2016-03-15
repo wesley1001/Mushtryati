@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar,Navigator} from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
@@ -40,15 +40,13 @@ export default class App extends Component {
             <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
             <Route initial={true} name="mediasTab" schema="tab"  selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
-
-                <Route name="captureMedia" schema="modal" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
+                <Route name="captureMedia" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
                 <Route name="mediasScene" hideNavBar={true} component={Medias} />
                 <Route name="mediaEntityScene" component={Media} />
                 <Route name="userScene" component={User} />
                 <Route name="mediaCommentsScene" component={MediaComments} />
                 <Route name="mediaFavoritesScene" component={MediaFavorites} />
                 <Route name="userEntityScene" component={User} />
-
               </Router>
             </Route>
             <Route  hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">

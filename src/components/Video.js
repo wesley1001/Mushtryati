@@ -112,7 +112,7 @@ class VideoPlayer extends Component {
                  resizeMode={this.state.resizeMode}
                  onLoad={this.onLoad}
                  onProgress={this.onProgress}
-                 onEnd={() => { AlertIOS.alert('Done!') }}
+                 onEnd={() => {}}
                  repeat={true} />
         </TouchableOpacity>
 
@@ -169,7 +169,7 @@ class VideoPlayer extends Component {
                  resizeMode={this.state.resizeMode}
                  onLoad={this.onLoad}
                  onProgress={this.onProgress}
-                 onEnd={() => { AlertIOS.alert('Done!') }}
+                 onEnd={() => {}}
                  repeat={true}
                  controls={this.state.controls} />
         </View>
