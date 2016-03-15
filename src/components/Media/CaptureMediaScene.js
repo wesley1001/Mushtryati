@@ -89,8 +89,8 @@ export default class CaptureMediaScene extends Component {
               <View style={styles.rightCol}>
                 <TouchableHighlight onPress={()=> this.switchCameraMode() } underlayColor="transparent">
                   <Icon
-                    name={cameraMode == 'video' ? 'ion|ios-camera' : 'fontawesome|video-camera'}
-                    size={30}
+                    name={cameraMode == 'video' ? 'fontawesome|camera' : 'fontawesome|video-camera'}
+                    size={25}
                     color='white'
                     style={styles.videoCameraButton}
                   />
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     alignItems:'center',
     paddingTop:5,
-    paddingBottom:5
+    paddingBottom:15
   },
   leftCol:{
   },
@@ -195,12 +195,12 @@ const styles = StyleSheet.create({
     width:70,
   },
   videoCameraButton:{
-    height:30,
-    width:30,
+    height:25,
+    width:25,
   },
   cameraShiftButton:{
     height:30,
-    width:40,
+    width:30,
   },
   fullScreen: {
     flex:1,
