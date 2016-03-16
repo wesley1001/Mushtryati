@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { Image, Text, TouchableHighlight, View, ScrollView, Dimensions } from 'react-native';
-import {connect} from 'react-redux';
-import {fetchMedias} from './../actions/medias';
+import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { fetchMedias } from './../actions/medias';
 import MediaList from './../components/Media/MediaList';
 import LoadingIndicator from './../components/LoadingIndicator';
 
@@ -16,7 +16,7 @@ class Medias extends Component {
   componentDidMount() {
     console.log(this.props);
     const {dispatch} = this.props;
-    //dispatch(fetchMedias());
+    dispatch(fetchMedias());
   }
 
   loadMedia(media) {
@@ -32,9 +32,9 @@ class Medias extends Component {
 
   render() {
 
-    const {  global,entities } = this.props;
+    const { medias,mediasReducer } = this.props;
 
-    if (global.isFetching) {
+    if (mediasReducer.isFetching) {
       return <LoadingIndicator />;
     }
 
@@ -43,7 +43,7 @@ class Medias extends Component {
         <View style={{ height:64, backgroundColor:'#343459', justifyContent:'flex-end',alignItems:'center',paddingLeft:10,paddingRight:10, paddingBottom:5}}>
           <Text style={{ alignSelf:'flex-end', color:'white',fontSize:30,fontWeight:'700' }} onPress={ () => this.postMedia()} > + </Text>
         </View>
-        <MediaList medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
+        <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
 
@@ -51,11 +51,10 @@ class Medias extends Component {
 }
 
 function mapStateToProps(state) {
-  const {entities,global } = state
+  const {entities,mediasReducer } = state;
   return {
-    ...state,
-    global,
-    entities
+    medias:entities.medias ? entities.medias : [],
+    mediasReducer
   }
 }
 

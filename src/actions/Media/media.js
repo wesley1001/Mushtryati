@@ -5,7 +5,6 @@ import {
 } from '../../constants/ActionTypes';
 
 import {fetchFavorites} from './../favorites';
-import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './../global';
 
 function mediaSuccess(payload) {
   return {

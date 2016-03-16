@@ -2,7 +2,6 @@ import {
   USER_SUCCESS,
 } from './../constants/ActionTypes';
 
-import {xhrRequest,xhrRequestSuccess,xhrRequestFailure} from './../global';
 
 import {API_ROOT} from './../utils/config';
 

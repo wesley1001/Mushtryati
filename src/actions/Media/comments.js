@@ -5,7 +5,6 @@ import {
   COMMENT_SAVED
 } from '../../constants/ActionTypes';
 
-import {xhrRequest,xhrRequestFailure} from './../global';
 
 function commentsSuccess(payload) {
   return {

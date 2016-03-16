@@ -1,30 +1,25 @@
 import { API_ROOT } from './../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { xhrRequest,xhrRequestSuccess,xhrRequestFailure } from './global';
-import { MEDIAS_SUCCESS } from '../constants/ActionTypes';
-import { mediaSchema } from '../constants/Schemas';
+import { MEDIAS_SUCCESS,MEDIAS_REQUEST,MEDIAS_FAILURE } from '../constants/ActionTypes';
+import { Schemas } from '../constants/Schema';
 
-function mediasSuccess(result,entities) {
+function mediasSuccess(payload) {
+  const normalized = normalize(payload.data, arrayOf(Schemas.MEDIA_ARRAY));
   return {
     type: MEDIAS_SUCCESS,
-    entities:entities
+    entities:normalized.entities
   }
 }
 
 export function fetchMedias() {
   const url = API_ROOT + '/medias';
   return (dispatch) => {
-    dispatch(xhrRequest());
+    dispatch({type:MEDIAS_REQUEST});
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        const normalized = normalize(json.data, arrayOf(mediaSchema));
-        dispatch(mediasSuccess(normalized.result, normalized.entities));
-        dispatch(xhrRequestSuccess());
-
+        dispatch(mediasSuccess(json));
       })
-      .catch((err)=> {
-        dispatch(xhrRequestFailure(err));
-      })
+      .catch((err) => dispatch({type:MEDIAS_FAILURE,error:err}))
   }
 }
