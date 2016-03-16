@@ -1,23 +1,28 @@
-'use strict';
-
-import React, { Component, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class MediaFavoriteIcon extends Component {
 
+  static propTypes = {
+    loadFavorites:PropTypes.func.isRequired,
+    favoriteMedia:PropTypes.func.isRequired
+  };
+
   render() {
+    const {media} = this.props;
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-        <TouchableHighlight onPress={() => this.props.onFavoriteCountPress()} underlayColor="transparent">
+        <TouchableHighlight onPress={() => this.props.loadFavorites()} underlayColor="transparent">
           <Text style={styles.count}>20</Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.props.onFavoriteIconPress()} underlayColor="transparent">
+        <TouchableHighlight onPress={() => this.props.favoriteMedia()} underlayColor="transparent">
           <Icon
-            name='ion|android-star-outline'
+            name={media.isFavorited ? 'ion|android-favorite' : 'ion|android-favorite-outline'}
             size={22}
-            color={ this.props.hasFavorited ? 'red' :'gray'}
+            color={'red'}
             style={styles.favoriteImg}
-            />
+          />
         </TouchableHighlight>
       </View>
     );

@@ -1,7 +1,6 @@
 import {API_ROOT} from './../../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../constants/Schema';
-import { fetchFavorites } from './../favorites';
 
 import {
   COMMENTS_REQUEST,
@@ -57,7 +56,7 @@ export function addMediaComment(comment) {
       user:state().userReducer.authUserID,
       media:state().mediaReducer.current
     };
-    const url = API_ROOT + '/medias/comment/create';
+    const url = API_ROOT + '/medias/comment';
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(params)

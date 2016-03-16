@@ -8,7 +8,7 @@ import { Icon } from 'react-native-icons';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';
-import MediaLikeIcon from './../../components/Media/Like/MediaLikeIcon';
+import MediaDownloadIcon from './../../components/Media/Download/MediaDownloadIcon';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaAuthorInfo from './../../components/Media/MediaAuthorInfo';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -25,40 +25,24 @@ class Media extends Component {
     dispatch(fetchMedia());
   }
 
-  handleCommentIconClick() {
+  loadComments() {
     Actions.mediaCommentsScene();
   }
 
-  handleFavoriteCountPress() {
+  loadFavorites() {
     Actions.mediaFavoritesScene();
   }
 
-  handleFavoriteIconPress() {
-    console.log('fav button pressed');
-    const {dispatch,user,media} = this.props;
-
-    user.id = 1; // for testing purpose only.. uncomment while in production
-
-    const params = {
-      user: user.id,
-      media: media.entity.id
-    };
-
-    dispatch(favoriteMedia(params));
+  loadDownloads() {
+    Actions.mediaFavoritesScene();
   }
 
-  handleLikeIconPress() {
-    console.log('fav button pressed');
-    const {dispatch,user,media} = this.props;
+  favoriteMedia() {
+    this.props.dispatch(favoriteMedia());
+  }
 
-    user.id = 1; // for testing purpose only.. uncomment while in production
-
-    const params = {
-      user: user.id,
-      media: media.entity.id
-    };
-
-    dispatch(likeMedia(params));
+  downloadMedia() {
+    this.props.dispatch(favoriteMedia());
   }
 
   loadUser(user) {
@@ -69,6 +53,7 @@ class Media extends Component {
   }
 
   render() {
+
     const {mediaReducer,media,author,comments} = this.props;
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
@@ -80,18 +65,23 @@ class Media extends Component {
         <MediaAuthorInfo user={author} loadUser={this.loadUser.bind(this)}/>
 
         <View style={styles.buttonWrapper}>
+
           <MediaCommentIcon
             onCommentIconClick={() => this.handleCommentIconClick()}
           />
+
           <MediaFavoriteIcon
-            onFavoriteIconPress={() => this.handleFavoriteIconPress()}
-            onFavoriteCountPress={() => this.handleFavoriteCountPress()}
-            loadUser={this.loadUser.bind(this)}
+            media={media}
+            favoriteMedia={() => this.favoriteMedia()}
+            loadFavorites={() => this.loadFavorites()}
           />
-          <MediaLikeIcon
-            onLikeIconPress={() => this.handleLikeIconPress()}
-            loadUser={this.loadUser.bind(this)}
+
+          <MediaDownloadIcon
+            media={media}
+            downloadMedia={() => this.downloadMedia()}
+            loadDownloads={() => this.loadDownloads()}
           />
+
         </View>
 
         <MediaItem media={media} />

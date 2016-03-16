@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, View, Text, TouchableHighlight, StyleSheet , ListView,Image} from 'react-native';
 import { Icon } from 'react-native-icons';
 

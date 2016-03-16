@@ -3,7 +3,7 @@
 import React, { Component, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-icons';
 
-export default class MediaLikeIcon extends Component {
+export default class MediaDownloadList extends Component {
 
   render() {
     return (
