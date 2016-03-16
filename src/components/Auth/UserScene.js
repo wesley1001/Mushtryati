@@ -1,65 +1,55 @@
-'use strict'
-import React, { Component, StyleSheet, Text, View, TouchableHighlight, TextInput,Image } from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput,Image } from 'react-native';
 import { Icon } from 'react-native-icons';
+
 export default class UserScene extends Component {
 
   render() {
 
     const {user} = this.props;
-    let imageUrl = 'http://mushtryati.app/images/test.png';
 
-
-    if(user && user.id) {
-      return (
-
-        <View style={styles.container}>
-          <View style={styles.infoColumnWrapper}>
-            <View style={styles.infoWrapper}>
-              <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-                <Text style={styles.count}>200 Medias</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-                <Text style={styles.count}>200 Followers</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-                <Text style={styles.count}>200 Followings</Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-
-          <View style={styles.imageWrapper}>
+    return (
+      <View style={styles.container}>
+        <View style={styles.infoColumnWrapper}>
+          <View style={styles.infoWrapper}>
             <TouchableHighlight onPress={() => ''} underlayColor="transparent">
-              <View>
-
-                <Image style={styles.image} source={{uri:imageUrl}} />
-              </View>
+              <Text style={styles.count}>200 Medias</Text>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+              <Text style={styles.count}>200 Followers</Text>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+              <Text style={styles.count}>200 Followings</Text>
             </TouchableHighlight>
           </View>
+        </View>
 
-          <View style={styles.imageWrapper}>
-            <Text style={styles.username}>
-              {user.name}
-            </Text>
-            <View style={styles.followingWrapperFollowing}>
-              <Icon
-                name='ion|android-done'
-                size={18}
-                color='white'
-                style={styles.checked}
-              />
-              <Text style={styles.following}> Following</Text>
+        <View style={styles.imageWrapper}>
+          <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+            <View>
+              <Image style={styles.image} source={{uri:user.image}} />
             </View>
+          </TouchableHighlight>
+        </View>
 
+        <View style={styles.imageWrapper}>
+          <Text style={styles.username}>
+            {user.name}
+          </Text>
+          <View style={styles.followingWrapperFollowing}>
+            <Icon
+              name='ion|android-done'
+              size={18}
+              color='white'
+              style={styles.checked}
+            />
+            <Text style={styles.following}> Following</Text>
           </View>
 
         </View>
-      );
-    } else {
-      return(
-        <View/>
-      );
-    }
 
+      </View>
+    );
   }
 
 }

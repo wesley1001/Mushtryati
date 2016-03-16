@@ -21,7 +21,7 @@ import {
 
 const InitialState= Record({
   isAuthenticated :false,
-  authUserID:null, // authenticated user ID
+  authUserID:1, // authenticated user ID
   current:null,
   isFetching:false,
   favorites:new (Record({
@@ -51,18 +51,6 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .set('authUserID',action.userID)
         .set('isAuthenticated',true);
-    case COMMENTS_REQUEST:
-      return state
-        .setIn(['appointments', 'isFetching'], true)
-        .setIn(['appointments', 'error'], null);
-    case COMMENTS_SUCCESS:
-      return state
-        .setIn(['appointments', 'isFetching'], false)
-        .setIn(['appointments', 'error'], null)
-    case COMMENTS_FAILURE:
-      return state
-        .setIn(['appointments', 'isFetching'], false)
-        .setIn(['appointments', 'error'], action.error);
     case CREATE_COMMENT_REQUEST:
       return state
         .setIn(['comment', 'isCreating'], true)

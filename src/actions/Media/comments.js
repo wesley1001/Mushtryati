@@ -1,15 +1,22 @@
 import {API_ROOT} from './../../utils/config';
+import { normalize, Schema, arrayOf } from 'normalizr';
+import { Schemas } from './../../constants/Schema';
+import { fetchFavorites } from './../favorites';
+
 import {
+  COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
+  COMMENTS_FAILURE,
   COMMENT_SAVING,
   COMMENT_SAVED
 } from '../../constants/ActionTypes';
 
-
 function commentsSuccess(payload) {
+  console.log(payload);
+  const normalized = normalize(payload.data, Schemas.MEDIA);
   return {
     type: COMMENTS_SUCCESS,
-    collection: payload.data
+    entities: normalized.entities
   }
 }
 
@@ -26,33 +33,37 @@ function commentSaved(payload) {
   }
 }
 
-export function fetchComments(mediaID) {
-  return (dispatch) => {
-    dispatch(xhrRequest());
-    return fetch(API_ROOT + '/medias/' + mediaID + '/comments')
+export function fetchMediaComments() {
+  return (dispatch,state) => {
+    dispatch({type:COMMENTS_REQUEST});
+    const mediaID = state().mediaReducer.current;
+    const url = API_ROOT + '/medias/' + mediaID + '/comments';
+    return fetch(url)
       .then(response => response.json())
       .then(json => {
         dispatch(commentsSuccess(json));
       })
       .catch((err)=> {
-        dispatch(xhrRequestFailure(err));
+        dispatch({type:COMMENTS_FAILURE,error:err});
       })
   }
 }
 
-export function addComment(inputs) {
-  return (dispatch) => {
+export function addMediaComment(comment) {
+  return (dispatch,state) => {
     dispatch(commentSaving());
-    return fetch(API_ROOT + '/medias/comment', {
+    const params = {
+      comment,
+      user:state().userReducer.authUserID,
+      media:state().mediaReducer.current
+    };
+    const url = API_ROOT + '/medias/comment/create';
+    return fetch(url, {
       method: 'POST',
-      body: JSON.stringify(inputs)
+      body: JSON.stringify(params)
     })
       .then(response => response.json())
-      .then(json => {
-        dispatch(commentSaved(json));
-        dispatch(fetchComments(inputs.media));
-      })
-      .catch((err)=> {
-      })
+      .then(json => dispatch(fetchMediaComments()))
+      .catch((err)=> console.log('error',err))
   }
 }

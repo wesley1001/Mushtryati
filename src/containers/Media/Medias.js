@@ -5,6 +5,7 @@ import { fetchMedias } from './../../actions/Media/medias';
 import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
+import AddMediaNavbar from './../../components/Media/AddMediaNavbar';
 
 const Actions = require('react-native-router-flux').Actions;
 
@@ -26,7 +27,7 @@ class Medias extends Component {
     });
   }
 
-  postMedia() {
+  createMedia() {
     return Actions.captureMedia();
   }
 
@@ -40,9 +41,7 @@ class Medias extends Component {
 
     return (
       <ScrollView contentInset={{bottom:40}}>
-        <View style={{ height:64, backgroundColor:'#343459', justifyContent:'flex-end',alignItems:'center',paddingLeft:10,paddingRight:10, paddingBottom:5}}>
-          <Text style={{ alignSelf:'flex-end', color:'white',fontSize:30,fontWeight:'700' }} onPress={ () => this.postMedia()} > + </Text>
-        </View>
+        <AddMediaNavbar postMedia={this.createMedia.bind(this)} />
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );

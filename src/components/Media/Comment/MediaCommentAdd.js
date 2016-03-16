@@ -6,11 +6,11 @@ export default class MediaCommentAdd extends Component {
 
   constructor(props) {
     super(props);
-    this.submitComment = this.submitComment.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       comment: ''
     }
+    this.submitComment = this.submitComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (comment) => {
@@ -20,9 +20,10 @@ export default class MediaCommentAdd extends Component {
   };
 
   submitComment() {
-    const {onCommentSubmit} = this.props;
-    return onCommentSubmit(this.state.comment);
-    this.refs.commentBox.value = '';
+    this.props.onCommentSubmit(this.state.comment);
+    this.setState({
+      comment:''
+    });
   }
 
   render() {
@@ -30,16 +31,15 @@ export default class MediaCommentAdd extends Component {
       <View>
         <TextInput
           style={[styles.loginInput,styles.mTop20]}
-          ref='email'
           placeholder="تعليق"
           placeholderTextColor={'#E2E2E2'}
           autoFocus={true}
           multiline={true}
-          ref='commentBox'
+          ref='commentbox'
           onChangeText={this.handleChange}
           />
 
-        <TouchableHighlight onPress={this.submitComment} style={styles.buttonGreen}>
+        <TouchableHighlight onPress={this.submitComment} style={styles.buttonGreen} underlayColor="transparent">
           <Text style={styles.buttonText}>ارسل</Text>
         </TouchableHighlight>
 

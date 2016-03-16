@@ -6,7 +6,6 @@ export default class MediaCommentList extends Component {
 
   constructor(props) {
     super(props);
-
     this.renderRow = this.renderRow.bind(this);
   }
 
@@ -14,7 +13,6 @@ export default class MediaCommentList extends Component {
     return (
       <View style={styles.cellContainer}>
         <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
-
           <View style={styles.cellWrapper}>
             <View style={styles.imageContainer}>
               {comment.user.image ? <Image style={styles.image} source={{uri:comment.user.image}}/> : <View/>}
@@ -29,11 +27,7 @@ export default class MediaCommentList extends Component {
               </Text>
             </View>
           </View>
-
         </TouchableHighlight>
-
-        <View style={styles.separator}/>
-
       </View>
     )
   }
@@ -44,7 +38,6 @@ export default class MediaCommentList extends Component {
     if (comments.length && comments.length > 0) {
       let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
       let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
-
       return (
         <ListView
           dataSource={dataSource}
@@ -54,7 +47,6 @@ export default class MediaCommentList extends Component {
         />
       )
     }
-    return <View />;
   }
 }
 

@@ -26,18 +26,11 @@ class Media extends Component {
   }
 
   handleCommentIconClick() {
-    const {media} = this.props;
-    Actions.mediaCommentsScene({
-      data: media
-    });
+    Actions.mediaCommentsScene();
   }
 
   handleFavoriteCountPress() {
-    const {media} = this.props;
-    Actions.mediaFavoritesScene({
-      data: media.entity
-    });
-
+    Actions.mediaFavoritesScene();
   }
 
   handleFavoriteIconPress() {
@@ -77,7 +70,6 @@ class Media extends Component {
 
   render() {
     const {mediaReducer,media,author,comments} = this.props;
-    console.log('comments',comments);
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
     }

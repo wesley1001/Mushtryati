@@ -1,14 +1,11 @@
-'use strict';
-
-import React, { Component, ScrollView, Text, StyleSheet, Dimensions, DeviceEventEmitter } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
-
-import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
-import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
-
+import React, { Component, PropTypes } from 'react';
+import { ScrollView,View, Text, StyleSheet, Dimensions, DeviceEventEmitter } from 'react-native';
+import { connect } from '../../../node_modules/react-redux';
 import { assets }  from '../../utils/assets';
 import { Icon } from 'react-native-icons';
-import { addComment, fetchComments } from './../../actions/Media/comments';
+import { addMediaComment, fetchMediaComments } from './../../actions/Media/comments';
+import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
+import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
 import LoadingIndicator from './../../components/LoadingIndicator';
 
 class MediaComments extends Component {
@@ -21,18 +18,15 @@ class MediaComments extends Component {
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
 
-  componentWillUnmount() {
-  }
-
   componentWillMount() {
-    const {dispatch,media} = this.props;
-    dispatch(fetchComments(media.entity.id));
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
+    const {dispatch} = this.props;
+    dispatch(fetchMediaComments());
   }
 
   keyboardWillShow(e) {
-    let newSize = Dimensions.get('window').height - e.endCoordinates.height
+    let newSize = Dimensions.get('window').height - e.endCoordinates.height;
     this.setState({visibleHeight: newSize})
   }
 
@@ -41,36 +35,18 @@ class MediaComments extends Component {
   }
 
   handleCommentSubmit(comment) {
-    const {dispatch,user,media} = this.props;
-
-    user.id = 1; // for test only
-
-    const inputs = {
-      media: media.entity.id,
-      comment: comment,
-      user: user.id
-    }
-
-    dispatch(addComment(inputs));
+    const {dispatch} = this.props;
+    dispatch(addMediaComment(comment)).then(()=>{
+      this.refs.scrollView.scrollTo({x: 0})
+    });
   }
 
   render() {
-
-    const {comments,entities} = this.props;
-
-    {console.log('comments',comments,null,2)}
-
-    if (comments.isFetching) {
-      return <LoadingIndicator />;
-    }
-
+    const {comments} = this.props;
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]}>
-
-        <MediaCommentList comments={entities.medias.id.comments} line={assets.line} contentInset={0}/>
-
+      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} ref="scrollView">
+        <MediaCommentList comments={comments} line={assets.line} />
         <MediaCommentAdd onCommentSubmit={this.handleCommentSubmit}/>
-
       </ScrollView>
     )
   }
@@ -85,14 +61,11 @@ var styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const { comments,user,media,entities } = state;
-
+  const { entities,mediaReducer } = state;
+  const media = entities.medias[mediaReducer.current];
+  const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
   return {
-    ...state,
-    comments,
-    user,
-    media,
-    entities
+    comments
   }
 }
 

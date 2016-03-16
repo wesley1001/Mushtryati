@@ -1,6 +1,8 @@
 import {Record} from 'immutable';
 
 import {
+  COMMENTS_REQUEST,
+  COMMENTS_FAILURE,
   COMMENTS_SUCCESS,
   COMMENT_SAVING,
   COMMENT_SAVED
@@ -15,12 +17,12 @@ const initialState = new InitialState;
 
 export default function commentsReducer(state = initialState, action = {}) {
   switch (action.type) {
+    case COMMENTS_REQUEST:
+      return state.set('isFetching', true);
     case COMMENTS_SUCCESS:
-      return state.set('isFetching', false).set('error', null);
-    case COMMENT_SAVING:
-      return state.set('isFetching', true).set('error', null);
-    case COMMENT_SAVED:
-      return state.set('isFetching', false).set('error', null);
+      return state.set('isFetching', false);
+    case COMMENTS_FAILURE:
+      return state.set('isFetching', false);
     default:
       return state
   }

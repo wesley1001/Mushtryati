@@ -12,7 +12,6 @@ import { fetchFavorites } from './../favorites';
 
 function mediaSuccess(payload) {
   const normalized = normalize(payload.data, Schemas.MEDIA_ARRAY);
-
   return {
     type: MEDIA_SUCCESS,
     entities: normalized.entities
@@ -66,3 +65,4 @@ export function likeMedia(params) {
       .catch((err)=> {})
   }
 }
+
