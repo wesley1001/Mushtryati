@@ -6,7 +6,7 @@ import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Media/Medias';
 import Media from './containers/Media/Media';
-import User from './containers/Auth/User';
+import User from './containers/User';
 import UserScene from './components/Auth/UserScene';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';

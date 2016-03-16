@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView
 import { connect } from 'react-redux';
 import { fetchFavorites, favoriteMedia } from './../../actions/Media/favorites';
 import { fetchMedia, likeMedia } from './../../actions/Media/media';
+import { setCurrentUser } from './../../actions/user';
 import { Icon } from 'react-native-icons';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
@@ -68,18 +69,13 @@ class Media extends Component {
   }
 
   loadUser(user) {
+    this.props.dispatch(setCurrentUser(user.id));
     Actions.userEntityScene({
-      title:user.name,
-      data:user.id
+      title:user.name
     })
   }
 
   render() {
-
-    //
-    //
-
-
     const {mediaReducer,media,author,comments} = this.props;
     console.log('comments',comments);
     if (mediaReducer.isFetching) {

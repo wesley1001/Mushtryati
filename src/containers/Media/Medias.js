@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchMedias } from './../../actions/Media/medias';
-import { setCurrent } from './../../actions/Media/media';
+import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 
@@ -15,13 +15,12 @@ class Medias extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     const {dispatch} = this.props;
     dispatch(fetchMedias());
   }
 
   loadMedia(media) {
-    this.props.dispatch(setCurrent(media.id));
+    this.props.dispatch(setCurrentMedia(media.id));
     Actions.mediaScene({
       title:media.caption
     });

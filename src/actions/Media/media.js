@@ -43,7 +43,7 @@ export function fetchMedia() {
   }
 }
 
-export function setCurrent(mediaID) {
+export function setCurrentMedia(mediaID) {
   return (dispatch) => {
     dispatch({type: SET_CURRENT_MEDIA, current: mediaID});
   }

@@ -1,11 +1,15 @@
+export const USER_REQUEST = 'USER_REQUEST';
 export const USER_SUCCESS = 'USER_SUCCESS';
+export const USER_FAILURE = 'USER_FAILURE';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_USER = 'LOGOUT_USER';
-export const SET_USER = 'SET_USER';
 export const ON_LOGIN_FORM_FIELD_CHANGE = 'ON_LOGIN_FORM_FIELD_CHANGE';
+
+export const SET_USER = 'SET_USER';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

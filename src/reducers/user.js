@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_USER,
   SET_USER,
+  SET_CURRENT_USER,
   CREATE_COMMENT_FAILURE,
   CREATE_COMMENT_REQUEST,
   CREATE_COMMENT_SUCCESS,
@@ -13,11 +14,15 @@ import {
   COMMENTS_REQUEST,
   COMMENTS_SUCCESS,
   COMMENTS_FAILURE,
+  USER_REQUEST,
+  USER_SUCCESS,
+  USER_FAILURE
 } from '../constants/ActionTypes';
 
 const InitialState= Record({
   isAuthenticated :false,
   authUserID:null, // authenticated user ID
+  current:null,
   isFetching:false,
   favorites:new (Record({
     isFetching:false,
@@ -94,6 +99,9 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .set('authUserID',null)
         .set('isAuthenticated',false);
+    case SET_CURRENT_USER:
+      return state
+        .set('current',action.current);
     default:
       return state;
 
