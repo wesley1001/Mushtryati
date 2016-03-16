@@ -7,7 +7,7 @@ import { Icon } from 'react-native-icons';
 export default class MediaItem extends Component {
 
   renderContent(media) {
-    const {caption,url,user} = media;
+    const {caption,url} = media;
     return (
       <View style={styles.container}>
         <View>

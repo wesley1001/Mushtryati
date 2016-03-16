@@ -11,7 +11,6 @@ export default class MediaCommentList extends Component {
   }
 
   renderRow(comment) {
-    const {users} = this.props;
     return (
       <View style={styles.cellContainer}>
         <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>

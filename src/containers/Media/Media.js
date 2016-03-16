@@ -77,7 +77,6 @@ class Media extends Component {
   render() {
 
     //
-    //<MediaItem media={media} />
     //
 
 
@@ -107,6 +106,8 @@ class Media extends Component {
           />
         </View>
 
+        <MediaItem media={media} />
+
         <MediaCommentList comments={comments}/>
 
       </ScrollView>
@@ -134,7 +135,6 @@ function mapStateToProps(state) {
   const { entities,mediaReducer } = state;
   const media = entities.medias[mediaReducer.current];
   const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
-
   return {
     mediaReducer,
     media,
