@@ -11,13 +11,14 @@ export default class MediaCommentList extends Component {
   }
 
   renderRow(comment) {
+    const {users} = this.props;
     return (
       <View style={styles.cellContainer}>
         <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
 
           <View style={styles.cellWrapper}>
             <View style={styles.imageContainer}>
-              {comment.user.thumbnail ? <Image style={styles.image} source={{uri:comment.user.thumbnail.name}}/> : <View/>}
+              {comment.user.image ? <Image style={styles.image} source={{uri:comment.user.image}}/> : <View/>}
             </View>
 
             <View style={styles.titleContainer}>
@@ -51,7 +52,7 @@ export default class MediaCommentList extends Component {
           renderRow={this.renderRow.bind(this)}
           automaticallyAdjustContentInsets={false}
           style={styles.container}
-          />
+        />
       )
     }
     return <View />;

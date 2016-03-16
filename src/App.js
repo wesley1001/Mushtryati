@@ -4,7 +4,7 @@ import { StatusBar, Navigator } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
-import Medias from './containers/Medias';
+import Medias from './containers/Media/Medias';
 import Media from './containers/Media/Media';
 import User from './containers/Auth/User';
 import UserScene from './components/Auth/UserScene';
@@ -42,7 +42,7 @@ export default class App extends Component {
             <Route initial={true} name="mediasTab" schema="tab" selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
                 <Route name="mediasScene" hideNavBar={true} component={Medias} />
-                <Route name="mediaEntityScene" component={Media} />
+                <Route name="mediaScene" component={Media} />
                 <Route name="userScene" component={User} />
                 <Route name="mediaCommentsScene" component={MediaComments} />
                 <Route name="mediaFavoritesScene" component={MediaFavorites} />

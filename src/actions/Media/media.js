@@ -1,17 +1,21 @@
 import {API_ROOT} from './../../utils/config';
 import {
   MEDIA_SUCCESS,
+  MEDIA_REQUEST,
+  MEDIA_FAILURE,
+  SET_CURRENT_MEDIA,
   MEDIA_LIKE
 } from '../../constants/ActionTypes';
-
-import {fetchFavorites} from './../favorites';
+import { normalize, Schema, arrayOf } from 'normalizr';
+import { Schemas } from './../../constants/Schema';
+import { fetchFavorites } from './../favorites';
 
 function mediaSuccess(payload) {
+  const normalized = normalize(payload.data, Schemas.MEDIA_ARRAY);
+
   return {
     type: MEDIA_SUCCESS,
-    entity: payload.data,
-    hasFavorited: payload.hasFavorited,
-    comments: payload.comments
+    entities: normalized.entities
   }
 }
 
@@ -22,24 +26,28 @@ function toggleLike(hasLiked) {
   }
 }
 
-export function fetchMedia(mediaID) {
-  const url = API_ROOT + '/medias/' + mediaID;
-  return (dispatch) => {
-    dispatch(xhrRequest());
+export function fetchMedia() {
+
+  return (dispatch,state) => {
+    dispatch({type:MEDIA_REQUEST});
+    const mediaID = state().mediaReducer.current;
+    const url = API_ROOT + '/medias/' + mediaID;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
-        dispatch(xhrRequestSuccess());
         dispatch(mediaSuccess(json));
       })
       .catch((err)=> {
-        dispatch(xhrRequestFailure(err));
+        dispatch({type:MEDIA_FAILURE,error:err});
       })
   }
 }
 
-
-
+export function setCurrent(mediaID) {
+  return (dispatch) => {
+    dispatch({type: SET_CURRENT_MEDIA, current: mediaID});
+  }
+}
 /**
  * @param params
  * @returns {Function}

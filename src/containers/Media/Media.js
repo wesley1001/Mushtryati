@@ -1,9 +1,9 @@
-'use strict';
-
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView,ScrollView,Modal } from 'react-native';
-import {connect} from 'react-redux';
-import {fetchFavorites,favoriteMedia} from './../../actions/Media/favorites';
-import {fetchMedia,likeMedia} from './../../actions/Media/media';
+import React, { Component, PropTypes } from 'react';
+import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView, Modal } from 'react-native';
+import { connect } from 'react-redux';
+import { fetchFavorites, favoriteMedia } from './../../actions/Media/favorites';
+import { fetchMedia, likeMedia } from './../../actions/Media/media';
+import { Icon } from 'react-native-icons';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';
@@ -11,7 +11,6 @@ import MediaLikeIcon from './../../components/Media/Like/MediaLikeIcon';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaAuthorInfo from './../../components/Media/MediaAuthorInfo';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import { Icon } from 'react-native-icons';
 const Actions = require('react-native-router-flux').Actions;
 
 class Media extends Component {
@@ -22,8 +21,7 @@ class Media extends Component {
 
   componentWillMount() {
     const {dispatch} = this.props;
-     dispatch(fetchMedia(this.props.data.id));
-    //dispatch(fetchMedia());
+    dispatch(fetchMedia());
   }
 
   handleCommentIconClick() {
@@ -78,35 +76,38 @@ class Media extends Component {
 
   render() {
 
-    const {media} = this.props;
+    //
+    //<MediaItem media={media} />
+    //
 
-    if (media.isFetching) {
+
+    const {mediaReducer,media,author,comments} = this.props;
+    console.log('comments',comments);
+    if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
     }
 
     return (
-      <ScrollView style={styles.container} contentInset={{bottom:49}} >
-        <MediaAuthorInfo user={media.entity.user} loadUser={this.loadUser.bind(this)}/>
+      <ScrollView style={styles.container} contentInset={{bottom:40}} >
+
+        <MediaAuthorInfo user={author} loadUser={this.loadUser.bind(this)}/>
+
         <View style={styles.buttonWrapper}>
           <MediaCommentIcon
             onCommentIconClick={() => this.handleCommentIconClick()}
-            />
+          />
           <MediaFavoriteIcon
-            hasFavorited={media.hasFavorited}
             onFavoriteIconPress={() => this.handleFavoriteIconPress()}
             onFavoriteCountPress={() => this.handleFavoriteCountPress()}
             loadUser={this.loadUser.bind(this)}
-            />
+          />
           <MediaLikeIcon
-            hasLiked={media.hasLiked}
             onLikeIconPress={() => this.handleLikeIconPress()}
             loadUser={this.loadUser.bind(this)}
-            />
+          />
         </View>
 
-        <MediaItem media={media.entity} />
-
-        <MediaCommentList comments={media.comments}/>
+        <MediaCommentList comments={comments}/>
 
       </ScrollView>
     );
@@ -130,10 +131,15 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const { media } = state
+  const { entities,mediaReducer } = state;
+  const media = entities.medias[mediaReducer.current];
+  const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
+
   return {
-    ...state,
-    media: media,
+    mediaReducer,
+    media,
+    author: entities.users[media.user],
+    comments: comments,
   }
 }
 

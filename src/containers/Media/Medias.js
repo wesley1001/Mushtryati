@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchMedias } from './../actions/medias';
-import MediaList from './../components/Media/MediaList';
-import LoadingIndicator from './../components/LoadingIndicator';
+import { fetchMedias } from './../../actions/Media/medias';
+import { setCurrent } from './../../actions/Media/media';
+import MediaList from './../../components/Media/MediaList';
+import LoadingIndicator from './../../components/LoadingIndicator';
 
 const Actions = require('react-native-router-flux').Actions;
 
@@ -20,9 +21,9 @@ class Medias extends Component {
   }
 
   loadMedia(media) {
-    Actions.mediaEntityScene({
-      title:media.caption,
-      data: media
+    this.props.dispatch(setCurrent(media.id));
+    Actions.mediaScene({
+      title:media.caption
     });
   }
 

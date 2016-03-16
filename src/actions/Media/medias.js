@@ -1,7 +1,7 @@
-import { API_ROOT } from './../utils/config';
+import { API_ROOT } from './../../utils/config';
+import { MEDIAS_SUCCESS,MEDIAS_REQUEST,MEDIAS_FAILURE } from '../../constants/ActionTypes';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { MEDIAS_SUCCESS,MEDIAS_REQUEST,MEDIAS_FAILURE } from '../constants/ActionTypes';
-import { Schemas } from '../constants/Schema';
+import { Schemas } from './../../constants/Schema';
 
 function mediasSuccess(payload) {
   const normalized = normalize(payload.data, arrayOf(Schemas.MEDIA_ARRAY));
