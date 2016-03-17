@@ -4,7 +4,7 @@ import {
   DOWNLOADS_REQUEST,
   DOWNLOADS_SUCCESS,
   DOWNLOADS_FAILURE,
-} from '../constants/ActionTypes'
+} from '../constants/actiontypes'
 
 const InitialState = Record({
   isFetching:false

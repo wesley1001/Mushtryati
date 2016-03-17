@@ -1,13 +1,13 @@
 import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
   FAVORITES_SUCCESS,
   FAVORITES_REQUEST,
   MEDIA_FAVORITE,
-} from '../../constants/ActionTypes';
+} from '../../constants/actiontypes';
 
 //function favoriteRequest() {
 //  return {

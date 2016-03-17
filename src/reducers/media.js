@@ -5,7 +5,7 @@ import {
   MEDIA_SUCCESS,
   MEDIA_FAILURE,
   SET_CURRENT_MEDIA
-} from '../constants/ActionTypes'
+} from '../constants/actiontypes'
 
 const InitialState = Record({
   isFetching:false,

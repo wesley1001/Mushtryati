@@ -1,6 +1,6 @@
 import {API_ROOT} from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
@@ -9,7 +9,7 @@ import {
   COMMENTS_FAILURE,
   COMMENT_SAVING,
   COMMENT_SAVED
-} from '../../constants/ActionTypes';
+} from '../../constants/actiontypes';
 
 function commentsSuccess(payload) {
   const normalized = normalize(payload.data, Schemas.MEDIA);

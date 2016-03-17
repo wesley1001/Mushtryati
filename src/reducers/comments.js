@@ -6,7 +6,7 @@ import {
   COMMENTS_SUCCESS,
   COMMENT_SAVING,
   COMMENT_SAVED
-} from '../constants/ActionTypes'
+} from '../constants/actiontypes'
 
 const InitialState = Record({
   isFetching: false,

@@ -4,7 +4,7 @@ import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
-} from '../constants/ActionTypes'
+} from '../constants/actiontypes'
 
 const InitialState = Record({
   isFetching:false

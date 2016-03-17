@@ -6,7 +6,7 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   ON_REGISTER_FORM_FIELD_CHANGE
-} from '../constants/ActionTypes';
+} from '../constants/actiontypes';
 
 const InitialState = Record({
   isLoggedIn: false,

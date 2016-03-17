@@ -4,7 +4,7 @@ import {
   MEDIAS_REQUEST,
   MEDIAS_SUCCESS,
   MEDIAS_FAILURE,
-} from '../constants/ActionTypes'
+} from '../constants/actiontypes'
 
 const InitialState = Record({
   isFetching:false

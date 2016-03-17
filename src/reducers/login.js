@@ -7,7 +7,7 @@ import {
   LOGIN_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE,
   LOGOUT_USER
-} from '../constants/ActionTypes';
+} from '../constants/actiontypes';
 
 const InitialState = Record({
   isFetching: false,

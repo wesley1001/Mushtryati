@@ -1,7 +1,7 @@
 import { API_ROOT } from './../../constants/config';
-import { MEDIAS_SUCCESS,MEDIAS_REQUEST,MEDIAS_FAILURE } from '../../constants/ActionTypes';
+import { MEDIAS_SUCCESS,MEDIAS_REQUEST,MEDIAS_FAILURE } from '../../constants/actiontypes';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 function mediasSuccess(payload) {

@@ -7,7 +7,7 @@ import {
   DOWNLOADS_SUCCESS,
   DOWNLOADS_REQUEST,
   MEDIA_DOWNLOAD,
-} from '../../constants/ActionTypes';
+} from '../../constants/actiontypes';
 
 //function favoriteRequest() {
 //  return {

@@ -17,7 +17,7 @@ import {
   USER_REQUEST,
   USER_SUCCESS,
   USER_FAILURE
-} from '../constants/ActionTypes';
+} from '../constants/actiontypes';
 
 const InitialState= Record({
   isAuthenticated :false,

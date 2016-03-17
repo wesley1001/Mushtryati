@@ -1,6 +1,6 @@
 import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import { fetchFavorites } from './../User/favorites';
 import { getUserToken } from './../../utils/storage';
 import {
@@ -8,7 +8,7 @@ import {
   MEDIA_REQUEST,
   MEDIA_FAILURE,
   SET_CURRENT_MEDIA
-} from '../../constants/ActionTypes';
+} from '../../constants/actiontypes';
 
 function mediaSuccess(payload) {
   const normalized = normalize(payload.data, Schemas.MEDIA_ARRAY);

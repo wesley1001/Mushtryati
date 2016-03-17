@@ -3,7 +3,7 @@ import {
   FAVORITES_SUCCESS,
   FAVORITES_REQUEST,
   FAVORITES_FAILURE
-} from '../../constants/ActionTypes'
+} from '../../constants/actiontypes'
 
 function favoritesSuccess(payload) {
   return {

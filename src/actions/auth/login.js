@@ -1,6 +1,6 @@
 import { API_ROOT, API_TOKEN } from './../../constants/config'
 import { setUserToken,getUserToken,forgetItem } from './../../utils/storage';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import { normalize } from 'normalizr';
 
 import {
@@ -9,7 +9,7 @@ import {
   LOGIN_FAILURE,
   LOGOUT_USER,
   ON_LOGIN_FORM_FIELD_CHANGE
-} from '../../constants/ActionTypes';
+} from '../../constants/actiontypes';
 
 function loginRequest() {
   return {

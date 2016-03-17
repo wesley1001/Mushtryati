@@ -1,12 +1,12 @@
 import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../utils/Schema';
+import { Schemas } from './../../utils/schema';
 import {
   USER_REQUEST,
   USER_SUCCESS,
   USER_FAILURE,
   SET_CURRENT_USER
-} from './../../constants/ActionTypes';
+} from './../../constants/actiontypes';
 
 function userSuccess(payload) {
   const normalized = normalize(payload.data, Schemas.USER);
