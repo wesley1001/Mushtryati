@@ -1,8 +1,7 @@
-'use strict';
 import React from 'react';
 import { AsyncStorage } from 'react-native';
+import { API_TOKEN } from './../constants/config';
 
-export const API_TOKEN = 'API_TOKEN';
 
 export const setUserToken = (token) => {
   forgetItem(API_TOKEN);

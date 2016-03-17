@@ -1,4 +1,4 @@
-import {API_ROOT} from './../../utils/config'
+import {API_ROOT} from './../../constants/config'
 
 import {
   REGISTER_FAILURE,

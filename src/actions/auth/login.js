@@ -1,6 +1,6 @@
-import {API_ROOT} from './../../utils/config'
-import { setUserToken,getUserToken,API_TOKEN,forgetItem } from './../../utils/storage';
-import { Schemas } from './../../constants/Schema';
+import { API_ROOT, API_TOKEN } from './../../constants/config'
+import { setUserToken,getUserToken,forgetItem } from './../../utils/storage';
+import { Schemas } from './../../utils/Schema';
 import { normalize } from 'normalizr';
 
 import {

@@ -1,13 +1,13 @@
 import { Record } from 'immutable';
-import validate from './../../validators/Auth/loginValidator';
-import rules from './../../validators/validationRules';
+import validate from './../validators/Auth/loginValidator';
+import rules from './../validators/validationRules';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   ON_LOGIN_FORM_FIELD_CHANGE,
   LOGOUT_USER
-} from '../../constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 const InitialState = Record({
   isFetching: false,

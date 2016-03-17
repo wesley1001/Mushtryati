@@ -1,6 +1,6 @@
-import {API_ROOT} from './../../utils/config';
+import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
-import { Schemas } from './../../constants/Schema';
+import { Schemas } from './../../utils/Schema';
 import {
   USER_REQUEST,
   USER_SUCCESS,
