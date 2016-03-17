@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { View, ScrollView  } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchUser } from './../actions/user';
-import { setCurrentMedia } from './../actions/Media/media';
+import { fetchUser } from './../../actions/User/user';
+import { setCurrentMedia } from './../../actions/Media/media';
 import { Icon } from 'react-native-icons';
-import UserScene from './../components/Auth/UserScene';
-import LoadingIndicator from './../components/LoadingIndicator';
-import MediaList from './../components/Media/MediaList';
+import UserScene from './../../components/User/UserScene';
+import LoadingIndicator from './../../components/LoadingIndicator';
+import MediaList from './../../components/Media/MediaList';
 const Actions = require('react-native-router-flux').Actions;
 
 class User extends Component {

@@ -1,7 +1,7 @@
 import {API_ROOT} from './../../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../constants/Schema';
-import { fetchFavorites } from './../favorites';
+import { fetchFavorites } from './../User/favorites';
 import { getUserToken } from './../../utils/storage';
 import {
   MEDIA_SUCCESS,

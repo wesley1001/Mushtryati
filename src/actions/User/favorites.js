@@ -1,9 +1,9 @@
-import {API_ROOT} from './../utils/config'
+import {API_ROOT} from './../../utils/config'
 import {
   FAVORITES_SUCCESS,
   FAVORITES_REQUEST,
   FAVORITES_FAILURE
-} from '../constants/ActionTypes'
+} from '../../constants/ActionTypes'
 
 function favoritesSuccess(payload) {
   return {

@@ -74,7 +74,6 @@ class CaptureMedia extends Component {
     });
   }
 
-
   returnBack() {
     Actions.pop();
   }
