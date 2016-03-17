@@ -20,8 +20,15 @@ function mediaSuccess(payload) {
 
 export function fetchMedia() {
   return (dispatch,state) => {
-    dispatch({type:MEDIA_REQUEST});
+
     const mediaID = state().mediaReducer.current;
+
+    if(state().entities.medias[mediaID]) {
+      return;
+    }
+
+    dispatch({type:MEDIA_REQUEST});
+
     return getUserToken().then((token) => {
       const url = API_ROOT + `/medias/${mediaID}?api_token=${token}`;
       return fetch(url)
