@@ -37,11 +37,8 @@ class User extends Component {
 
     return (
       <ScrollView style={{paddingTop:64}} contentInset={{bottom:49}}>
-
         <UserScene user={user}/>
-
-        {user ? <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}  contentInset={{top:1}}/> : <View/> }
-
+        <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
 

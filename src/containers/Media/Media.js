@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView, Modal } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchFavorites, favoriteMedia } from './../../actions/Media/favorites';
-import { fetchMedia, likeMedia } from './../../actions/Media/media';
+import { fetchDownloads, downloadMedia } from './../../actions/Media/downloads';
+import { fetchMedia } from './../../actions/Media/media';
 import { setCurrentUser } from './../../actions/user';
 import { Icon } from 'react-native-icons';
 import MediaItem from './../../components/Media/MediaItem';
@@ -48,7 +49,7 @@ class Media extends Component {
     if(!this.props.userReducer.isAuthenticated) {
       return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
     }
-    this.props.dispatch(favoriteMedia());
+    this.props.dispatch(downloadMedia());
   }
 
   loadUser(user) {
@@ -68,33 +69,22 @@ class Media extends Component {
 
     return (
       <ScrollView style={styles.container} contentInset={{bottom:40}} >
-
         <MediaAuthorInfo user={author} loadUser={this.loadUser.bind(this)}/>
-
         <View style={styles.buttonWrapper}>
-
-          <MediaCommentIcon
-            onCommentIconClick={() => this.handleCommentIconClick()}
-          />
-
+          <MediaCommentIcon loadComments={() => this.loadComments()} />
           <MediaFavoriteIcon
             media={media}
             favoriteMedia={() => this.favoriteMedia()}
             loadFavorites={() => this.loadFavorites()}
           />
-
           <MediaDownloadIcon
             media={media}
             downloadMedia={() => this.downloadMedia()}
             loadDownloads={() => this.loadDownloads()}
           />
-
         </View>
-
         <MediaItem media={media} />
-
-        <MediaCommentList comments={comments}/>
-
+        { comments.size ? <MediaCommentList comments={comments}/> : <View/> }
       </ScrollView>
     );
 

@@ -18,7 +18,7 @@ export default class MediaDownloadIcon extends Component {
         </TouchableHighlight>
         <TouchableHighlight onPress={() => this.props.downloadMedia()} underlayColor="transparent">
           <Icon
-            name={media.isFavorited ? 'ion|android-star' : 'ion|android-star-outline'}
+            name={media.isDownloaded ? 'ion|android-star' : 'ion|android-star-outline'}
             size={22}
             color={'gold'}
             style={styles.favoriteImg}

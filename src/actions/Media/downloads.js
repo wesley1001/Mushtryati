@@ -4,38 +4,36 @@ import { Schemas } from './../../constants/Schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
-  FAVORITES_SUCCESS,
-  FAVORITES_REQUEST,
-  MEDIA_FAVORITE,
+  DOWNLOADS_SUCCESS,
+  DOWNLOADS_REQUEST,
+  MEDIA_DOWNLOAD,
 } from '../../constants/ActionTypes';
 
 //function favoriteRequest() {
 //  return {
-//    type: FAVORITES_REQUEST
+//    type: DOWNLOADS_REQUEST
 //  }
 //}
 
-function favoriteSuccess(payload) {
-  console.log('payload',payload.isFavorited);
+function downloadSuccess(payload) {
+  console.log('payload',payload.isDownloaded);
   const normalized = normalize(payload.data,Schemas.USER);
   return {
-    type: MEDIA_FAVORITE,
+    type: MEDIA_DOWNLOAD,
     //entities: normalized.entities
   }
 }
 
-function toggleFavorite(payload) {
-  console.log('payload',payload.isFavorited);
-  const media = Object.assign({},payload,{isFavorited:!payload.isFavorited});
-  console.log('payload after',media.isFavorited);
+function toggleDownload(payload) {
+  const media = Object.assign({},payload,{isDownloaded:!payload.isDownloaded});
   const normalized = normalize(media,Schemas.MEDIA);
   return {
-    type: MEDIA_FAVORITE,
+    type: MEDIA_DOWNLOAD,
     entities: normalized.entities
   }
 }
 
-export function fetchFavorites() {
+export function fetchDownloads() {
   //return (dispatch) => {
   //  dispatch(favoriteRequest());
   //  return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
@@ -53,7 +51,7 @@ export function fetchFavorites() {
  * @returns {Function}
  * Favorite a media
  */
-export function favoriteMedia() {
+export function downloadMedia() {
   return (dispatch,state) => {
 
     const params = {
@@ -61,11 +59,10 @@ export function favoriteMedia() {
     };
 
     const media = state().entities.medias[params.media];
-    console.log('current med',media.isFavorited);
-    dispatch(toggleFavorite(media));
+    dispatch(toggleDownload(media));
 
     return getUserToken().then((token) => {
-      const url = API_ROOT + `/medias/favorite?api_token=${token}`;
+      const url = API_ROOT + `/medias/download?api_token=${token}`;
       return fetch(url, {
         method: 'POST',
         body: JSON.stringify(params)
@@ -73,7 +70,6 @@ export function favoriteMedia() {
         .then(response => response.json())
         .then(json => {
           console.log('json',json)
-          //dispatch(fetchFavorites());
         }).catch((err)=> console.log(err))
     })
   }

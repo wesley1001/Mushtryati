@@ -1,20 +1,18 @@
-'use strict';
-
-import React, { Component, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class MediaCommentIcon extends Component {
 
-  handleCommentIconPress() {
-    const {onCommentIconClick} = this.props;
-    onCommentIconClick();
-  }
+  static propTypes = {
+    loadComments:PropTypes.func.isRequired,
+  };
 
   render() {
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
         <Text style={styles.count}>100</Text>
-        <TouchableHighlight onPress={() => this.props.onCommentIconClick()} underlayColor="transparent">
+        <TouchableHighlight onPress={() => this.props.loadComments()} underlayColor="transparent">
           <Icon
             name='ion|ios-chatbubble-outline'
             size={20}

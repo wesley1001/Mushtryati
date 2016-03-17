@@ -29,6 +29,7 @@ export default class Login extends Component {
     dispatch(login(credentials))
       .then((success)=> {
         if(success) {
+          console.log('sss');
           Actions.home();
         } else {
           alert('Wrong Credentials, Try again');

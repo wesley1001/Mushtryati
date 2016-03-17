@@ -17,7 +17,6 @@ export function fetchMedias() {
   return (dispatch) => {
     dispatch({type:MEDIAS_REQUEST});
     return getUserToken().then((token) => {
-      console.log(token);
       const url = API_ROOT + `/medias?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
