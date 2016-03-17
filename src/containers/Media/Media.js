@@ -5,7 +5,6 @@ import { fetchFavorites, favoriteMedia } from './../../actions/Media/favorites';
 import { fetchDownloads, downloadMedia } from './../../actions/Media/downloads';
 import { fetchMedia } from './../../actions/Media/media';
 import { setCurrentUser } from './../../actions/user';
-import { Icon } from 'react-native-icons';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';

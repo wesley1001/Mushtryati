@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
-import {connect} from '../../../node_modules/react-redux';
+import { connect } from '../../../node_modules/react-redux';
+import { fetchFavorites } from './../../actions/Media/favorites';
 import MediaFavoriteList from './../../components/Media/Favorite/MediaFavoriteList';
-import { assets }  from '../../utils/assets';
-import { Icon } from 'react-native-icons';
-import {fetchFavorites} from './../../actions/Media/favorites';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -49,21 +47,9 @@ class MediaFavorites extends Component {
   }
 }
 
-
-var styles = StyleSheet.create({
-  contentContainer: {
-    paddingBottom: 64,
-    paddingTop: 64,
-    margin:5
-  }
-});
-
 function mapStateToProps(state) {
-  const { media } = state
-
   return {
-    ...state,
-    media
+    media:state.media
   }
 }
 
