@@ -62,7 +62,11 @@ export function commentMedia(comment) {
         body: JSON.stringify(params)
       })
         .then(response => response.json())
-        .then(json => dispatch(fetchComments()))
+        .then(json => {
+          if(json.success) {
+            dispatch(fetchComments())
+          }
+        })
     }).catch((err)=> console.log('error', err))
 
   }

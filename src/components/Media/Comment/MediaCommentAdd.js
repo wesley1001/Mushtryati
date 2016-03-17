@@ -35,10 +35,10 @@ export default class MediaCommentAdd extends Component {
           style={[styles.loginInput,styles.mTop20]}
           placeholder="تعليق"
           placeholderTextColor={'#E2E2E2'}
-          autoFocus={true}
+          autoFocus={false}
           multiline={true}
           ref='commentbox'
-          onChangeText={this.handleChange}
+          onChangeText={()=>this.handleChange}
         />
 
         <TouchableHighlight onPress={()=>this.submitComment()} style={styles.buttonGreen} underlayColor="transparent">

@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { ScrollView,View, Text, StyleSheet, Dimensions, DeviceEventEmitter } from 'react-native';
+import { ScrollView, Dimensions, DeviceEventEmitter } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { assets }  from '../../utils/assets';
-import { Icon } from 'react-native-icons';
 import { commentMedia, fetchComments } from './../../actions/Media/comments';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
 import LoadingIndicator from './../../components/LoadingIndicator';
+const Actions = require('react-native-router-flux').Actions;
 
 class MediaComments extends Component {
 
@@ -19,10 +18,9 @@ class MediaComments extends Component {
   }
 
   componentWillMount() {
-    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
-    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
-    const {dispatch} = this.props;
-    dispatch(fetchComments());
+    //DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
+    //DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
+    this.props.dispatch(fetchComments());
   }
 
   keyboardWillShow(e) {
@@ -47,21 +45,13 @@ class MediaComments extends Component {
   render() {
     const {comments} = this.props;
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} ref="scrollView">
-        <MediaCommentList comments={comments} line={assets.line} />
+      <ScrollView contentContainerStyle={[{paddingBottom: 49,paddingTop: 64, margin:5, height: this.state.visibleHeight}]} ref="scrollView">
+        <MediaCommentList comments={comments} />
         <MediaCommentAdd commentMedia={this.commentMedia.bind(this)}/>
       </ScrollView>
     )
   }
 }
-
-var styles = StyleSheet.create({
-  contentContainer: {
-    paddingBottom: 64,
-    paddingTop: 64,
-    margin:5
-  }
-});
 
 function mapStateToProps(state) {
   const { entities,mediaReducer,userReducer } = state;
