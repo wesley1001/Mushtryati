@@ -36,7 +36,7 @@ export function fetchComments() {
   return (dispatch,state) => {
     dispatch({type:COMMENTS_REQUEST});
     const mediaID = state().mediaReducer.current;
-    const url = API_ROOT + `medias/${mediaID}/comments`;
+    const url = API_ROOT + `/medias/${mediaID}/comments`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -56,13 +56,13 @@ export function commentMedia(comment) {
       media: state().mediaReducer.current
     };
     return getUserToken().then((token) => {
-      const url = API_ROOT + `medias/comment?api_token=${token}`;
+      const url = API_ROOT + `/medias/comment?api_token=${token}`;
       return fetch(url, {
         method: 'POST',
         body: JSON.stringify(params)
       })
         .then(response => response.json())
-        .then(json => dispatch(fetchMediaComments()))
+        .then(json => dispatch(fetchComments()))
     }).catch((err)=> console.log('error', err))
 
   }

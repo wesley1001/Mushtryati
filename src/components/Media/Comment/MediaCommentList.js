@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView
 export default class MediaCommentList extends Component {
 
   static propTypes = {
-
+    comments: PropTypes.array.isRequired
   }
 
   constructor(props) {
@@ -15,22 +15,20 @@ export default class MediaCommentList extends Component {
   renderRow(comment) {
     return (
       <View style={styles.cellContainer}>
-        <TouchableHighlight onPress={this.props.onSelect} underlayColor='transparent'>
-          <View style={styles.cellWrapper}>
-            <View style={styles.imageContainer}>
-              {comment.user.image ? <Image style={styles.image} source={{uri:comment.user.image}}/> : <View/>}
-            </View>
-
-            <View style={styles.titleContainer}>
-              <Text style={styles.title}>
-                {comment.user.name}
-              </Text>
-              <Text style={styles.comment}>
-                {comment.comment}
-              </Text>
-            </View>
+        <View style={styles.cellWrapper}>
+          <View style={styles.imageContainer}>
+            {comment.user.image ? <Image style={styles.image} source={{uri:comment.user.image}}/> : <View/>}
           </View>
-        </TouchableHighlight>
+
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>
+              {comment.user.name}
+            </Text>
+            <Text style={styles.comment}>
+              {comment.comment}
+            </Text>
+          </View>
+        </View>
       </View>
     )
   }
@@ -38,18 +36,16 @@ export default class MediaCommentList extends Component {
   render() {
     const {comments} = this.props;
 
-    if (comments.length && comments.length > 0) {
-      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-      let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
-      return (
-        <ListView
-          dataSource={dataSource}
-          renderRow={this.renderRow.bind(this)}
-          automaticallyAdjustContentInsets={false}
-          style={styles.container}
-        />
-      )
-    }
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
+    let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
+    return (
+      <ListView
+        dataSource={dataSource}
+        renderRow={this.renderRow.bind(this)}
+        automaticallyAdjustContentInsets={false}
+        style={styles.container}
+      />
+    )
   }
 }
 

@@ -39,9 +39,9 @@ export default class MediaCommentAdd extends Component {
           multiline={true}
           ref='commentbox'
           onChangeText={this.handleChange}
-          />
+        />
 
-        <TouchableHighlight onPress={this.submitComment} style={styles.buttonGreen} underlayColor="transparent">
+        <TouchableHighlight onPress={()=>this.submitComment()} style={styles.buttonGreen} underlayColor="transparent">
           <Text style={styles.buttonText}>ارسل</Text>
         </TouchableHighlight>
 

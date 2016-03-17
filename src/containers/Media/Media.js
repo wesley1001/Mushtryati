@@ -63,8 +63,6 @@ class Media extends Component {
 
     const {mediaReducer,media,author,comments} = this.props;
 
-    console.log('comments',comments);
-
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
     }
@@ -86,7 +84,7 @@ class Media extends Component {
           />
         </View>
         <MediaItem media={media} />
-        { comments.size ? <MediaCommentList comments={comments}/> : <View/> }
+        <MediaCommentList comments={comments}/>
       </ScrollView>
     );
 
@@ -112,6 +110,7 @@ function mapStateToProps(state) {
   const { entities,mediaReducer,userReducer } = state;
   const media = entities.medias[mediaReducer.current];
   const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
+
   return {
     mediaReducer,
     media,

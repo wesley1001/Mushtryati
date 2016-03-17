@@ -15,7 +15,7 @@ class MediaComments extends Component {
     this.state = {
       visibleHeight: Dimensions.get('window').height
     }
-    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    this.commentMedia = this.commentMedia.bind(this);
   }
 
   componentWillMount() {
@@ -48,8 +48,8 @@ class MediaComments extends Component {
     const {comments} = this.props;
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} ref="scrollView">
-        {comments.size ? <MediaCommentList comments={comments} line={assets.line} /> : <View/> }
-        <MediaCommentAdd commentMedia={this.commentMedia()}/>
+        <MediaCommentList comments={comments} line={assets.line} />
+        <MediaCommentAdd commentMedia={this.commentMedia.bind(this)}/>
       </ScrollView>
     )
   }
