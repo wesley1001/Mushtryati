@@ -3,6 +3,10 @@ import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView
 
 export default class MediaCommentList extends Component {
 
+  static propTypes = {
+
+  }
+
   constructor(props) {
     super(props);
     this.renderRow = this.renderRow.bind(this);
