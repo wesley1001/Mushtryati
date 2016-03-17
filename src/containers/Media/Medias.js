@@ -28,6 +28,9 @@ class Medias extends Component {
   }
 
   createMedia() {
+    if(!this.props.userReducer.isAuthenticated) {
+      return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
+    }
     return Actions.captureMedia();
   }
 
@@ -41,7 +44,7 @@ class Medias extends Component {
 
     return (
       <ScrollView contentInset={{bottom:40}}>
-        <AddMediaNavbar postMedia={this.createMedia.bind(this)} />
+        <AddMediaNavbar createMedia={this.createMedia.bind(this)} />
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
@@ -50,10 +53,11 @@ class Medias extends Component {
 }
 
 function mapStateToProps(state) {
-  const {entities,mediasReducer } = state;
+  const {entities,mediasReducer,userReducer } = state;
   return {
     medias:entities.medias ? entities.medias : [],
-    mediasReducer
+    mediasReducer,
+    userReducer
   }
 }
 

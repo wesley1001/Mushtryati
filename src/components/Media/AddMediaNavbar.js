@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 export default class AddMediaNavbar extends Component {
 
   static propTypes = {
-    postMedia:PropTypes.func.isRequired
+    createMedia:PropTypes.func.isRequired
   }
 
   render() {
