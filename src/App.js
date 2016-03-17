@@ -12,7 +12,7 @@ import User from './containers/User/User';
 import UserScene from './components/User/UserScene';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
-import Favorites from './containers/User/Favorites';
+import UserFavorites from './containers/User/UserFavorites';
 import Home from './containers/Home';
 import CaptureMedia from './containers/Media/CaptureMedia';
 import TabIcon from './components/TabIcon';
@@ -45,8 +45,8 @@ class App extends Component {
         <Route initial={true}  name="tabBar">
           <Router footer={TabBar} hideNavBar={true} tabBarStyle={{backgroundColor:'#343459', justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, paddingTop:10}}>
             <Route name="settingsTab" schema="tab" component={Medias} selectedTabIcon="ion|ios-gear" tabIcon="ion|ios-gear-outline"  />
-            <Route name="favoritesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
-            <Route name="likesTab" schema="tab" component={Favorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
+            <Route name="favoritesTab" schema="tab" component={UserFavorites}  selectedTabIcon="ion|android-star" tabIcon="ion|android-star-outline"   />
+            <Route name="likesTab" schema="tab" component={UserFavorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
 
             <Route initial={true} name="mediasTab" schema="tab" selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediasRouter" >
@@ -65,6 +65,7 @@ class App extends Component {
             </Route>
           </Router>
         </Route>
+
         <Route name="captureMedia" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
 
         <Route name="login" component={Login}  />

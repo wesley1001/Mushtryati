@@ -4,25 +4,8 @@ import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
-  FAVORITES_SUCCESS,
-  FAVORITES_REQUEST,
   MEDIA_FAVORITE,
 } from '../../constants/actiontypes';
-
-//function favoriteRequest() {
-//  return {
-//    type: FAVORITES_REQUEST
-//  }
-//}
-
-function favoriteSuccess(payload) {
-  console.log('payload',payload.isFavorited);
-  const normalized = normalize(payload.data,Schemas.USER);
-  return {
-    type: MEDIA_FAVORITE,
-    //entities: normalized.entities
-  }
-}
 
 function toggleFavorite(payload) {
   console.log('payload',payload.isFavorited);
@@ -33,20 +16,6 @@ function toggleFavorite(payload) {
     type: MEDIA_FAVORITE,
     entities: normalized.entities
   }
-}
-
-export function fetchFavorites() {
-  //return (dispatch) => {
-  //  dispatch(favoriteRequest());
-  //  return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
-  //    .then(response => response.json())
-  //    .then(json => {
-  //      dispatch(favoriteSuccess(json));
-  //    })
-  //    .catch((err)=> {
-  //      dispatch(xhrRequestFailure(err));
-  //    })
-  //}
 }
 
 /**

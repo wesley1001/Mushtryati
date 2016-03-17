@@ -10,7 +10,6 @@ export default class MediaList extends Component {
         <TouchableHighlight onPress={() => this.props.loadMedia(media)} underlayColor="transparent">
           <Image style={styles.thumbnail} source={{uri:media.url}}/>
         </TouchableHighlight>
-        <Text>{media.caption}</Text>
       </View>
     )
   }
@@ -47,7 +46,6 @@ var styles = StyleSheet.create({
     width: 100,
     height: 100,
     alignItems: 'center',
-    backgroundColor:'green',
     borderRadius:50
   },
   thumbnail: {

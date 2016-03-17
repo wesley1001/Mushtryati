@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchMedias } from './../../actions/Media/medias';
+import { fetchFavorites } from './../../actions/User/favorites';
 import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 import AddMediaNavbar from './../../components/Media/AddMediaNavbar';
 const Actions = require('react-native-router-flux').Actions;
 
-class Medias extends Component {
+class UserFavorites extends Component {
 
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ class Medias extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchMedias());
+    dispatch(fetchFavorites());
   }
 
   loadMedia(media) {
@@ -26,24 +26,12 @@ class Medias extends Component {
     });
   }
 
-  createMedia() {
-    if(!this.props.userReducer.isAuthenticated) {
-      return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
-    }
-    return Actions.captureMedia();
-  }
-
   render() {
-
-    const { medias,mediasReducer } = this.props;
-
-    if (mediasReducer.isFetching) {
-      return <LoadingIndicator />;
-    }
+    const { medias,userReducer } = this.props;
 
     return (
-      <ScrollView contentInset={{bottom:40}}>
-        <AddMediaNavbar createMedia={this.createMedia.bind(this)} />
+      <ScrollView contentInset={{bottom:40,top:10}} style={{ paddingTop:64}}>
+        { userReducer.favorites.isFetching ? <LoadingIndicator/> : <View/> }
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
@@ -53,11 +41,12 @@ class Medias extends Component {
 
 function mapStateToProps(state) {
   const {entities,mediasReducer,userReducer } = state;
+  const user = entities.users[userReducer.authUserID];
   return {
-    medias:entities.medias ? entities.medias : [],
+    medias:user ? user.favorites ? entities.users[userReducer.authUserID].favorites.map((favoriteID) => entities.medias[favoriteID]) : [] : [],
     mediasReducer,
     userReducer
   }
 }
 
-export default connect(mapStateToProps)(Medias)
+export default connect(mapStateToProps)(UserFavorites)
