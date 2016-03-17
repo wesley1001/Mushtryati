@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchMedias } from './../../actions/Media/medias';
 import { setCurrentMedia } from './../../actions/Media/media';

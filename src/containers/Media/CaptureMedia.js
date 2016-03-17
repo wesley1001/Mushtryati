@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { StatusBar } from 'react-native';
-import {connect} from 'react-redux';
-const Actions = require('react-native-router-flux').Actions;
+import { connect } from 'react-redux';
 import CaptureMediaScene from './../../components/Media/CaptureMediaScene';
+const Actions = require('react-native-router-flux').Actions;
 
 class CaptureMedia extends Component {
 

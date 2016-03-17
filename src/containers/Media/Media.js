@@ -61,7 +61,7 @@ class Media extends Component {
 
   render() {
 
-    const {mediaReducer,media,author,comments} = this.props;
+    const {mediaReducer,media,user,comments} = this.props;
 
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
@@ -69,7 +69,7 @@ class Media extends Component {
 
     return (
       <ScrollView style={styles.container} contentInset={{bottom:40}} >
-        <MediaAuthorInfo user={author} loadUser={this.loadUser.bind(this)}/>
+        <MediaAuthorInfo user={user} loadUser={this.loadUser.bind(this)}/>
         <View style={styles.buttonWrapper}>
           <MediaCommentIcon loadComments={() => this.loadComments()} />
           <MediaFavoriteIcon
@@ -114,7 +114,7 @@ function mapStateToProps(state) {
   return {
     mediaReducer,
     media,
-    author: entities.users[media.user],
+    user: entities.users[media.user],
     comments: comments,
     userReducer
   }

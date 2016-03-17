@@ -1,6 +1,5 @@
-'use strict';
-
-import React, { Component, ScrollView, Text, StyleSheet, View } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { ScrollView } from 'react-native';
 import {connect} from '../../../node_modules/react-redux';
 import MediaFavoriteList from './../../components/Media/Favorite/MediaFavoriteList';
 import { assets }  from '../../utils/assets';

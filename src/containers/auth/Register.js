@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
 import { signup,onRegisterFormFieldChange } from '../../actions/Auth/register';
