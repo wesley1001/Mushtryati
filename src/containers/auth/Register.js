@@ -1,37 +1,73 @@
-'use strict';
-import React, { Component, StyleSheet, Text, View,  TouchableHighlight, TextInput, Image,ActivityIndicatorIOS } from 'react-native';
-import {register} from '../../actions/Auth/register';
+import React, { Component } from 'react';
+import { View, ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
+import { signup,onRegisterFormFieldChange } from '../../actions/Auth/register';
 import RegisterScene from './../../components/Auth/RegisterScene';
 import LoadingIndicator from './../../components/LoadingIndicator';
-
 const Actions = require('react-native-router-flux').Actions;
 
 class Register extends Component {
 
-  handleRegister = (inputs) => {
-    dispatch(register(inputs, (cb)=> {
-      if (cb.success) {
-        Actions.login();
-      }
-    }));
-  };
+  constructor(props) {
 
-  handleLoginRoute = () => {
-    return Actions.login();
-  };
+    super(props);
+
+    const {fields} = this.props.register.form;
+
+    this.state = {
+      fields: {
+        name: fields.name,
+        email: fields.email,
+        password: fields.password,
+        passwordConfirmation: fields.passwordConfirmation,
+        mobile: fields.mobile
+      }
+    };
+  }
+
+
+  onFieldChange(value, field) {
+    let changedField = field[0];
+    const { dispatch } = this.props;
+    dispatch(onRegisterFormFieldChange(changedField, value[changedField]));
+    this.setState({fields: value});
+  }
+
+  handleRegister() {
+    const {dispatch,register} = this.props;
+    const fields = this.state.fields;
+    console.log('fields', JSON.stringify(fields));
+    dispatch(signup(fields, (cb)=> {
+      Actions.login();
+    }));
+  }
+
+  handleLoginRoute() {
+    Actions.login();
+  }
 
   render() {
     const { register } = this.props;
 
-    if (register.isFetching) {
-      return <LoadingIndicator />;
+    if (register.form.error != null) {
+      alert('Error, Please try again');
     }
+
     return (
-      <RegisterScene
-        onRegisterSubmit={this.handleRegister}
-        onLoginRouteClick={this.handleLoginRoute}
+
+      <ScrollView style={{padding:10,paddingTop: 64}}>
+
+        {register.isFetching ? <LoadingIndicator style={{ marginTop:10}} /> : <View />}
+
+        <RegisterScene
+          register={register}
+          fields={this.state.fields}
+          onRegisterPress={this.handleRegister.bind(this)}
+          onLoginRoutePress={this.handleLoginRoute.bind(this)}
+          onChange={this.onFieldChange.bind(this)}
         />
+
+      </ScrollView>
     );
   }
 

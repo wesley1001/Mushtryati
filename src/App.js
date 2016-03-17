@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { StatusBar, Navigator } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { loginUserByToken } from './actions/Auth/login';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Media/Medias';
@@ -14,11 +16,18 @@ import Favorites from './containers/Favorites';
 import Home from './containers/Home';
 import CaptureMedia from './containers/Media/CaptureMedia';
 import TabIcon from './components/TabIcon';
+import LoginDialog from './components/LoginDialog';
 
-export default class App extends Component {
+class App extends Component {
 
   componentDidMount() {
     StatusBar.setBarStyle('light-content');
+    const {dispatch} = this.props;
+    dispatch(loginUserByToken()).then((success)=>{
+      if(success) {
+        //dispatch(fetchFavorites());
+      }
+    });
   }
 
   render() {
@@ -49,23 +58,30 @@ export default class App extends Component {
                 <Route name="userEntityScene" component={User} />
               </Router>
             </Route>
-            <Route hideNavBar={true} name="homeTab" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
+            <Route hideNavBar={true} name="home" schema="tab"  selectedTabIcon="ion|ios-home" tabIcon="ion|ios-home-outline">
               <Router name="homeRouter">
-                <Route name="home" component={Home}/>
+                <Route name="homeScene" component={Home}/>
               </Router>
             </Route>
           </Router>
         </Route>
         <Route name="captureMedia" hideTabBar={true} hideNavBar={true} component={CaptureMedia}  />
-        <Route name="auth" hideNavBar={true} >
-          <Router name="authRouter">
-            <Route name="login" component={Login}  />
-            <Route name="register" component={Register} title="تسجيل الدخول"   />
-          </Router>
-        </Route>
+
+        <Route name="login" component={Login}  />
+        <Route name="register" component={Register} title="تسجيل الدخول"   />
+
+        <Route name="loginDialog" schema="modal" hideNavBar={true}  component={LoginDialog} />
 
       </Router>
     );
 
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    state
+  }
+}
+
+export default connect(mapStateToProps)(App);

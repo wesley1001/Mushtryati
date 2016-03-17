@@ -38,10 +38,16 @@ class Media extends Component {
   }
 
   favoriteMedia() {
+    if(!this.props.userReducer.isAuthenticated) {
+      return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
+    }
     this.props.dispatch(favoriteMedia());
   }
 
   downloadMedia() {
+    if(!this.props.userReducer.isAuthenticated) {
+      return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
+    }
     this.props.dispatch(favoriteMedia());
   }
 
@@ -55,6 +61,7 @@ class Media extends Component {
   render() {
 
     const {mediaReducer,media,author,comments} = this.props;
+    
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
     }
@@ -110,7 +117,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const { entities,mediaReducer } = state;
+  const { entities,mediaReducer,userReducer } = state;
   const media = entities.medias[mediaReducer.current];
   const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
   return {
@@ -118,6 +125,7 @@ function mapStateToProps(state) {
     media,
     author: entities.users[media.user],
     comments: comments,
+    userReducer
   }
 }
 

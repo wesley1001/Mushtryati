@@ -18,7 +18,6 @@ function loginRequest() {
 }
 
 function loginSuccess(payload) {
-  console.log('pau',payload);
   return {
     type: LOGIN_SUCCESS,
     userID:payload.userID,

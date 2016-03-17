@@ -1,6 +1,7 @@
 import {API_ROOT} from './../../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../constants/Schema';
+import { getUserToken } from './../../utils/storage';
 
 import {
   FAVORITES_SUCCESS,
@@ -8,11 +9,11 @@ import {
   MEDIA_FAVORITE,
 } from '../../constants/ActionTypes';
 
-function favoriteRequest() {
-  return {
-    type: FAVORITES_REQUEST
-  }
-}
+//function favoriteRequest() {
+//  return {
+//    type: FAVORITES_REQUEST
+//  }
+//}
 
 //function favoriteSuccess(payload) {
 //  return {
@@ -29,45 +30,42 @@ function toggleFavorite(media) {
   }
 }
 
-export function fetchFavorites(mediaID) {
-  return (dispatch) => {
-    dispatch(favoriteRequest());
-    return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
-      .then(response => response.json())
-      .then(json => {
-        dispatch(favoriteSuccess(json));
-      })
-      .catch((err)=> {
-        dispatch(xhrRequestFailure(err));
-      })
-  }
-}
+//export function fetchFavorites(mediaID) {
+//  return (dispatch) => {
+//    dispatch(favoriteRequest());
+//    return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
+//      .then(response => response.json())
+//      .then(json => {
+//        dispatch(favoriteSuccess(json));
+//      })
+//      .catch((err)=> {
+//        dispatch(xhrRequestFailure(err));
+//      })
+//  }
+//}
 
 /**
- * @param params
  * @returns {Function}
  * Favorite a media
  */
 export function favoriteMedia() {
   return (dispatch,state) => {
-
     const params = {
-      user:state().userReducer.authUserID,
       media:state().mediaReducer.current
     };
-
     const media = state().entities.medias[params.media];
-
-    // if the api request failed, remove the item from array
     dispatch(toggleFavorite(media));
-
-    return fetch(API_ROOT + '/medias/favorite', {
-      method: 'POST',
-      body: JSON.stringify(params)
+    return getUserToken().then((token) => {
+      const url = API_ROOT + `/medias/favorite?api_token=${token}`;
+      return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log('success',json);
+          //dispatch(favoriteSuccess(json));
+        }).catch((err)=> console.log(err))
     })
-      .then(response => response.json())
-      .then(json => {
-        //dispatch(favoriteSuccess(json));
-      }).catch((err)=> console.log(err))
   }
 }

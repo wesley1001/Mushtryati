@@ -1,101 +1,80 @@
-'use strict'
-import React, { Component,View,Image } from 'react-native';
-import LoadingIndicator from './../../components/LoadingIndicator';
+'use strict';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ScrollView, View, Image } from 'react-native';
+import { login,onLoginFormFieldChange } from './../../actions/Auth/login';
 import LoginScene from './../../components/Auth/LoginScene';
-import {login,onLoginFormFieldChange} from '../../actions/Auth/login';
-import {connect} from '../../../node_modules/react-redux';
-import {getUser,saveUser} from './../../utils/storage';
-import {assets} from './../../utils/assets';
-
 const Actions = require('react-native-router-flux').Actions;
 
-class Login extends Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      credentials: {
-        email: this.props.login.form.fields.email,
-        password: this.props.login.form.fields.password,
-      }
+      credentials: { email : this.props.login.form.fields.email, password : this.props.login.form.fields.password }
     };
   }
 
-  componentWillMount() {
-    //return getUser((user)=> {
-    //  if (user != null) {
-    //    return Actions.tabBar();
-    //  }
-    //});
+  componentDidMount() {
+    this.setState({
+      credentials : {email : 'admin@test.com',password:'password'}
+    });
   }
 
   handleLogin() {
     const {dispatch} = this.props;
     const credentials = this.state.credentials;
-    dispatch(login(credentials, (cb)=> {
-      if (cb.success) {
-        saveUser(cb.user);
-        return Actions.tabBar();
-      }
-    }));
+
+    dispatch(login(credentials))
+      .then((success)=> {
+        if(success) {
+          Actions.home();
+        } else {
+          alert('Wrong Credentials, Try again');
+        }
+      })
+      .catch(()=>{alert('network error')});
   }
 
   handleRegisterRoute() {
-    return Actions.register();
+    Actions.register();
   }
 
   handleForgotPasswordRoute() {
     // @todo: implement route
-    return Actions.tabBar();
+    Actions.home();
   }
 
   onFieldChange(value, field) {
-
     let changedField = field[0];
-
     const { dispatch } = this.props;
-
-    dispatch(onLoginFormFieldChange(changedField, value[changedField]));
-
+    //dispatch(onLoginFormFieldChange(changedField, value[changedField]));
     this.setState({credentials: value});
   }
 
   render() {
-
-    const { login,global } = this.props;
-
+    const { login } = this.props;
     return (
-      <View style={{flex: 1,padding: 10}}>
-
-        <Image style={{  height: 100, marginTop: 80,  alignSelf: 'center'}} source={assets.mark}/>
-
-        {global.isFetching ? <LoadingIndicator /> : <View />}
-
+      <ScrollView style={{paddingTop: 64}}>
         <LoginScene
           login={login}
           credentials={this.state.credentials}
-          onLoginPressed={this.handleLogin.bind(this)}
+          onLoginPress={this.handleLogin.bind(this)}
           onRegisterRoutePress={this.handleRegisterRoute.bind(this)}
           onForgotPasswordRoutePress={this.handleForgotPasswordRoute.bind(this)}
           onChange={this.onFieldChange.bind(this)}
-          />
-
-
-      </View>
+        />
+      </ScrollView>
     );
-
   }
-
 }
 
 function mapStateToProps(state) {
-  const { login,global } = state
   return {
     ...state,
-    login,
-    global
+    login : state.login
   }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(Login);

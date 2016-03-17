@@ -1,5 +1,5 @@
-'use strict'
-import React, { Component, StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-native';
 import t from 'tcomb-form-native';
 import FormButton from './../FormButton';
 import stylesheet from '../../assets/style/form';
@@ -7,8 +7,17 @@ const Form = t.form.Form;
 
 export default class LoginScene extends Component {
 
+  static propTypes= {
+    login:PropTypes.object.isRequired,
+    credentials:PropTypes.object.isRequired,
+    onChange:PropTypes.func.isRequired,
+    onLoginPress:PropTypes.func.isRequired,
+    onForgotPasswordRoutePress:PropTypes.func.isRequired,
+    onRegisterRoutePress:PropTypes.func.isRequired,
+  };
+
   handleLogin() {
-    this.props.onLoginPressed();
+    this.props.onLoginPress();
   }
 
   handleForgotPasswordRoutePress() {
@@ -68,7 +77,6 @@ export default class LoginScene extends Component {
           />
 
         <FormButton
-          isDisabled={!login.form.isValid || login.isFetching}
           onPress={this.handleLogin.bind(this)}
           buttonText='الدخول'/>
 
