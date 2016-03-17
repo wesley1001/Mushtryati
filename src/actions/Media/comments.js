@@ -1,6 +1,7 @@
 import {API_ROOT} from './../../utils/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../constants/Schema';
+import { getUserToken } from './../../utils/storage';
 
 import {
   COMMENTS_REQUEST,
@@ -11,7 +12,6 @@ import {
 } from '../../constants/ActionTypes';
 
 function commentsSuccess(payload) {
-  console.log(payload);
   const normalized = normalize(payload.data, Schemas.MEDIA);
   return {
     type: COMMENTS_SUCCESS,
@@ -32,37 +32,38 @@ function commentSaved(payload) {
   }
 }
 
-export function fetchMediaComments() {
+export function fetchComments() {
   return (dispatch,state) => {
     dispatch({type:COMMENTS_REQUEST});
     const mediaID = state().mediaReducer.current;
-    const url = API_ROOT + '/medias/' + mediaID + '/comments';
+    const url = API_ROOT + `medias/${mediaID}/comments`;
     return fetch(url)
       .then(response => response.json())
       .then(json => {
         dispatch(commentsSuccess(json));
       })
       .catch((err)=> {
-        dispatch({type:COMMENTS_FAILURE,error:err});
+        dispatch({type: COMMENTS_FAILURE, error: err});
       })
   }
 }
 
-export function addMediaComment(comment) {
+export function commentMedia(comment) {
   return (dispatch,state) => {
     dispatch(commentSaving());
     const params = {
       comment,
-      user:state().userReducer.authUserID,
-      media:state().mediaReducer.current
+      media: state().mediaReducer.current
     };
-    const url = API_ROOT + '/medias/comment';
-    return fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(params)
-    })
-      .then(response => response.json())
-      .then(json => dispatch(fetchMediaComments()))
-      .catch((err)=> console.log('error',err))
+    return getUserToken().then((token) => {
+      const url = API_ROOT + `medias/comment?api_token=${token}`;
+      return fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(params)
+      })
+        .then(response => response.json())
+        .then(json => dispatch(fetchMediaComments()))
+    }).catch((err)=> console.log('error', err))
+
   }
 }

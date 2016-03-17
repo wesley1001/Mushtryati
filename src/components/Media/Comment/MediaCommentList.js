@@ -1,6 +1,5 @@
-'use strict';
-
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView } from 'react-native';
 
 export default class MediaCommentList extends Component {
 
@@ -37,7 +36,7 @@ export default class MediaCommentList extends Component {
 
     if (comments.length && comments.length > 0) {
       let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
-      let dataSource = comments.size ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
+      let dataSource = comments ? ds.cloneWithRows(comments) : ds.cloneWithRows([]);
       return (
         <ListView
           dataSource={dataSource}

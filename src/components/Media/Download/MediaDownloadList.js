@@ -1,15 +1,18 @@
-'use strict';
-
-import React, { Component, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-icons';
 
 export default class MediaDownloadList extends Component {
+
+  static propTypes = {
+    loadDownloads : PropTypes.func.isRequired
+  }
 
   render() {
     return (
       <View style={{flex:1, flexDirection:'row',justifyContent:'center'}}>
         <Text style={styles.count}>20</Text>
-        <TouchableHighlight onPress={() => this.props.onLikeIconPress()} underlayColor="transparent">
+        <TouchableHighlight onPress={() => this.props.loadDownloads()} underlayColor="transparent">
           <Icon
             name='ion|android-favorite-outline'
             size={22}

@@ -3,7 +3,7 @@ import { ScrollView,View, Text, StyleSheet, Dimensions, DeviceEventEmitter } fro
 import { connect } from '../../../node_modules/react-redux';
 import { assets }  from '../../utils/assets';
 import { Icon } from 'react-native-icons';
-import { addMediaComment, fetchMediaComments } from './../../actions/Media/comments';
+import { commentMedia, fetchComments } from './../../actions/Media/comments';
 import MediaCommentList from './../../components/Media/Comment/MediaCommentList';
 import MediaCommentAdd from './../../components/Media/Comment/MediaCommentAdd';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -22,7 +22,7 @@ class MediaComments extends Component {
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this));
     const {dispatch} = this.props;
-    dispatch(fetchMediaComments());
+    dispatch(fetchComments());
   }
 
   keyboardWillShow(e) {
@@ -34,9 +34,12 @@ class MediaComments extends Component {
     this.setState({visibleHeight: Dimensions.get('window').height})
   }
 
-  handleCommentSubmit(comment) {
+  commentMedia(comment) {
+    if(!this.props.userReducer.isAuthenticated) {
+      return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
+    }
     const {dispatch} = this.props;
-    dispatch(addMediaComment(comment)).then(()=>{
+    dispatch(commentMedia(comment)).then(()=>{
       this.refs.scrollView.scrollTo({x: 0})
     });
   }
@@ -45,8 +48,8 @@ class MediaComments extends Component {
     const {comments} = this.props;
     return (
       <ScrollView contentContainerStyle={[styles.contentContainer,{height: this.state.visibleHeight}]} ref="scrollView">
-        <MediaCommentList comments={comments} line={assets.line} />
-        <MediaCommentAdd onCommentSubmit={this.handleCommentSubmit}/>
+        {comments.size ? <MediaCommentList comments={comments} line={assets.line} /> : <View/> }
+        <MediaCommentAdd commentMedia={this.commentMedia()}/>
       </ScrollView>
     )
   }
@@ -61,11 +64,12 @@ var styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  const { entities,mediaReducer } = state;
+  const { entities,mediaReducer,userReducer } = state;
   const media = entities.medias[mediaReducer.current];
   const comments = media.comments ? media.comments.map((commentID) => Object.assign({},entities.comments[commentID],{user:entities.users[entities.comments[commentID].user]})) : [];
   return {
-    comments
+    comments,
+    userReducer
   }
 }
 

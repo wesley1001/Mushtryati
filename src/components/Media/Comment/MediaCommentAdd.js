@@ -1,7 +1,5 @@
-'use strict';
-
-import React, { Component, View, Text, TextInput, StyleSheet, TouchableHighlight} from 'react-native';
-
+import React, { Component, PropTypes } from 'react';
+import { View, Text, TextInput, TouchableHighlight, StyleSheet } from 'react-native';
 export default class MediaCommentAdd extends Component {
 
   constructor(props) {
@@ -13,6 +11,10 @@ export default class MediaCommentAdd extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  static propTypes = {
+    commentMedia:PropTypes.func.isRequired,
+  };
+
   handleChange = (comment) => {
     return this.setState({
       comment: comment
@@ -20,7 +22,7 @@ export default class MediaCommentAdd extends Component {
   };
 
   submitComment() {
-    this.props.onCommentSubmit(this.state.comment);
+    this.props.commentMedia(this.state.comment);
     this.setState({
       comment:''
     });

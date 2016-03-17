@@ -63,6 +63,8 @@ class Media extends Component {
 
     const {mediaReducer,media,author,comments} = this.props;
 
+    console.log('comments',comments);
+
     if (mediaReducer.isFetching) {
       return <LoadingIndicator />;
     }
