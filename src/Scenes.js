@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
 
 export const Scenes = Actions.create(
 
-  <Scene key="modal" component={Modal} style={styles.container} >
+  <Scene key="modal" component={Modal} >
 
-    <Scene key="root" hideNavBar={true}>
+    <Scene key="root" hideNavBar={true} >
 
       <Scene key="tabBar" component={TabBar} tabs={true}
              tabBarStyle={{backgroundColor:'#343459', justifyContent:'center', alignItems:'center', alignSelf:'center', height:40, paddingTop:10}}
@@ -56,8 +56,9 @@ export const Scenes = Actions.create(
                navigationBarStyle={{backgroundColor: '#343459',borderBottomColor: '#343459'}}
                titleStyle={{ color:'white', fontSize:17}}
                barButtonTextStyle={{ fontSize:17, color:'white' }}
+               style={styles.container}
         >
-          <Scene key="mediasScene"  component={Medias} rightTitle="+" onRight={()=>Actions.captureMedia()}  />
+          <Scene key="mediasScene"  component={Medias} rightTitle="+" onRight={()=>Actions.captureMedia()}   />
           <Scene key="mediaScene" component={Media} />
           <Scene key="userScene" component={User} />
           <Scene key="mediaCommentsScene" component={MediaComments} />

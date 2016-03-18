@@ -50,7 +50,7 @@ export default function userReducer(state = initialState, action = {}) {
     case LOGIN_SUCCESS:
       return state
         .set('authUserID',action.userID)
-        .set('isAuthenticated',true);
+        .set('isAuthenticated',false);
     case CREATE_COMMENT_REQUEST:
       return state
         .setIn(['comment', 'isCreating'], true)

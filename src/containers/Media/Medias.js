@@ -41,7 +41,7 @@ class Medias extends Component {
     }
 
     return (
-      <ScrollView contentInset={{bottom:40}}>
+      <ScrollView contentInset={{bottom:40}} style={{ backgroundColor:'white' }}>
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );

@@ -37,7 +37,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingVertical:20
+    paddingVertical:20,
+    paddingTop:64
   },
   row: {
     justifyContent: 'center',
