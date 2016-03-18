@@ -5,7 +5,6 @@ import { fetchFavorites } from './../../actions/User/favorites';
 import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
-import AddMediaNavbar from './../../components/Media/AddMediaNavbar';
 const Actions = require('react-native-router-flux').Actions;
 
 class UserFavorites extends Component {

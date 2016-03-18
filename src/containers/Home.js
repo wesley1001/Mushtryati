@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Image, Text, TouchableHighlight, View, ScrollView } from 'react-native';
-import {connect} from 'react-redux';
-import {fetchMedias} from './../actions/Media/medias';
+import { connect } from 'react-redux';
+import { fetchMedias } from './../actions/Media/medias';
 import Master from './../components/Master';
 import LoadingIndicator from './../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
@@ -26,30 +26,30 @@ class Medias extends Component {
 
   render() {
 
-    const {  global,entities } = this.props;
+    const {mediasReducer,medias } = this.props;
 
-    if (global.isFetching) {
+    if (mediasReducer.isFetching) {
       return <LoadingIndicator />;
     }
     return (
-        <ScrollView
-          contentInset={{bottom:49}}
-          contentContainerStyle={{paddingTop:64}}
-          automaticallyAdjustContentInsets={false}
-        >
-          <Master medias={entities.medias} loadMedia={this.loadMedia.bind(this)}/>
-        </ScrollView>
+      <ScrollView
+        contentInset={{bottom:49}}
+        contentContainerStyle={{paddingTop:64}}
+        automaticallyAdjustContentInsets={false}
+      >
+        <Master medias={medias} loadMedia={this.loadMedia.bind(this)}/>
+      </ScrollView>
     );
 
   }
 }
 
 function mapStateToProps(state) {
-  const {entities,global } = state
+  const {entities,mediasReducer } = state
   return {
     ...state,
-    global,
-    entities
+    mediasReducer,
+    medias:entities.medias
   }
 }
 

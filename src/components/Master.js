@@ -1,9 +1,8 @@
-'use strict';
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
-
-import {connect} from 'react-redux';
-var Lightbox = require('react-native-lightbox');
+import React, { Component, PropTypes } from 'react';
+import { Image, StyleSheet, Text, TouchableHighlight, View, ListView } from 'react-native';
+import { connect } from 'react-redux';
 import VideoPlayer from './Video';
+const Lightbox = require('react-native-lightbox');
 
 export default class Master extends Component {
 
