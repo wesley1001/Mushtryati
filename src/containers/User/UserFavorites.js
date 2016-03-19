@@ -20,9 +20,12 @@ class UserFavorites extends Component {
 
   loadMedia(media) {
     this.props.dispatch(setCurrentMedia(media.id));
+    Actions.mediasRouter();
+
     Actions.mediaScene({
       title:media.caption
     });
+
   }
 
   render() {
