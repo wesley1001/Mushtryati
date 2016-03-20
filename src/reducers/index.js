@@ -6,8 +6,6 @@ import userReducer from './user';
 import mediasReducer from './medias';
 import mediaReducer from './media';
 import commentsReducer from './comments';
-import favoritesReducer from './favorites';
-import downloadsReducer from './downloads';
 
 const rootReducer = combineReducers({
   entities,
@@ -16,9 +14,7 @@ const rootReducer = combineReducers({
   userReducer,
   mediasReducer,
   mediaReducer,
-  commentsReducer,
-  favoritesReducer,
-  downloadsReducer
+  commentsReducer
 });
 
 export default rootReducer;

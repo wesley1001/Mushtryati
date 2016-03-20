@@ -3,6 +3,9 @@ import {
   FAVORITES_REQUEST,
   FAVORITES_SUCCESS,
   FAVORITES_FAILURE,
+  DOWNLOADS_REQUEST,
+  DOWNLOADS_SUCCESS,
+  DOWNLOADS_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT_USER,
   SET_USER,
@@ -50,7 +53,7 @@ export default function userReducer(state = initialState, action = {}) {
     case LOGIN_SUCCESS:
       return state
         .set('authUserID',action.userID)
-        .set('isAuthenticated',false);
+        .set('isAuthenticated',true);
     case CREATE_COMMENT_REQUEST:
       return state
         .setIn(['comment', 'isCreating'], true)
@@ -80,6 +83,18 @@ export default function userReducer(state = initialState, action = {}) {
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], null)
     case FAVORITES_FAILURE:
+      return state
+        .setIn(['favorites', 'isFetching'], false)
+        .setIn(['favorites', 'error'], action.error);
+    case DOWNLOADS_REQUEST:
+      return state
+        .setIn(['favorites', 'isFetching'], true)
+        .setIn(['favorites', 'error'], null);
+    case DOWNLOADS_SUCCESS:
+      return state
+        .setIn(['favorites', 'isFetching'], false)
+        .setIn(['favorites', 'error'], null)
+    case DOWNLOADS_FAILURE:
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);

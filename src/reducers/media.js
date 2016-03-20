@@ -9,7 +9,15 @@ import {
 
 const InitialState = Record({
   isFetching:false,
-  current:null
+  current:null,
+  favorites:new (Record({
+    isFetching:false,
+    error:null
+  })),
+  downloads:new (Record({
+    isFetching:false,
+    error:null
+  })),
 });
 
 const initialState = new InitialState;
