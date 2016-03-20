@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchFavorites, favoriteMedia } from './../../actions/Media/favorites';
+import { fetchMediaFavorites, favoriteMedia } from './../../actions/Media/favorites';
 import { fetchDownloads, downloadMedia } from './../../actions/Media/downloads';
 import { fetchMedia } from './../../actions/Media/media';
 import { setCurrentUser } from './../../actions/User/user';
@@ -34,7 +34,7 @@ class Media extends Component {
   }
 
   loadDownloads() {
-    Actions.mediaFavoritesScene();
+    Actions.mediaDownloadsScene();
   }
 
   favoriteMedia() {
@@ -53,7 +53,7 @@ class Media extends Component {
 
   loadUser(user) {
     this.props.dispatch(setCurrentUser(user.id));
-    Actions.userEntityScene({
+    Actions.userScene({
       title:user.name
     })
   }

@@ -20,7 +20,7 @@ class UserDownloads extends Component {
 
   loadMedia(media) {
     this.props.dispatch(setCurrentMedia(media.id));
-    Actions.mediasRouter();
+    Actions.mediaTab();
 
     Actions.mediaScene({
       title:media.caption
@@ -30,10 +30,11 @@ class UserDownloads extends Component {
 
   render() {
     const { medias,userReducer } = this.props;
+    console.log('downloads',medias);
 
     return (
       <ScrollView contentInset={{bottom:40,top:10}} style={{ paddingTop:64}}>
-        { userReducer.downloads.isFetching ? <LoadingIndicator/> : <View/> }
+        { userReducer.downloads.isFetching && <LoadingIndicator/> }
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );

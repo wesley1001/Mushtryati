@@ -5,16 +5,38 @@ import { getUserToken } from './../../utils/storage';
 
 import {
   MEDIA_FAVORITE,
+  MEDIA_FAVORITES_SUCCESS,
+  MEDIA_FAVORITES_REQUEST,
+  MEDIA_FAVORITES_FAILURE,
 } from '../../constants/actiontypes';
 
 function toggleFavorite(payload) {
-  console.log('payload',payload.isFavorited);
   const media = Object.assign({},payload,{isFavorited:!payload.isFavorited});
-  console.log('payload after',media.isFavorited);
   const normalized = normalize(media,Schemas.MEDIA);
   return {
     type: MEDIA_FAVORITE,
     entities: normalized.entities
+  }
+}
+
+function mediaFavoritesRequest() {
+  return {
+    type: USER_FAVORITES_REQUEST
+  }
+}
+
+function mediaFavoritesSuccess(payload) {
+  const normalized = normalize(payload.data,Schemas.USER);
+  return {
+    type: USER_FAVORITES_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+function mediaFavoritesFailure(err) {
+  return {
+    type: USER_FAVORITES_FAILURE,
+    error:err
   }
 }
 
@@ -30,7 +52,6 @@ export function favoriteMedia() {
     };
 
     const media = state().entities.medias[params.media];
-    console.log('current med',media.isFavorited);
     dispatch(toggleFavorite(media));
 
     return getUserToken().then((token) => {
@@ -41,9 +62,34 @@ export function favoriteMedia() {
       })
         .then(response => response.json())
         .then(json => {
-          console.log('json',json)
           //dispatch(fetchFavorites());
         }).catch((err)=> console.log(err))
     })
+  }
+}
+
+/**
+ * @returns {Function}
+ */
+
+// get Auth user's favorites
+export function fetchMediaFavorites() {
+  return (dispatch,state) => {
+    const mediaID = state().mediaReducer.current;
+    dispatch(mediaFavoritesRequest());
+    return getUserToken().then((token) => {
+      const url = API_ROOT + `/medias/${mediaID}/favorites?api_token=${token}`;
+      console.log('url');
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          if(json.success) {
+            dispatch(mediaFavoritesSuccess(json));
+          } else {
+            console.log('rejected');
+            Promise.reject(new Error(json.message))
+          }
+        })
+    }).catch((err)=> dispatch(mediaFavoritesFailure(err)))
   }
 }

@@ -4,53 +4,52 @@ import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
-  FAVORITES_SUCCESS,
-  FAVORITES_REQUEST,
-  FAVORITES_FAILURE,
+  USER_FAVORITES_SUCCESS,
+  USER_FAVORITES_REQUEST,
+  USER_FAVORITES_FAILURE,
 } from '../../constants/actiontypes';
 
-function favoritesRequest() {
+function userFavoritesRequest() {
   return {
-    type: FAVORITES_REQUEST
+    type: USER_FAVORITES_REQUEST
   }
 }
 
-function favoritesSuccess(payload) {
+function userFavoritesSuccess(payload) {
   const normalized = normalize(payload.data,Schemas.USER);
   return {
-    type: FAVORITES_SUCCESS,
+    type: USER_FAVORITES_SUCCESS,
     entities: normalized.entities
   }
 }
 
-function favoritesFailure(err) {
+function userFavoritesFailure(err) {
   return {
-    type: FAVORITES_FAILURE,
+    type: USER_FAVORITES_FAILURE,
     error:err
   }
 }
 
 /**
  * @returns {Function}
- * Favorite a media
  */
 
 // get Auth user's favorites
-export function fetchFavorites() {
+export function fetchUserFavorites() {
   return (dispatch) => {
-    dispatch(favoritesRequest());
+    dispatch(userFavoritesRequest());
     return getUserToken().then((token) => {
       const url = API_ROOT + `/favorites?api_token=${token}`;
       return fetch(url)
         .then(response => response.json())
         .then(json => {
           if(json.success) {
-            dispatch(favoritesSuccess(json));
+            dispatch(userFavoritesSuccess(json));
           } else {
             console.log('rejected');
             Promise.reject(new Error(json.message))
           }
         })
-    }).catch((err)=> dispatch(favoritesFailure(err)))
+    }).catch((err)=> dispatch(userFavoritesFailure(err)))
   }
 }

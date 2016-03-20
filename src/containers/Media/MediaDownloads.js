@@ -1,27 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchMediaFavorites } from './../../actions/Media/favorites';
-import { setCurrentUser } from './../../actions/User/user';
+import { fetchFavorites } from './../../actions/Media/favorites';
 import MediaFavoriteList from './../../components/Media/Favorite/MediaFavoriteList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
-class MediaFavorites extends Component {
+class MediaDownloads extends Component {
 
   constructor(props) {
     super(props);
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchMediaFavorites());
+    const {dispatch} = this.props;
+    dispatch(fetchFavorites(this.props.data.id));
   }
 
   loadUser(user) {
-    this.props.dispatch(setCurrentUser(user.id));
-    Actions.userScene({
-      title:user.name
-    });
+    Actions.userEntityScene({
+      title:user.name,
+      data:user
+    })
   }
 
   followUser(user) {
@@ -53,4 +53,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(MediaFavorites)
+export default connect(mapStateToProps)(MediaDownloads)

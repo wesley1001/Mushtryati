@@ -1,8 +1,8 @@
 import { Record } from 'immutable';
 import {
-  FAVORITES_REQUEST,
-  FAVORITES_SUCCESS,
-  FAVORITES_FAILURE,
+  USER_FAVORITES_REQUEST,
+  USER_FAVORITES_SUCCESS,
+  USER_FAVORITES_FAILURE,
   DOWNLOADS_REQUEST,
   DOWNLOADS_SUCCESS,
   DOWNLOADS_FAILURE,
@@ -74,30 +74,30 @@ export default function userReducer(state = initialState, action = {}) {
         .setIn(['comment', 'isCreating'], false)
         .setIn(['comment', 'created'], false)
         .setIn(['comment', 'error'], false);
-    case FAVORITES_REQUEST:
+    case USER_FAVORITES_REQUEST:
       return state
         .setIn(['favorites', 'isFetching'], true)
         .setIn(['favorites', 'error'], null);
-    case FAVORITES_SUCCESS:
+    case USER_FAVORITES_SUCCESS:
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], null)
-    case FAVORITES_FAILURE:
+    case USER_FAVORITES_FAILURE:
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
     case DOWNLOADS_REQUEST:
       return state
-        .setIn(['favorites', 'isFetching'], true)
-        .setIn(['favorites', 'error'], null);
+        .setIn(['downloads', 'isFetching'], true)
+        .setIn(['downloads', 'error'], null);
     case DOWNLOADS_SUCCESS:
       return state
-        .setIn(['favorites', 'isFetching'], false)
-        .setIn(['favorites', 'error'], null)
+        .setIn(['downloads', 'isFetching'], false)
+        .setIn(['downloads', 'error'], null)
     case DOWNLOADS_FAILURE:
       return state
-        .setIn(['favorites', 'isFetching'], false)
-        .setIn(['favorites', 'error'], action.error);
+        .setIn(['downloads', 'isFetching'], false)
+        .setIn(['downloads', 'error'], action.error);
     case LOGOUT_USER:
       return state
         .set('authUserID',null)

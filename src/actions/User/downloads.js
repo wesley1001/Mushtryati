@@ -42,6 +42,7 @@ export function fetchDownloads() {
     dispatch(downloadsRequest());
     return getUserToken().then((token) => {
       const url = API_ROOT + `/downloads?api_token=${token}`;
+      console.log('url',url);
       return fetch(url)
         .then(response => response.json())
         .then(json => {
