@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View, Image } from 'react-native';
-import { login,onLoginFormFieldChange } from './../../actions/Auth/login';
+import { login, onLoginFormFieldChange } from './../../actions/Auth/login';
 import LoginScene from './../../components/Auth/LoginScene';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -28,8 +28,7 @@ export default class Login extends Component {
     dispatch(login(credentials))
       .then((success)=> {
         if(success) {
-          console.log('sss');
-          Actions.home();
+          return Actions.home();
         } else {
           alert('Wrong Credentials, Try again');
         }

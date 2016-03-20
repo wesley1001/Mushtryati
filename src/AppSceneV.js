@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import {Scene, TabBar, Modal, Schema, Actions,Switch} from 'react-native-router-flux';
+import { StatusBar, Navigator, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { loginUserByToken } from './actions/Auth/login';
+import { Scene, TabBar, Modal, Schema, Actions, Switch, Router } from 'react-native-router-flux';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
 import Medias from './containers/Media/Medias';
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Scenes = Actions.create(
+const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
 
@@ -45,8 +47,6 @@ export const Scenes = Actions.create(
                barButtonTextStyle={{ fontSize:17, color:'white' }}
         >
           <Scene key="downloadsScene" component={UserDownloads} />
-
-
         </Scene>
 
         <Scene key="favoritesTab" icon={TabIcon} selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"
@@ -74,7 +74,7 @@ export const Scenes = Actions.create(
 
       </Scene>
 
-      <Scene key="captureMedia" hideNavBar={true} component={CaptureMedia} />
+      <Scene key="captureMedia" hideNavBar={true} component={CaptureMedia}  />
       <Scene key="loginDialog"  hideNavBar={true}  component={LoginDialog} />
 
       <Scene key="login" hideNavBar={true} component={Login}  />
@@ -84,4 +84,20 @@ export const Scenes = Actions.create(
 
   </Scene>
 );
+
+export default class App extends Component {
+
+  componentDidMount() {
+    StatusBar.setBarStyle('light-content');
+    //const {dispatch} = this.props;
+    //dispatch(loginUserByToken());
+  }
+
+  render() {
+    return (
+      <Router scenes={Scenes}/>
+    );
+
+  }
+}
 
