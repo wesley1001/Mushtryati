@@ -37,7 +37,7 @@ function userDownloadsFailure(err) {
  */
 
 // get Auth user's downloads
-export function fetchDownloads() {
+export function fetchUserDownloads() {
   return (dispatch) => {
     dispatch(userDownloadsRequest());
     return getUserToken().then((token) => {

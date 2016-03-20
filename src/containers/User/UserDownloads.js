@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchDownloads } from './../../actions/User/downloads';
+import { fetchUserDownloads } from './../../actions/User/downloads';
 import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -15,7 +15,7 @@ class UserDownloads extends Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchDownloads());
+    dispatch(fetchUserDownloads());
   }
 
   loadMedia(media) {
