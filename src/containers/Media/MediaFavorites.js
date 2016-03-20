@@ -30,14 +30,10 @@ class MediaFavorites extends Component {
 
   render() {
 
-    const {media} = this.props;
-
-    if (media.favorites.isFetching) {
-      return <LoadingIndicator />;
-    }
-
+    const {isFetching} = this.props;
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer]}>
+      <ScrollView contentContainerStyle={{top:64}}>
+        { isFetching && <LoadingIndicator /> }
         <MediaFavoriteList users={media.favorites.users} loadUser={this.loadUser.bind(this)}
           followUser={this.followUser.bind(this)}
           />
@@ -47,10 +43,14 @@ class MediaFavorites extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
+  const {entities,mediasReducer,userReducer } = state;
+  const user = entities.users[userReducer.authUserID];
   return {
-    media:state.media
+    medias:user ? user.favorites ? entities.users[userReducer.authUserID].favorites.map((favoriteID) => entities.medias[favoriteID]) : [] : [],
+    mediasReducer,
+    isFetching:mediaReducer.favorites.isFetching
   }
 }
-
 export default connect(mapStateToProps)(MediaFavorites)

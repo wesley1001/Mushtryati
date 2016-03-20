@@ -36,12 +36,9 @@ class Medias extends Component {
 
     const { medias,mediasReducer } = this.props;
 
-    if (mediasReducer.isFetching) {
-      return <LoadingIndicator />;
-    }
-
     return (
-      <ScrollView contentInset={{bottom:40}} style={{ backgroundColor:'white' }}>
+      <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64 }}>
+        { mediasReducer.isFetching && <LoadingIndicator /> }
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );

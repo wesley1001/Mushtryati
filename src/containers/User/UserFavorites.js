@@ -31,7 +31,7 @@ class UserFavorites extends Component {
     const { medias,userReducer } = this.props;
 
     return (
-      <ScrollView contentInset={{bottom:40,top:10}} style={{ paddingTop:64}}>
+      <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.favorites.isFetching ? <LoadingIndicator/> : <View/> }
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
