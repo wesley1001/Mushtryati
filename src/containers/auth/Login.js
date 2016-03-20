@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { ScrollView, View, Image } from 'react-native';
+import { connect } from 'react-redux';
 import { login, onLoginFormFieldChange } from './../../actions/Auth/login';
 import LoginScene from './../../components/Auth/LoginScene';
 const Actions = require('react-native-router-flux').Actions;

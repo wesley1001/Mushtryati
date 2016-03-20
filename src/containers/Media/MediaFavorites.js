@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
-import { connect } from '../../../node_modules/react-redux';
+import { connect } from 'react-redux';
 import { fetchMediaFavorites } from './../../actions/Media/favorites';
 import { setCurrentUser } from './../../actions/User/user';
 import UserList from './../../components/User/UserList';
