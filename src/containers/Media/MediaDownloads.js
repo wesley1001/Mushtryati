@@ -55,4 +55,4 @@ function mapStateToProps(state) {
     isFetching:mediaReducer.downloads.isFetching
   }
 }
-export default connect(mapStateToProps)(MediaFavorites)
+export default connect(mapStateToProps)(MediaDownloads);

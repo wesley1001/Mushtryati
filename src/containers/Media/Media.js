@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { favoriteMedia } from './../../actions/Media/favorites';
 import { downloadMedia } from './../../actions/Media/downloads';
 import { fetchMedia } from './../../actions/Media/media';
+import { setCurrentUser } from './../../actions/User/user';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/MediaFavoriteIcon';
@@ -36,8 +37,6 @@ class Media extends Component {
     Actions.mediaDownloadsScene();
   }
 
-
-
   favoriteMedia() {
     if(!this.props.userReducer.isAuthenticated) {
       return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
@@ -52,6 +51,12 @@ class Media extends Component {
     this.props.dispatch(downloadMedia());
   }
 
+  loadUser(user) {
+    this.props.dispatch(setCurrentUser(user.id));
+    Actions.userScene({
+      title:user.name
+    })
+  }
 
   render() {
 
