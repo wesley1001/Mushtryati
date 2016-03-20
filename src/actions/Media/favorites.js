@@ -8,6 +8,7 @@ import {
   MEDIA_FAVORITES_SUCCESS,
   MEDIA_FAVORITES_REQUEST,
   MEDIA_FAVORITES_FAILURE,
+
 } from '../../constants/actiontypes';
 
 function toggleFavorite(payload) {
@@ -21,21 +22,21 @@ function toggleFavorite(payload) {
 
 function mediaFavoritesRequest() {
   return {
-    type: USER_FAVORITES_REQUEST
+    type: MEDIA_FAVORITES_REQUEST
   }
 }
 
 function mediaFavoritesSuccess(payload) {
   const normalized = normalize(payload.data,Schemas.USER);
   return {
-    type: USER_FAVORITES_SUCCESS,
+    type: MEDIA_FAVORITES_SUCCESS,
     entities: normalized.entities
   }
 }
 
 function mediaFavoritesFailure(err) {
   return {
-    type: USER_FAVORITES_FAILURE,
+    type: MEDIA_FAVORITES_FAILURE,
     error:err
   }
 }

@@ -4,26 +4,32 @@ import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
-  DOWNLOADS_SUCCESS,
-  DOWNLOADS_REQUEST,
+  MEDIA_DOWNLOADS_REQUEST,
+  MEDIA_DOWNLOADS_SUCCESS,
+  MEDIA_DOWNLOADS_FAILURE,
   MEDIA_DOWNLOAD,
 } from '../../constants/actiontypes';
 
-//function favoriteRequest() {
-//  return {
-//    type: DOWNLOADS_REQUEST
-//  }
-//}
-
-function downloadSuccess(payload) {
-  console.log('payload',payload.isDownloaded);
-  const normalized = normalize(payload.data,Schemas.USER);
+function mediaDownloadsRequest() {
   return {
-    type: MEDIA_DOWNLOAD,
-    //entities: normalized.entities
+    type: MEDIA_DOWNLOADS_REQUEST
   }
 }
 
+function mediaDownloadsSuccess(payload) {
+  const normalized = normalize(payload.data,Schemas.USER);
+  return {
+    type: MEDIA_DOWNLOADS_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+function mediaDownloadsFailure(err) {
+  return {
+    type: MEDIA_DOWNLOADS_FAILURE,
+    error:err
+  }
+}
 function toggleDownload(payload) {
   const media = Object.assign({},payload,{isDownloaded:!payload.isDownloaded});
   const normalized = normalize(media,Schemas.MEDIA);
@@ -33,18 +39,26 @@ function toggleDownload(payload) {
   }
 }
 
-export function fetchDownloads() {
-  //return (dispatch) => {
-  //  dispatch(favoriteRequest());
-  //  return fetch(API_ROOT + '/medias/' + mediaID + '/favorites')
-  //    .then(response => response.json())
-  //    .then(json => {
-  //      dispatch(favoriteSuccess(json));
-  //    })
-  //    .catch((err)=> {
-  //      dispatch(xhrRequestFailure(err));
-  //    })
-  //}
+
+// get Auth user's favorites
+export function fetchMediaDownloads() {
+  return (dispatch,state) => {
+    const mediaID = state().mediaReducer.current;
+    dispatch(mediaDownloadsRequest());
+    return getUserToken().then((token) => {
+      const url = API_ROOT + `/medias/${mediaID}/downloads?api_token=${token}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          if(json.success) {
+            dispatch(mediaDownloadsSuccess(json));
+          } else {
+            console.log('rejected');
+            Promise.reject(new Error(json.message))
+          }
+        })
+    }).catch((err)=> dispatch(mediaDownloadsFailure(err)))
+  }
 }
 
 /**

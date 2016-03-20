@@ -4,29 +4,29 @@ import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
 
 import {
-  DOWNLOADS_SUCCESS,
-  DOWNLOADS_REQUEST,
-  DOWNLOADS_FAILURE,
+  USER_DOWNLOADS_SUCCESS,
+  USER_DOWNLOADS_REQUEST,
+  USER_DOWNLOADS_FAILURE,
 } from '../../constants/actiontypes';
 
-function downloadsRequest() {
+function userDownloadsRequest() {
   return {
-    type: DOWNLOADS_REQUEST
+    type: USER_DOWNLOADS_REQUEST
   }
 }
 
-function downloadsSuccess(payload) {
+function userDownloadsSuccess(payload) {
   const normalized = normalize(payload.data,Schemas.USER);
   console.log('normaziled',normalized);
   return {
-    type: DOWNLOADS_SUCCESS,
+    type: USER_DOWNLOADS_SUCCESS,
     entities: normalized.entities
   }
 }
 
-function downloadsFailure(err) {
+function userDownloadsFailure(err) {
   return {
-    type: DOWNLOADS_FAILURE,
+    type: USER_DOWNLOADS_FAILURE,
     error:err
   }
 }
@@ -39,7 +39,7 @@ function downloadsFailure(err) {
 // get Auth user's downloads
 export function fetchDownloads() {
   return (dispatch) => {
-    dispatch(downloadsRequest());
+    dispatch(userDownloadsRequest());
     return getUserToken().then((token) => {
       const url = API_ROOT + `/downloads?api_token=${token}`;
       console.log('url',url);
@@ -47,12 +47,12 @@ export function fetchDownloads() {
         .then(response => response.json())
         .then(json => {
           if(json.success) {
-            dispatch(downloadsSuccess(json));
+            dispatch(userDownloadsSuccess(json));
           } else {
             console.log('rejected');
             Promise.reject(new Error(json.message))
           }
         })
-    }).catch((err)=> dispatch(downloadsFailure(err)))
+    }).catch((err)=> dispatch(userDownloadsFailure(err)))
   }
 }

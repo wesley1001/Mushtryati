@@ -3,9 +3,9 @@ import {
   USER_FAVORITES_REQUEST,
   USER_FAVORITES_SUCCESS,
   USER_FAVORITES_FAILURE,
-  DOWNLOADS_REQUEST,
-  DOWNLOADS_SUCCESS,
-  DOWNLOADS_FAILURE,
+  USER_DOWNLOADS_REQUEST,
+  USER_DOWNLOADS_SUCCESS,
+  USER_DOWNLOADS_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT_USER,
   SET_USER,
@@ -86,15 +86,15 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .setIn(['favorites', 'isFetching'], false)
         .setIn(['favorites', 'error'], action.error);
-    case DOWNLOADS_REQUEST:
+    case USER_DOWNLOADS_REQUEST:
       return state
         .setIn(['downloads', 'isFetching'], true)
         .setIn(['downloads', 'error'], null);
-    case DOWNLOADS_SUCCESS:
+    case USER_DOWNLOADS_SUCCESS:
       return state
         .setIn(['downloads', 'isFetching'], false)
         .setIn(['downloads', 'error'], null)
-    case DOWNLOADS_FAILURE:
+    case USER_DOWNLOADS_FAILURE:
       return state
         .setIn(['downloads', 'isFetching'], false)
         .setIn(['downloads', 'error'], action.error);

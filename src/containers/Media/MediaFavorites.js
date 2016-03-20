@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
 import { fetchMediaFavorites } from './../../actions/Media/favorites';
 import { setCurrentUser } from './../../actions/User/user';
-import MediaFavoriteList from './../../components/Media/Favorite/MediaFavoriteList';
+import UserList from './../../components/User/UserList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -14,7 +14,7 @@ class MediaFavorites extends Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchMediaFavorites());
+    //this.props.dispatch(fetchMediaFavorites());
   }
 
   loadUser(user) {
@@ -30,13 +30,15 @@ class MediaFavorites extends Component {
 
   render() {
 
-    const {isFetching} = this.props;
+    const {isFetching,users} = this.props;
     return (
       <ScrollView contentContainerStyle={{top:64}}>
         { isFetching && <LoadingIndicator /> }
-        <MediaFavoriteList users={media.favorites.users} loadUser={this.loadUser.bind(this)}
+        <UserList
+          users={users}
+          loadUser={this.loadUser.bind(this)}
           followUser={this.followUser.bind(this)}
-          />
+        />
       </ScrollView>
 
     )
@@ -45,11 +47,11 @@ class MediaFavorites extends Component {
 
 
 function mapStateToProps(state) {
-  const {entities,mediasReducer,userReducer } = state;
-  const user = entities.users[userReducer.authUserID];
+  const {entities,mediaReducer } = state;
+  const media = entities.medias[mediaReducer.current];
+  const mediaFavorites = media.favorites ? media.favorites.map((userID) => entities.users[userID]) : [];
   return {
-    medias:user ? user.favorites ? entities.users[userReducer.authUserID].favorites.map((favoriteID) => entities.medias[favoriteID]) : [] : [],
-    mediasReducer,
+    users:mediaFavorites,
     isFetching:mediaReducer.favorites.isFetching
   }
 }

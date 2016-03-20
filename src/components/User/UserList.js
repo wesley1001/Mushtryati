@@ -1,7 +1,8 @@
-import React, { Component, View, Text, TouchableHighlight, StyleSheet , ListView,Image} from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import{ View, Text, TouchableHighlight, StyleSheet, ListView, Image } from 'react-native';
 import { Icon } from 'react-native-icons';
 
-export default class MediaFavoriteList extends Component {
+export default class UserList extends Component {
 
   renderRow(user) {
     return (

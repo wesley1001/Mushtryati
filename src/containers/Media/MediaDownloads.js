@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from '../../../node_modules/react-redux';
-import { fetchFavorites } from './../../actions/Media/favorites';
-import MediaFavoriteList from './../../components/Media/Favorite/MediaFavoriteList';
+import { fetchMediaDownloads } from './../../actions/Media/downloads';
+import { setCurrentUser } from './../../actions/User/user';
+import UserList from './../../components/User/UserList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
 
@@ -13,15 +14,14 @@ class MediaDownloads extends Component {
   }
 
   componentWillMount() {
-    const {dispatch} = this.props;
-    dispatch(fetchFavorites(this.props.data.id));
+    //this.props.dispatch(fetchMediaDownloads());
   }
 
   loadUser(user) {
-    Actions.userEntityScene({
-      title:user.name,
-      data:user
-    })
+    this.props.dispatch(setCurrentUser(user.id));
+    Actions.userScene({
+      title:user.name
+    });
   }
 
   followUser(user) {
@@ -30,27 +30,29 @@ class MediaDownloads extends Component {
 
   render() {
 
-    const {media} = this.props;
-
-    if (media.favorites.isFetching) {
-      return <LoadingIndicator />;
-    }
-
+    const {isFetching,users} = this.props;
     return (
-      <ScrollView contentContainerStyle={[styles.contentContainer]}>
-        <MediaFavoriteList users={media.favorites.users} loadUser={this.loadUser.bind(this)}
+      <ScrollView contentContainerStyle={{top:64}}>
+        { isFetching && <LoadingIndicator /> }
+        <UserList
+          users={users}
+          loadUser={this.loadUser.bind(this)}
           followUser={this.followUser.bind(this)}
-          />
+        />
       </ScrollView>
 
     )
   }
 }
 
+
 function mapStateToProps(state) {
+  const {entities,mediaReducer } = state;
+  const media = entities.medias[mediaReducer.current];
+  const mediaDownloads = media.downloads ? media.downloads.map((userID) => entities.users[userID]) : [];
   return {
-    media:state.media
+    users:mediaDownloads,
+    isFetching:mediaReducer.downloads.isFetching
   }
 }
-
-export default connect(mapStateToProps)(MediaDownloads)
+export default connect(mapStateToProps)(MediaFavorites)

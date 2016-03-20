@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Image, StyleSheet, Text, TouchableHighlight, View, ListView, ScrollView, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchMediaFavorites, favoriteMedia } from './../../actions/Media/favorites';
-import { fetchDownloads, downloadMedia } from './../../actions/Media/downloads';
+import { favoriteMedia } from './../../actions/Media/favorites';
+import { downloadMedia } from './../../actions/Media/downloads';
 import { fetchMedia } from './../../actions/Media/media';
-import { setCurrentUser } from './../../actions/User/user';
 import MediaItem from './../../components/Media/MediaItem';
 import MediaCommentIcon from './../../components/Media/Comment/MediaCommentIcon';
 import MediaFavoriteIcon from './../../components/Media/Favorite/MediaFavoriteIcon';
@@ -37,6 +36,8 @@ class Media extends Component {
     Actions.mediaDownloadsScene();
   }
 
+
+
   favoriteMedia() {
     if(!this.props.userReducer.isAuthenticated) {
       return Actions.loginDialog({dialogText:'Please Login to view and manage your Favorites'});
@@ -51,12 +52,6 @@ class Media extends Component {
     this.props.dispatch(downloadMedia());
   }
 
-  loadUser(user) {
-    this.props.dispatch(setCurrentUser(user.id));
-    Actions.userScene({
-      title:user.name
-    })
-  }
 
   render() {
 
