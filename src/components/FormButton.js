@@ -1,29 +1,14 @@
-import React,
-{
-  PropTypes,
-  StyleSheet,
-  View,
-  Text
-} from 'react-native';
-
+import React, { PropTypes, Component } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
 import Button from 'apsl-react-native-button';
 
-var styles = StyleSheet.create({
-  container: {},
-  button: {
-    backgroundColor: '#5BC3BE',
-    borderColor: '#5BC3BE',
-    borderRadius: 0
-  }
-});
+export default class FormButton extends Component{
 
-var FormButton = React.createClass({
-
-  propTypes: {
+  static propTypes=  {
     isDisabled: PropTypes.bool,
     onPress: PropTypes.func,
     buttonText: PropTypes.string
-  },
+  };
 
   render() {
     return (
@@ -33,12 +18,19 @@ var FormButton = React.createClass({
           isDisabled={this.props.isDisabled}
           onPress={this.props.onPress}
           textStyle={{fontSize: 18, color:'white'}}
-          >
+        >
           {this.props.buttonText}
         </Button>
       </View>
     );
   }
-});
+}
 
-module.exports = FormButton;
+const styles = StyleSheet.create({
+  container: {},
+  button: {
+    backgroundColor: '#5BC3BE',
+    borderColor: '#5BC3BE',
+    borderRadius: 0
+  }
+});

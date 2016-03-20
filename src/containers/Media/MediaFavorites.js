@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { fetchMediaFavorites } from './../../actions/Media/favorites';
 import { setCurrentUser } from './../../actions/User/user';
 import UserList from './../../components/User/UserList';
 import LoadingIndicator from './../../components/LoadingIndicator';
-const Actions = require('react-native-router-flux').Actions;
 
 class MediaFavorites extends Component {
 

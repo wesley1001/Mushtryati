@@ -1,6 +1,5 @@
-'use strict';
-
-import React, { Component, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import { Image, StyleSheet, Text, TouchableHighlight, View  } from 'react-native';
 import {connect} from 'react-redux';
 
 export default class Modal extends Component {

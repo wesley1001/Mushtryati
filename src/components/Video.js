@@ -1,14 +1,5 @@
-'use strict';
-
-import React, {
-  AlertIOS,
-  Component,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-
+import React, { PropTypes, Component } from 'react';
+import { AlertIOS, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Video from 'react-native-video';
 
 class VideoPlayer extends Component {

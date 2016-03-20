@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-import { StyleSheet,View,Text,Image,Component } from 'react-native';
+import React, { PropTypes, Component } from 'react';
+import { StyleSheet,View,Text,Image } from 'react-native';
 import { assets } from './../utils/assets';
 import Button from 'apsl-react-native-button';
 const Actions = require('react-native-router-flux').Actions;
