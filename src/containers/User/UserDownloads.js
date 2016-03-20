@@ -25,12 +25,10 @@ class UserDownloads extends Component {
     Actions.mediaScene({
       title:media.caption
     });
-
   }
 
   render() {
     const { medias,userReducer } = this.props;
-    console.log('downloads',medias);
 
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerstyle={{ paddingTop:64}}>
