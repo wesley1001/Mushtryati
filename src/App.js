@@ -3,6 +3,7 @@ import { StatusBar, Navigator } from 'react-native';
 import { Router, Route, Schema, Animations, TabBar } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { loginUserByToken } from './actions/Auth/login';
+import { Actions } from 'react-native-router-flux';
 import Home from './containers/Home';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
@@ -48,7 +49,7 @@ class App extends Component {
             <Route name="userFavoritesScene" schema="tab" component={UserFavorites}  selectedTabIcon="ion|android-favorite" tabIcon="ion|android-favorite-outline"   />
             <Route name="mediaTab" initial={true}  schema="tab" selectedTabIcon="ion|briefcase" tabIcon="ion|briefcase" >
               <Router name="mediaRoutes" >
-                <Route name="mediasScene" component={Medias} rightTitle="+" onRight={()=>alert('waa')} />
+                <Route name="mediasScene" component={Medias} rightTitle="+" onRight={()=>Actions.captureMedia()} />
                 <Route name="mediaScene" component={Media} />
                 <Route name="mediaCommentsScene" component={MediaComments} />
                 <Route name="mediaFavoritesScene" component={MediaFavorites} />
