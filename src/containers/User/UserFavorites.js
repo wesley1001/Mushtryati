@@ -29,23 +29,20 @@ class UserFavorites extends Component {
 
   render() {
     const { medias,userReducer } = this.props;
-
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.favorites.isFetching ? <LoadingIndicator/> : <View/> }
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
-
   }
 }
 
 function mapStateToProps(state) {
-  const {entities,mediasReducer,userReducer } = state;
+  const { entities,userReducer } = state;
   const user = entities.users[userReducer.authUserID];
   return {
-    medias:user ? user.favorites ? entities.users[userReducer.authUserID].favorites.map((favoriteID) => entities.medias[favoriteID]) : [] : [],
-    mediasReducer,
+    medias: user && user.favorites ? user.favorites.map((favoriteID) => entities.medias[favoriteID]) : [] ,
     userReducer
   }
 }

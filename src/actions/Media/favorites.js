@@ -11,11 +11,34 @@ import {
 
 } from '../../constants/actiontypes';
 
-function toggleFavorite(payload) {
-  const media = Object.assign({},payload,{isFavorited:!payload.isFavorited});
-  const normalized = normalize(media,Schemas.MEDIA);
+function updateUserFavs(user,media) {
+  var favorites = user.favorites ? user.favorites : [];
+  if(!media.isFavorited) {
+    favorites = favorites.concat([media.id]);
+  } else {
+    favorites = favorites.filter((fav) => fav != media.id);
+  }
+  user.favorites = favorites;
+  const normalized = normalize(user,Schemas.USER);
+
   return {
-    type: MEDIA_FAVORITE,
+    type: MEDIA_FAVORITES_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+function updateMediaFavs(user,media) {
+  var favorites = media.favorites ? media.favorites : [];
+  if(!media.isFavorited) {
+    favorites = favorites.concat([user.id]);
+  } else {
+    favorites = favorites.filter((fav) => fav != user.id);
+  }
+  media.favorites = favorites;
+  const normalized = normalize(media,Schemas.MEDIA);
+
+  return {
+    type: MEDIA_FAVORITES_SUCCESS,
     entities: normalized.entities
   }
 }
@@ -53,7 +76,10 @@ export function favoriteMedia() {
     };
 
     const media = state().entities.medias[params.media];
-    dispatch(toggleFavorite(media));
+    const user = state().entities.users[state().userReducer.authUserID];
+
+    dispatch(updateUserFavs(...user,...media));
+    dispatch(updateMediaFavs(...user,...media));
 
     return getUserToken().then((token) => {
       const url = API_ROOT + `/medias/favorite?api_token=${token}`;

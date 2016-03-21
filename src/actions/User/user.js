@@ -1,6 +1,8 @@
 import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../utils/schema';
+import { getUserToken } from './../../utils/storage';
+
 import {
   USER_REQUEST,
   USER_SUCCESS,
@@ -26,14 +28,16 @@ export function fetchUser() {
   return (dispatch,state) => {
     dispatch({type:USER_REQUEST});
     const currentID = state().userReducer.current;
-    const url = API_ROOT + '/users/' + currentID;
-    return fetch(url)
-      .then(response => response.json())
-      .then(json => {
-        dispatch(userSuccess(json));
+    return getUserToken().then((token) => {
+        const url = API_ROOT + `/users/${currentID}?api_token=${token}`;
+        return fetch(url)
+          .then(response => response.json())
+          .then(json => {
+            dispatch(userSuccess(json));
+          })
       })
-      .catch((err)=> {
-        dispatch({type:USER_FAILURE,error:err});
-      })
+        .catch((err)=> {
+          dispatch({type:USER_FAILURE,error:err});
+        })
   }
 }
