@@ -2,6 +2,7 @@ import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
+import union from 'lodash/union';
 
 import {
   MEDIA_FAVORITE,
@@ -11,29 +12,22 @@ import {
 
 } from '../../constants/actiontypes';
 
-function updateUserFavs(user,media) {
+function updateUserFavorites(user,media) {
   const favorites = user.favorites ? user.favorites : [];
-  user.favorites = !media.isFavorited ? favorites.concat([media.id]) : favorites.filter((fav) => fav != media.id);
-  //user.favorites = favorites;
+  user.favorites = media.isFavorited ? favorites.filter((fav) => fav != media.id) : union(favorites,[media.id]) ;
   const normalized = normalize(user,Schemas.USER);
-
   return {
     type: MEDIA_FAVORITES_SUCCESS,
     entities: normalized.entities
   }
 }
 
-function updateMediaFavs(user,media) {
-  var favorites = media.favorites ? media.favorites : [];
-  if(!media.isFavorited) {
-    favorites = favorites.concat([user.id]);
-  } else {
-    favorites = favorites.filter((fav) => fav != user.id);
-  }
-  media.favorites = favorites;
+function updateMediaFavorites(user,media) {
+  const favorites = media.favorites ? media.favorites : [];
+  media.favorites = media.isFavorited ? favorites.filter((fav) => fav != user.id) : union(favorites,[user.id]) ;
   media.isFavorited = !media.isFavorited;
+  media.isDeleted = media.isFavorited ? false : true;
   const normalized = normalize(media,Schemas.MEDIA);
-
   return {
     type: MEDIA_FAVORITES_SUCCESS,
     entities: normalized.entities
@@ -72,11 +66,11 @@ export function favoriteMedia() {
       media:state().mediaReducer.current
     };
 
-    const media = state().entities.medias[params.media];
-    const user = state().entities.users[state().userReducer.authUserID];
+    const media = Object.assign({},state().entities.medias[params.media]);
+    const user = Object.assign({},state().entities.users[state().userReducer.authUserID]);
 
-    dispatch(updateUserFavs(user,media));
-    dispatch(updateMediaFavs(user,media));
+    dispatch(updateUserFavorites(user,media));
+    dispatch(updateMediaFavorites(user,media));
 
     return getUserToken().then((token) => {
       const url = API_ROOT + `/medias/favorite?api_token=${token}`;

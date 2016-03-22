@@ -6,6 +6,7 @@ import { setCurrentMedia } from './../../actions/Media/media';
 import MediaList from './../../components/Media/MediaList';
 import LoadingIndicator from './../../components/LoadingIndicator';
 const Actions = require('react-native-router-flux').Actions;
+import merge from 'lodash/merge';
 
 class UserFavorites extends Component {
 
@@ -32,7 +33,7 @@ class UserFavorites extends Component {
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.favorites.isFetching ? <LoadingIndicator/> : <View/> }
-        <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
+        <MediaList medias={medias.filter((media) => !media.isDeleted)} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
   }
