@@ -12,13 +12,9 @@ import {
 } from '../../constants/actiontypes';
 
 function updateUserFavs(user,media) {
-  var favorites = user.favorites ? user.favorites : [];
-  if(!media.isFavorited) {
-    favorites = favorites.concat([media.id]);
-  } else {
-    favorites = favorites.filter((fav) => fav != media.id);
-  }
-  user.favorites = favorites;
+  const favorites = user.favorites ? user.favorites : [];
+  user.favorites = !media.isFavorited ? favorites.concat([media.id]) : favorites.filter((fav) => fav != media.id);
+  //user.favorites = favorites;
   const normalized = normalize(user,Schemas.USER);
 
   return {
