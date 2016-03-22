@@ -33,7 +33,7 @@ class UserDownloads extends Component {
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerstyle={{ paddingTop:64}}>
         { userReducer.downloads.isFetching && <LoadingIndicator/> }
-        <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
+        <MediaList medias={medias.filter((media) => !media.unDownloaded)} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
 

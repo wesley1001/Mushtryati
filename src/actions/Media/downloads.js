@@ -2,6 +2,7 @@ import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
+import union from 'lodash/union';
 
 import {
   MEDIA_DOWNLOADS_REQUEST,
@@ -9,6 +10,30 @@ import {
   MEDIA_DOWNLOADS_FAILURE,
   MEDIA_DOWNLOAD,
 } from '../../constants/actiontypes';
+
+
+function updateUserDownloads(user,media) {
+  const downloads = user.downloads ? user.downloads : [];
+  user.downloads = media.isDownloaded ? downloads.filter((download) => download != media.id) : union(downloads,[media.id]) ;
+  const normalized = normalize(user,Schemas.USER);
+  return {
+    type: MEDIA_DOWNLOADS_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+function updateMediaDownloads(user,media) {
+  const downloads = media.downloads ? media.downloads : [];
+  media.downloads = media.isDownloaded ? downloads.filter((download) => download != user.id) : union(downloads,[user.id]) ;
+  media.isDownloaded = !media.isDownloaded;
+  media.unDownloaded = media.isDownloaded ? false : true;
+  const normalized = normalize(media,Schemas.MEDIA);
+  return {
+    type: MEDIA_DOWNLOADS_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
 
 function mediaDownloadsRequest() {
   return {
@@ -72,8 +97,19 @@ export function downloadMedia() {
       media:state().mediaReducer.current
     };
 
-    const media = state().entities.medias[params.media];
-    dispatch(toggleDownload(media));
+    //const media = state().entities.medias[params.media];
+    //dispatch(toggleDownload(media));
+    //
+    //const params = {
+    //  media:state().mediaReducer.current
+    //};
+
+    const media = Object.assign({},state().entities.medias[params.media]);
+    const user = Object.assign({},state().entities.users[state().userReducer.authUserID]);
+
+    dispatch(updateUserDownloads(user,media));
+    dispatch(updateMediaDownloads(user,media));
+
 
     return getUserToken().then((token) => {
       const url = API_ROOT + `/medias/download?api_token=${token}`;

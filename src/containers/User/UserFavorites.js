@@ -33,7 +33,7 @@ class UserFavorites extends Component {
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.favorites.isFetching ? <LoadingIndicator/> : <View/> }
-        <MediaList medias={medias.filter((media) => !media.isDeleted)} loadMedia={this.loadMedia.bind(this)}/>
+        <MediaList medias={medias.filter((media) => !media.unFavorited)} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>
     );
   }

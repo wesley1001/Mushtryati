@@ -26,7 +26,7 @@ function updateMediaFavorites(user,media) {
   const favorites = media.favorites ? media.favorites : [];
   media.favorites = media.isFavorited ? favorites.filter((fav) => fav != user.id) : union(favorites,[user.id]) ;
   media.isFavorited = !media.isFavorited;
-  media.isDeleted = media.isFavorited ? false : true;
+  media.unFavorited = media.isFavorited ? false : true;
   const normalized = normalize(media,Schemas.MEDIA);
   return {
     type: MEDIA_FAVORITES_SUCCESS,
