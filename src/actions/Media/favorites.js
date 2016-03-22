@@ -35,6 +35,7 @@ function updateMediaFavs(user,media) {
     favorites = favorites.filter((fav) => fav != user.id);
   }
   media.favorites = favorites;
+  media.isFavorited = !media.isFavorited;
   const normalized = normalize(media,Schemas.MEDIA);
 
   return {
@@ -78,8 +79,8 @@ export function favoriteMedia() {
     const media = state().entities.medias[params.media];
     const user = state().entities.users[state().userReducer.authUserID];
 
-    dispatch(updateUserFavs(...user,...media));
-    dispatch(updateMediaFavs(...user,...media));
+    dispatch(updateUserFavs(user,media));
+    dispatch(updateMediaFavs(user,media));
 
     return getUserToken().then((token) => {
       const url = API_ROOT + `/medias/favorite?api_token=${token}`;
