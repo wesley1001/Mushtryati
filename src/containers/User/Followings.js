@@ -19,7 +19,6 @@ class Followings extends Component {
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchUserFollowings());
-    console.log('dispatched');
   }
 
   loadMedia(media) {
@@ -44,7 +43,6 @@ class Followings extends Component {
 
   render() {
     const { users,userReducer } = this.props;
-    console.log('followings',users);
     return (
       <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.followings.isFetching ? <LoadingIndicator/> : <View/> }

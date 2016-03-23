@@ -3,7 +3,7 @@ import { View, ScrollView  } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchUser } from './../../actions/User/user';
 import { setCurrentMedia } from './../../actions/Media/media';
-import { setCurrentUser } from './../../actions/User/user';
+import { setCurrentUser,followUser } from './../../actions/User/user';
 import { Icon } from 'react-native-icons';
 import UserScene from './../../components/User/UserScene';
 import LoadingIndicator from './../../components/LoadingIndicator';
@@ -49,6 +49,11 @@ class User extends Component {
     });
   }
 
+  followUser() {
+    console.log('followed');
+    this.props.dispatch(followUser());
+  }
+
   render() {
 
     const {userReducer,user, medias} = this.props;
@@ -61,9 +66,11 @@ class User extends Component {
       <ScrollView style={{paddingTop:64}} contentInset={{bottom:49}}>
         <UserScene
           user={user}
+          authUserID={userReducer.authUserID ? userReducer.authUserID : 1 }
           loadUserMedias={this.loadUserMedias.bind(this)}
           loadFollowers={this.loadFollowers.bind(this)}
           loadFollowings={this.loadFollowings.bind(this)}
+          followUser={this.followUser.bind(this)}
         />
         <MediaList medias={medias} loadMedia={this.loadMedia.bind(this)}/>
       </ScrollView>

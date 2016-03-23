@@ -4,8 +4,13 @@ import { Icon } from 'react-native-icons';
 
 export default class UserScene extends Component {
 
-  render() {
 
+  static propTypes = {
+    authUserID : PropTypes.number.isRequired,
+    user:PropTypes.object.isRequired,
+    followUser:PropTypes.func.isRequired
+  }
+  render() {
     const {user} = this.props;
 
     return (
@@ -36,15 +41,31 @@ export default class UserScene extends Component {
           <Text style={styles.username}>
             {user.name}
           </Text>
-          <View style={styles.followingWrapperFollowing}>
-            <Icon
-              name='ion|android-done'
-              size={18}
-              color='white'
-              style={styles.checked}
-            />
-            <Text style={styles.following}> Following</Text>
-          </View>
+          { user.id == this.props.authUserID ? <View/> :
+            <TouchableHighlight onPress={()=>this.props.followUser()} underlayColor="transparent">
+                { user.isFollowing ?
+                  <View style={styles.followingWrapperFollowing}>
+                    <Icon
+                      name='ion|android-done'
+                      size={18}
+                      color='white'
+                      style={styles.checked}
+                    />
+                    <Text style={[styles.following]}> Following </Text>
+                  </View>
+                  :
+                  <View style={styles.followingWrapperFollow}>
+                    <Icon
+                      name='ion|plus'
+                      size={18}
+                      color='white'
+                      style={styles.checked}
+                    />
+                    <Text style={[styles.following]}> Follow </Text>
+                  </View>
+                }
+            </TouchableHighlight>
+          }
 
         </View>
 
@@ -104,25 +125,23 @@ var styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     marginTop:10,
-    backgroundColor:'white',
     borderColor:'gray',
     borderWidth:0.5,
-    padding:5
+    padding:5,
+    backgroundColor:'blue'
   },
   followingWrapperFollowing:{
     flexDirection:'row',
     justifyContent:'center',
     alignItems:'center',
     marginTop:10,
-    backgroundColor:'#63D85B',
-    padding:5
+    padding:5,
+    backgroundColor:'green'
   },
-
   mediaContainer:{
     flexDirection:'row'
   },
   mediaWrapper: {
-
   },
   follow:{
     color:'#5BC3BE'

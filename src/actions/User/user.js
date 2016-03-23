@@ -2,6 +2,7 @@ import { API_ROOT } from './../../constants/config';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import { Schemas } from './../../utils/schema';
 import { getUserToken } from './../../utils/storage';
+import union from 'lodash/union';
 
 import {
   USER_REQUEST,
@@ -130,4 +131,73 @@ export function fetchUserFollowers() {
   }
 }
 
+//
+//function updateMediaFavorites(user,media) {
+//  const favorites = media.favorites ? media.favorites : [];
+//  media.favorites = media.isFavorited ? favorites.filter((fav) => fav != user.id) : union(favorites,[user.id]) ;
+//  media.isFavorited = !media.isFavorited;
+//  media.unFavorited = media.isFavorited ? false : true;
+//  const normalized = normalize(media,Schemas.MEDIA);
+//  return {
+//    type: MEDIA_FAVORITES_SUCCESS,
+//    entities: normalized.entities
+//  }
+//}
+
+function updateFollowers(currentUser,authUser) {
+  console.log('current user',currentUser);
+  console.log('auth user',authUser);
+  const followings = authUser.followings ? authUser.followings : [];
+  authUser.followings = currentUser.isFollowing ? followings.filter((followingID) => followingID != currentUser.id) : union(followings,[currentUser.id]) ;
+  //currentUser.isFollowing = !currentUser.isFollowing;
+  //currentUser.unFollowed = currentUser.isFollowing ? false : true;
+  const normalized = normalize(authUser,Schemas.USER);
+  return {
+    type: USER_FOLLOWERS_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+function updateFollowees(currentUser,authUser) {
+  //console.log('current user',currentUser);
+  //console.log('auth user',authUser);
+  const followers = currentUser.followers ? currentUser.followers : [];
+  currentUser.followers = authUser.isFollowing ? followers.filter((followerID) => followerID != authUser.id) : union(followers,[authUser.id]) ;
+  currentUser.isFollowing = !currentUser.isFollowing;
+  currentUser.unFollowed = currentUser.isFollowing ? false : true;
+  const normalized = normalize(currentUser,Schemas.USER);
+  return {
+    type: USER_FOLLOWERS_SUCCESS,
+    entities: normalized.entities
+  }
+}
+
+export function followUser() {
+  return (dispatch,state) => {
+
+    const params = {
+      currentUser:state().userReducer.current,
+      authUser:state().userReducer.authUserID,
+    };
+
+    const currentUser = Object.assign({},state().entities.users[params.currentUser]);
+    const authUser = Object.assign({},state().entities.users[params.authUser]);
+
+    dispatch(updateFollowers(currentUser,authUser));
+    dispatch(updateFollowees(currentUser,authUser));
+    //dispatch(updateMediaFavorites(user,media));
+
+    //return getUserToken().then((token) => {
+    //  const url = API_ROOT + `/follow?api_token=${token}`;
+    //  return fetch(url, {
+    //    method: 'POST',
+    //    body: JSON.stringify(params)
+    //  })
+    //    .then(response => response.json())
+    //    .then(json => {
+    //      //dispatch(fetchFavorites());
+    //    }).catch((err)=> console.log(err))
+    //})
+  }
+}
 
