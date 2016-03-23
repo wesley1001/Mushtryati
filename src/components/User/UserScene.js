@@ -12,13 +12,13 @@ export default class UserScene extends Component {
       <View style={styles.container}>
         <View style={styles.infoColumnWrapper}>
           <View style={styles.infoWrapper}>
-            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+            <TouchableHighlight onPress={() => this.props.loadUserMedias(user)} underlayColor="transparent">
               <Text style={styles.count}>200 Medias</Text>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+            <TouchableHighlight onPress={() => this.props.loadFollowers(user)} underlayColor="transparent">
               <Text style={styles.count}>200 Followers</Text>
             </TouchableHighlight>
-            <TouchableHighlight onPress={() => ''} underlayColor="transparent">
+            <TouchableHighlight onPress={() => this.props.loadFollowings(user)} underlayColor="transparent">
               <Text style={styles.count}>200 Followings</Text>
             </TouchableHighlight>
           </View>

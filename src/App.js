@@ -15,6 +15,9 @@ import Medias from './containers/Media/Medias';
 import MediaComments from './containers/Media/MediaComments';
 import MediaFavorites from './containers/Media/MediaFavorites';
 import MediaDownloads from './containers/Media/MediaDownloads';
+import UserMedias from './containers/User/UserMedias';
+import Followers from './containers/User/Followers';
+import Followings from './containers/User/Followings';
 import CaptureMedia from './containers/Media/CaptureMedia';
 import TabIcon from './components/TabIcon';
 import LoginDialog from './components/LoginDialog';
@@ -54,6 +57,9 @@ class App extends Component {
                 <Route name="mediaCommentsScene" component={MediaComments} />
                 <Route name="mediaFavoritesScene" component={MediaFavorites} />
                 <Route name="mediaDownloadsScene" component={MediaDownloads} />
+                <Route name="userMediasScene" component={UserMedias} />
+                <Route name="followersScene" component={Followers} />
+                <Route name="followingsScene" component={Followings} />
                 <Route name="userScene" component={User} />
               </Router>
             </Route>

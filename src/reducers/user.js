@@ -6,6 +6,15 @@ import {
   USER_DOWNLOADS_REQUEST,
   USER_DOWNLOADS_SUCCESS,
   USER_DOWNLOADS_FAILURE,
+  USER_MEDIAS_REQUEST,
+  USER_MEDIAS_SUCCESS,
+  USER_MEDIAS_FAILURE,
+  USER_FOLLOWINGS_REQUEST,
+  USER_FOLLOWINGS_SUCCESS,
+  USER_FOLLOWINGS_FAILURE,
+  USER_FOLLOWERS_REQUEST,
+  USER_FOLLOWERS_SUCCESS,
+  USER_FOLLOWERS_FAILURE,
   LOGIN_SUCCESS,
   LOGOUT_USER,
   SET_USER,
@@ -32,6 +41,18 @@ const InitialState= Record({
     error:null
   })),
   downloads:new (Record({
+    isFetching:false,
+    error:null
+  })),
+  medias:new (Record({
+    isFetching:false,
+    error:null
+  })),
+  followers:new (Record({
+    isFetching:false,
+    error:null
+  })),
+  followings:new (Record({
     isFetching:false,
     error:null
   })),
@@ -98,6 +119,42 @@ export default function userReducer(state = initialState, action = {}) {
       return state
         .setIn(['downloads', 'isFetching'], false)
         .setIn(['downloads', 'error'], action.error);
+    case USER_MEDIAS_REQUEST:
+      return state
+        .setIn(['medias', 'isFetching'], true)
+        .setIn(['medias', 'error'], null);
+    case USER_MEDIAS_SUCCESS:
+      return state
+        .setIn(['medias', 'isFetching'], false)
+        .setIn(['medias', 'error'], null)
+    case USER_MEDIAS_FAILURE:
+      return state
+        .setIn(['medias', 'isFetching'], false)
+        .setIn(['medias', 'error'], action.error);
+    case USER_FOLLOWERS_REQUEST:
+      return state
+        .setIn(['followers', 'isFetching'], true)
+        .setIn(['followers', 'error'], null);
+    case USER_FOLLOWERS_SUCCESS:
+      return state
+        .setIn(['followers', 'isFetching'], false)
+        .setIn(['followers', 'error'], null)
+    case USER_FOLLOWERS_FAILURE:
+      return state
+        .setIn(['followers', 'isFetching'], false)
+        .setIn(['followers', 'error'], action.error);
+    case USER_FOLLOWINGS_REQUEST:
+      return state
+        .setIn(['followings', 'isFetching'], true)
+        .setIn(['followings', 'error'], null);
+    case USER_FOLLOWINGS_SUCCESS:
+      return state
+        .setIn(['followings', 'isFetching'], false)
+        .setIn(['followings', 'error'], null)
+    case USER_FOLLOWINGS_FAILURE:
+      return state
+        .setIn(['followings', 'isFetching'], false)
+        .setIn(['followings', 'error'], action.error);
     case LOGOUT_USER:
       return state
         .set('authUserID',null)

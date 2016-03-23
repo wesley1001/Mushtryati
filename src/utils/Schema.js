@@ -14,7 +14,9 @@ userSchema.define({
   medias:arrayOf(mediaSchema),
   comments:arrayOf(commentSchema),
   favorites:arrayOf(mediaSchema),
-  downloads:arrayOf(mediaSchema)
+  downloads:arrayOf(mediaSchema),
+  followers:arrayOf(userSchema),
+  followings:arrayOf(userSchema),
 });
 
 commentSchema.define({

@@ -27,3 +27,20 @@ export function fetchMedias() {
     })
   }
 }
+
+export function fetchUserMedias() {
+  const url = API_ROOT + '/medias';
+  return (dispatch,state) => {
+    dispatch({type:MEDIAS_REQUEST});
+    const userID = state().userReducer.current;
+    return getUserToken().then((token) => {
+      const url = API_ROOT + `/users/${userID}/medias?api_token=${token}`;
+      return fetch(url)
+        .then(response => response.json())
+        .then(json => {
+          dispatch(mediasSuccess(json));
+        })
+        .catch((err) => dispatch({type: MEDIAS_FAILURE, error: err}))
+    })
+  }
+}
