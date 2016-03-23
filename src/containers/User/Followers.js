@@ -47,7 +47,7 @@ class Followers extends Component {
       <ScrollView contentInset={{bottom:40}} contentContainerStyle={{ paddingTop:64}}>
         { userReducer.followers.isFetching ? <LoadingIndicator/> : <View/> }
         <UserList
-          users={users}
+          users={users.filter((user) => !user.unFollowed)}
           loadUser={this.loadUser.bind(this)}
           followUser={this.followUser.bind(this)}
         />
