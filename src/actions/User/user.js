@@ -133,7 +133,9 @@ export function fetchUserFollowers() {
 
 function updateFollowers(currentUser,authUser) {
   const followings = authUser.followings ? authUser.followings : [];
+  const followers = authUser.followers ? authUser.followers : [];
   authUser.followings = currentUser.isFollowing ? followings.filter((followingID) => followingID != currentUser.id) : union(followings,[currentUser.id]) ;
+  //authUser.followers = currentUser.isFollower ? followers.filter((followerID) => followerID != currentUser.id) : union(followers,[currentUser.id]) ;
   const normalized = normalize(authUser,Schemas.USER);
   return {
     type: USER_FOLLOWERS_SUCCESS,
@@ -143,8 +145,11 @@ function updateFollowers(currentUser,authUser) {
 
 function updateFollowees(currentUser,authUser) {
   const followers = currentUser.followers ? currentUser.followers : [];
+  const followings = currentUser.followings ? currentUser.followings : [];
   currentUser.followers = authUser.isFollowing ? followers.filter((followerID) => followerID != authUser.id) : union(followers,[authUser.id]) ;
+  //currentUser.followings = authUser.isFollower ? followings.filter((followeeID) => followeeID != authUser.id) : union(followings,[authUser.id]) ;
   currentUser.isFollowing = !currentUser.isFollowing;
+  //currentUser.isFollower = !currentUser.isFollower;
   currentUser.unFollowed = currentUser.isFollowing ? false : true;
   const normalized = normalize(currentUser,Schemas.USER);
   return {
